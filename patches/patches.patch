@@ -1,0 +1,16 @@
+Index: admin/admin.php
+===================================================================
+--- admin/admin.php	(revision 12170)
++++ admin/admin.php	(working copy)
+@@ -76,6 +76,11 @@
+ 
+ if(isset($_SESSION['loginID']))
+ {
++	if (!$_SESSION['USER_RIGHT_SUPERADMIN'])
++	{
++		print ('<script type="text/javascript">window.open(\'../user\', \'_top\');</script>');
++	}
++	
+     //VARIOUS DATABASE OPTIONS/ACTIONS PERFORMED HERE
+     if (in_array($action, array('updateemailtemplates','delsurvey','delgroup','delquestion','insertsurvey','updatesubquestions','copynewquestion','insertquestiongroup','insertCSV','insertquestion','updatesurveysettings','updatesurveysettingsandeditlocalesettings','updatesurveylocalesettings','updategroup','deactivate','savepersonalsettings','updatequestion','updateansweroptions','renumberquestions','updatedefaultvalues')))
+     {
