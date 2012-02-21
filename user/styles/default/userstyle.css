@@ -21,13 +21,16 @@ body {
     background-color: white;
 }
 
-a:link, a:visited {
-    color: royalblue;
+a:hover {
+    color: #819D26;
+    text-decoration: underline;
 }
 
-a {
+a, a:link, a:visited {
     color: royalblue;
+    text-decoration: none;
 }
+
 
 .maintitle {
 	color: royalblue;
@@ -88,6 +91,11 @@ div.menubar {
     text-align: center;
     color: gray;
     background-color: lightgray;
-    height: auto;
     margin: 12px;
+}
+
+.subtitle {
+	margin-top: 8px;
+	margin-left: 6px;
+	float: left;
 }

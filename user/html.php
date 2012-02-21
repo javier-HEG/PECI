@@ -32,9 +32,9 @@ function showUserMenu() {
 	$adminmenu = "<div class='menubar'>\n";
 	
 	if (isset($_SESSION['loginID'])) {
-		$adminmenu .= $clang->gT("Logged in as:") . " <a href=\"#\" onclick=\"window.open('{$scriptname}?action=personalsettings', '_top')\""
+		$adminmenu .= $clang->gT("Logged in as:") . " <a onclick=\"window.open('{$scriptname}?action=personalsettings', '_top')\""
 			. " title=\"Edit your personal preferences\">" . $_SESSION['full_name'] . "</a>";
-    	$adminmenu .= " | <a href=\"#\" onclick=\"window.open('../admin/admin.php?action=logout', '_top')\""
+    	$adminmenu .= " | <a onclick=\"window.open('../admin/admin.php?action=logout', '_top')\""
     		. " title=\"".$clang->gTview("Logout")."\" >" . $clang->gT("Logout") . "</a>";
 	}
 	

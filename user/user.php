@@ -29,6 +29,8 @@ require_once(dirname(__FILE__).'/../common.php');
 
 require_once('../admin/htmleditor-functions.php');
 
+require_once('user_functions.php');
+
 $_SESSION['FileManagerContext']='';
 
 if (!isset($surveyid)) {$surveyid=returnglobal('sid');} //SurveyID
@@ -71,9 +73,6 @@ if ( $action == 'FakeGET')
 
 if(isset($_SESSION['loginID']))
 {
-	// Change the visible sitename
-	$sitename = "Usefulness.ch";
-	
 	// Analogous to what we do in 'admin/admin.php', should the
 	// user have super-admin rights we send him to the interface
 	// in '/admin'.
@@ -567,7 +566,6 @@ if(isset($_SESSION['loginID']))
         // Add our custom made JavaScript scripts
         $adminCoreScript = "<script type=\"text/javascript\" src=\"{$homeurl}/scripts/admin_core.js\"></script>";
         $userTabsScript = "<script type=\"text/javascript\" src=\"{$rooturl}/user/scripts/tabs.js\"></script>";
-        $userTabsScript .= "<script type=\"text/javascript\" src=\"{$rooturl}/user/scripts/footer.js\"></script>";
         $adminHeader = str_replace($adminCoreScript, $adminCoreScript . "\n" . $userTabsScript, $adminHeader);
         
         // Include header before the already generated code
@@ -632,10 +630,8 @@ EOF;
         . "</script>\n";
         
         // Modify the footer before adding it to the output
-        $adminFooter = getAdminFooter("http://docs.limesurvey.org", $clang->gT("LimeSurvey online manual"));
+        $adminFooter = getUserFooter("http://www.hesge.ch/heg/", "© 2012 Haute École de Gestion de Genève");
         $adminoutput .= $adminFooter;
-        
-        $adminoutput .= "<script type=\"text/javascript\">replaceFooterText();</script>\n";
     }
 } else { //not logged in
 	sendcacheheaders();
@@ -650,7 +646,7 @@ EOF;
 	$adminoutput = str_replace($adminstyle, $userstyle, $adminoutput);
 
 	unset($_SESSION['metaHeader']);
-	$adminoutput.= "</div>\n".getAdminFooter("http://docs.limesurvey.org", $clang->gT("LimeSurvey online manual"));
+	$adminoutput.= "</div>\n".getAdminFooter("http://www.hesge.ch/heg/", "Haute École de Gestion de Genève");
 }
 
 if (($action=='showphpinfo') && ($_SESSION['USER_RIGHT_CONFIGURATOR'] == 1)) {
