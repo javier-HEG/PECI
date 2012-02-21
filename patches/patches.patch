@@ -1,3 +1,23 @@
+Index: common.php
+===================================================================
+--- common.php	(revision 12170)
++++ common.php	(working copy)
+@@ -133,7 +133,14 @@
+         $sourcefrom="install";
+     }
+ } else {
+-    $sourcefrom="public";
++	if (strpos($slashlesspath, "user"))
++	{
++		$sourcefrom="admin";
++	}
++	else
++	{
++		$sourcefrom="public";
++	}
+ }
+ 
+ // Set path for captcha verification.php
 Index: admin/admin.php
 ===================================================================
 --- admin/admin.php	(revision 12170)

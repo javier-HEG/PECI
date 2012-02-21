@@ -1,4 +1,4 @@
-Copyright: 2012, HEG - Haute École de Gestion de Genève
+Copyright: (C) 2012, HEG - Haute École de Gestion de Genève
 Author: Javier Belmonte <javier.belmonte@hesge.ch>
 License: GNU/GPL v3.0 or later
 
@@ -10,10 +10,8 @@ LimeSurvey offers two main interfaces:
 2. The interface for surveyed users, where the only possibility is the
    participation in the survey.
 
-Our intermediary interface will be available for registered users not belonging
-to the "SuperAdministrator" group. In fact, this intermediary interface being 
-a simplified version of the normal interface, in the absence of some controls,
-users should be able to create surveys only.
+Our intermediary interface is a third one which will be available for registered
+users not having "SuperAdministrator" rights.
 
 HOW IT WORKS
 
@@ -21,5 +19,4 @@ HOW IT WORKS
    https://limesurvey.svn.sourceforge.net/svnroot/limesurvey/source/limesurvey
 2. Copy the "user" folder and its contents inside the LimeSurvey main folder,
    next to the "admin" folder.
-3. Apply the patches in the "patches" folder. So far only "admin/admin.php" is
-   patched.
+3. Apply the patches in the "patches" folder.
