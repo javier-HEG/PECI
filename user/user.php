@@ -52,15 +52,6 @@ else
     $adminoutput='';
 }
 
-if($casEnabled==true)
-{
-    include_once("../admin/login_check_cas.php");
-}
-else
-{
-    include_once('../admin/login_check.php');
-}
-
 if ( $action == 'CSRFwarn')
 {
     include('../admin/access_denied.php');
@@ -71,7 +62,13 @@ if ( $action == 'FakeGET')
     include('../admin/access_denied.php');
 }
 
-if(isset($_SESSION['loginID']))
+if (!isset($_SESSION['loginID']))
+{
+	// Should the user not have logged in yet we redirect it
+	// to the original login page.
+	print ('<script type="text/javascript">window.open(\'../admin\', \'_top\');</script>');
+}
+else
 {
 	// Analogous to what we do in 'admin/admin.php', should the
 	// user have super-admin rights we send him to the interface
@@ -633,20 +630,6 @@ EOF;
         $adminFooter = getUserFooter("http://www.hesge.ch/heg/", "© 2012 Haute École de Gestion de Genève");
         $adminoutput .= $adminFooter;
     }
-} else { //not logged in
-	sendcacheheaders();
-	if (!isset($_SESSION['metaHeader'])) {
-		$_SESSION['metaHeader']='';
-	}
-	$adminoutput = getAdminHeader($_SESSION['metaHeader']).$adminoutput.$loginsummary;  // All future output is written into this and then outputted at the end of file
-
-	// Replace adminstyle.css with the user default style in this first version of the $adminoutput
-	$adminstyle = "href=\"{$homeurl}/styles/$admintheme/adminstyle.css\"";
-	$userstyle = "href=\"{$rooturl}/user/styles/default/userstyle.css\"";
-	$adminoutput = str_replace($adminstyle, $userstyle, $adminoutput);
-
-	unset($_SESSION['metaHeader']);
-	$adminoutput.= "</div>\n".getAdminFooter("http://www.hesge.ch/heg/", "Haute École de Gestion de Genève");
 }
 
 if (($action=='showphpinfo') && ($_SESSION['USER_RIGHT_CONFIGURATOR'] == 1)) {
