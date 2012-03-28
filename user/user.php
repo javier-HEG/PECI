@@ -52,6 +52,8 @@ else
     $adminoutput='';
 }
 
+include_once('login_check.php');
+
 if ( $action == 'CSRFwarn')
 {
     include('../admin/access_denied.php');
@@ -62,13 +64,7 @@ if ( $action == 'FakeGET')
     include('../admin/access_denied.php');
 }
 
-if (!isset($_SESSION['loginID']))
-{
-	// Should the user not have logged in yet we redirect it
-	// to the original login page.
-	print ('<script type="text/javascript">window.open(\'../admin\', \'_top\');</script>');
-}
-else
+if (isset($_SESSION['loginID']))
 {
 	// Analogous to what we do in 'admin/admin.php', should the
 	// user have super-admin rights we send him to the interface
@@ -461,7 +457,6 @@ else
         }
     }
 
-
     if ($action=='adduser' || $action=='deluser'|| $action=='finaldeluser' || $action=='moduser' || $action=='setusertemplates' || $action=='usertemplates' ||                                        //Still to check
     $action=='userrights' || $action=='modifyuser' || $action=='editusers' ||
     $action=='addusergroup' || $action=='editusergroup' || $action=='mailusergroup' ||
@@ -630,6 +625,29 @@ EOF;
         $adminFooter = getUserFooter("http://www.hesge.ch/heg/", "© 2012 Haute École de Gestion de Genève");
         $adminoutput .= $adminFooter;
     }
+} else { //not logged in
+	if ($action == 'addonlineuser') {
+        include ('userrighthandling.php');
+        $adminoutput .= $addsummary;
+	}
+	
+	sendcacheheaders();
+	if (!isset($_SESSION['metaHeader'])) {
+		$_SESSION['metaHeader']='';
+	}
+	
+	$adminoutput = getAdminHeader($_SESSION['metaHeader']).$adminoutput.$loginsummary;  // All future output is written into this and then outputted at the end of file
+
+	// Override adminstyle.css with the user default style
+	$adminStyle = "<link rel=\"stylesheet\" type=\"text/css\" href=\"{$homeurl}/styles/$admintheme/adminstyle.css\" />";
+	$userStyle = "<link rel=\"stylesheet\" type=\"text/css\" href=\"{$rooturl}/user/styles/default/userstyle.css\" />";
+	$adminoutput = str_replace($adminStyle, $adminStyle . "\n" . $userStyle, $adminoutput);
+
+	unset($_SESSION['metaHeader']);
+	
+	$adminFooter = getUserFooter("http://www.hesge.ch/heg/", "© 2012 Haute École de Gestion de Genève");
+	$adminoutput .= "</div>\n";
+	$adminoutput .= $adminFooter;
 }
 
 if (($action=='showphpinfo') && ($_SESSION['USER_RIGHT_CONFIGURATOR'] == 1)) {

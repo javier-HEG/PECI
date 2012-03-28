@@ -18,6 +18,25 @@ Index: common.php
  }
  
  // Set path for captcha verification.php
+Index: classes/core/language.php
+===================================================================
+--- classes/core/language.php	(revision 12170)
++++ classes/core/language.php	(working copy)
+@@ -34,7 +34,13 @@
+     function limesurvey_lang($langcode){
+         global $rootdir;
+         $langcode=sanitize_languagecode($langcode);
+-        $streamer = new FileReader($rootdir.'/locale/'.$langcode.'/LC_MESSAGES/'.$langcode.'.mo');
++        
++        if ($langcode == 'en' || $langcode == 'fr' || $langcode == 'de') {
++	        $streamer = new FileReader($rootdir.'/user/locale/'.$langcode.'/LC_MESSAGES/'.$langcode.'.mo');
++        } else {
++            $streamer = new FileReader($rootdir.'/locale/'.$langcode.'/LC_MESSAGES/'.$langcode.'.mo');
++        }
++        
+         $this->gettextclass = new gettext_reader($streamer);
+         $this->langcode = $langcode;
+     }
 Index: admin/admin.php
 ===================================================================
 --- admin/admin.php	(revision 12170)
@@ -34,3 +53,15 @@ Index: admin/admin.php
      //VARIOUS DATABASE OPTIONS/ACTIONS PERFORMED HERE
      if (in_array($action, array('updateemailtemplates','delsurvey','delgroup','delquestion','insertsurvey','updatesubquestions','copynewquestion','insertquestiongroup','insertCSV','insertquestion','updatesurveysettings','updatesurveysettingsandeditlocalesettings','updatesurveylocalesettings','updategroup','deactivate','savepersonalsettings','updatequestion','updateansweroptions','renumberquestions','updatedefaultvalues')))
      {
+Index: admin/sessioncontrol.php
+===================================================================
+--- admin/sessioncontrol.php	(revision 12170)
++++ admin/sessioncontrol.php	(working copy)
+@@ -197,6 +197,7 @@
+ 
+ if ($_SERVER['REQUEST_METHOD'] == 'POST' &&
+ returnglobal('action') != 'login' &&
++returnglobal('action') != 'addonlineuser' &&
+ returnglobal('action') != 'forgotpass' &&
+ returnglobal('action') != 'ajaxquestionattributes' &&
+ returnglobal('action') != '')

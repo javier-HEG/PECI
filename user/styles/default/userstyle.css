@@ -31,6 +31,9 @@ a, a:link, a:visited {
     text-decoration: none;
 }
 
+#wrapper {
+    background-color: white;
+}
 
 .maintitle {
 	color: royalblue;
@@ -98,4 +101,29 @@ div.menubar {
 	margin-top: 8px;
 	margin-left: 6px;
 	float: left;
+}
+
+#loginform, #newuserform {
+	background-color: whitesmoke;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 12px;
+	padding-top: 12px;
+	padding-bottom: 12px;
+	width: 600px;
+}
+
+#newuserform li label:first-child {
+    width: 39%;
+    text-align: right;
+    margin-right: 0.5em;
+    float: left;
+    font-weight: bold;
+    color: #1d2d45;
+}
+
+#newuserform li {
+    list-style-type: none;
+    clear:left;
+    padding-bottom:5px;
 }
