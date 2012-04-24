@@ -32,7 +32,7 @@ a, a:link, a:visited {
 }
 
 #wrapper {
-    background-color: white;
+    background-color: whitesmoke;
 }
 
 .maintitle {
@@ -78,16 +78,20 @@ div.menubar {
 
 .usabilityTabSelected {
 	border: 2px solid gray;
-	background: white;
+	background: whitesmoke;
 	border-bottom: none;
 	padding-top: 6px;
 	padding-bottom: 8px;
 	margin-top: -4px;
 }
 
-.usabilityTab {
+#usabilityTabContainer {
 	border: 2px solid gray;
 	margin: 0px 12px 12px 12px;
+}
+
+.usabilityTabContent {
+	background-color: yellow;
 }
 
 .footer {
@@ -104,10 +108,11 @@ div.menubar {
 }
 
 #loginform, #newuserform {
-	background-color: whitesmoke;
+	background-color: white;
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 12px;
+	margin-top: 12px;
 	padding-top: 12px;
 	padding-bottom: 12px;
 	width: 600px;

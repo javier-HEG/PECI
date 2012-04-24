@@ -549,16 +549,7 @@ if (isset($_SESSION['loginID']))
         
         // Add the user default stylesheet after the admin styleseet on the
         // automatically generated header
-        $adminHeader = getAdminHeader($_SESSION['metaHeader']);
-        
-        $adminStyle = "<link rel=\"stylesheet\" type=\"text/css\" href=\"{$homeurl}/styles/$admintheme/adminstyle.css\" />";
-        $userStyle = "<link rel=\"stylesheet\" type=\"text/css\" href=\"{$rooturl}/user/styles/default/userstyle.css\" />";
-        $adminHeader = str_replace($adminStyle, $adminStyle . "\n" . $userStyle, $adminHeader);
-        
-        // Add our custom made JavaScript scripts
-        $adminCoreScript = "<script type=\"text/javascript\" src=\"{$homeurl}/scripts/admin_core.js\"></script>";
-        $userTabsScript = "<script type=\"text/javascript\" src=\"{$rooturl}/user/scripts/tabs.js\"></script>";
-        $adminHeader = str_replace($adminCoreScript, $adminCoreScript . "\n" . $userTabsScript, $adminHeader);
+        $adminHeader = getUserHeader($_SESSION['metaHeader']);
         
         // Include header before the already generated code
         // NB. All future output is written into this and then outputted at the end of file
@@ -567,17 +558,6 @@ if (isset($_SESSION['loginID']))
         unset($_SESSION['metaHeader']);
         
         $adminoutput .= "</div>\n";
-        $adminoutput .= <<<EOF
-        	<div id="mainTitleMenu"></div>
-       		<div id="usabilityTabNameBar"></div>
-        	<div class="usabilityTab" id="wrapperTab"></div>
-        	
-        	<script type="text/javascript">
-        		createAllUsabilitTabNames();
-        		selectTab("createUsabilityTabName");
-        		putWrapperIntoTab("wrapperTab");
-        	</script>
-EOF;
         
         if(!isset($_SESSION['checksessionpost'])) {
             $_SESSION['checksessionpost'] = '';
@@ -620,10 +600,6 @@ EOF;
         . "\n"
         . "//-->\n"
         . "</script>\n";
-        
-        // Modify the footer before adding it to the output
-        $adminFooter = getUserFooter("http://www.hesge.ch/heg/", "© 2012 Haute École de Gestion de Genève");
-        $adminoutput .= $adminFooter;
     }
 } else { //not logged in
 	if ($action == 'addonlineuser') {
@@ -636,19 +612,27 @@ EOF;
 		$_SESSION['metaHeader']='';
 	}
 	
-	$adminoutput = getAdminHeader($_SESSION['metaHeader']).$adminoutput.$loginsummary;  // All future output is written into this and then outputted at the end of file
-
-	// Override adminstyle.css with the user default style
-	$adminStyle = "<link rel=\"stylesheet\" type=\"text/css\" href=\"{$homeurl}/styles/$admintheme/adminstyle.css\" />";
-	$userStyle = "<link rel=\"stylesheet\" type=\"text/css\" href=\"{$rooturl}/user/styles/default/userstyle.css\" />";
-	$adminoutput = str_replace($adminStyle, $adminStyle . "\n" . $userStyle, $adminoutput);
+	$adminoutput = getUserHeader($_SESSION['metaHeader']).$adminoutput.$loginsummary;  // All future output is written into this and then outputted at the end of file
 
 	unset($_SESSION['metaHeader']);
 	
-	$adminFooter = getUserFooter("http://www.hesge.ch/heg/", "© 2012 Haute École de Gestion de Genève");
 	$adminoutput .= "</div>\n";
-	$adminoutput .= $adminFooter;
 }
+
+// Regardless of the user being logged in or not
+$adminFooter = getUserFooter("http://www.hesge.ch/heg/", "© 2012 Haute École de Gestion de Genève");
+
+$adminoutput .= <<<EOF
+	<div id="mainTitleMenu"></div>
+	<div id="usabilityTabNameBar"></div>
+	<div id="usabilityTabContainer"></div>
+	
+	<script type="text/javascript">
+		createAllUsabilityTabNames();
+	</script>
+
+	$adminFooter
+EOF;
 
 if (($action=='showphpinfo') && ($_SESSION['USER_RIGHT_CONFIGURATOR'] == 1)) {
 	phpinfo();
