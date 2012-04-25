@@ -28,9 +28,79 @@ function getUserHeader($meta=false) {
 }
 
 /**
- * Function returning html text for the interface's footer, it's
- * based on "common_functions.php:getAdminFooter()" but returns a
- * much simpler footer.
+ * Creates the menu holding the project selector and other buttons needed
+ * for this menu.
+ */
+function getProjectSelectorMenu() {
+	global $imageurl;
+	
+	$output = '<div id="projectMenu">';
+	$output .= '<span id="menuOptionOpen" class="menuOption">Open ' . getUserSurveySelect() . "<img src=\"$imageurl/user/silk/page_go.png\" title=\"Open\" /></span>";
+	$output .= "<span id=\"menuOptionCreate\" class=\"menuOption\">Create new <img src=\"$imageurl/user/silk/page_add.png\" title=\"Open\" /></span>";
+	$output .= "<span id=\"menuOptionSave\" class=\"menuOption\" style=\"margin-right: 0px;\">Save <img src=\"$imageurl/user/silk/page_save.png\" title=\"Open\" /></span>";
+	
+	// Add hover style
+	$output .= "<script>
+		// Add hover style to menu items
+		$('span[class=menuOption]').hover(
+    	    function(){ $(this).addClass(\"menuOptionHover\"); },
+        	function(){ $(this).removeClass(\"menuOptionHover\"); }
+    	);
+		
+    	// Manage the click on the 'Open' option of the menu
+		$('#menuOptionOpen').click(
+			function(){ window.open('user.php?sid=' + $('#userMenuSurveySelect').val(), '_self', false); }
+		);
+		$('#userMenuSurveySelect').click(
+			function(event){ event.stopPropagation(); }
+		);
+		
+		// Temporally alert user that the other items are coming soon
+		$('#menuOptionCreate, #menuOptionSave').click(
+			function(){
+				alert('This function coming soon');
+				event.stopPropagation();
+			}
+		);
+	</script>";
+	
+	$output .= '</div>';
+	
+	return $output;
+}
+
+/**
+ * Creates an option menu with the surveys belonging to the current user.
+ * <strong>NB.</strong> Code based on <code>admin/surveylist.php</code>.
+ */
+function getUserSurveySelect() {
+	$query = " SELECT a.*, c.*, u.users_name FROM ".db_table_name('surveys')." as a "
+		." INNER JOIN ".db_table_name('surveys_languagesettings')." as c ON ( surveyls_survey_id = a.sid AND surveyls_language = a.language ) AND surveyls_survey_id=a.sid and surveyls_language=a.language "
+		." INNER JOIN ".db_table_name('users')." as u ON (u.uid=a.owner_id) ";
+	
+	$query .= " ORDER BY surveyls_title";
+	
+	$result = db_execute_assoc($query) or safe_die($connect->ErrorMsg());
+	
+	$output = '<select name="menu1" disabled="true" />';
+	
+	if($result->RecordCount() > 0) {
+		$output = '<select id="userMenuSurveySelect">';
+	
+		while($rows = $result->FetchRow()) {
+			$output .="<option value=\"{$rows['sid']}\">{$rows['surveyls_title']}</option>";
+		}
+	
+		$output .= '</select>';
+	}
+	
+	return $output;
+}
+
+/**
+ * Function returning html text for the interface's footer.
+ * <strong>NB.</strong> Code based on <code>common_functions.php</code>'s
+ * <code>getAdminFooter()</code> function but returning a much simpler footer.
  */
 function getUserFooter($url, $label) {
 	global $js_admin_includes, $homeurl;

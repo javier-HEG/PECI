@@ -17,6 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/***************************/
+/* Overriding admin styles */
+/***************************/
 body {
     background-color: white;
 }
@@ -32,7 +35,7 @@ a, a:link, a:visited {
 }
 
 #wrapper {
-    background-color: whitesmoke;
+    background-color: lightgray;
 }
 
 .maintitle {
@@ -62,6 +65,15 @@ div.menubar {
     width: auto;
 }
 
+.limebutton {
+   padding: 2px;
+   cursor:pointer;
+   text-align: center;
+}
+
+/*************/
+/* PECI Tabs */
+/*************/
 #usabilityTabNameBar {
 	height: 27px;
 	margin: 12px 12px 0px 24px;
@@ -70,16 +82,17 @@ div.menubar {
 .usabilityTabName {
 	border: 2px solid darkgray;
 	border-bottom: none;
-	background: lightgray;
-	margin-right: 4px;
+	background: whitesmoke;
 	padding: 4px;
+	margin-right: 4px;
+	border-radius: 5px 5px 0px 0px;
 	float: left;
 }
 
 .usabilityTabSelected {
 	border: 2px solid gray;
-	background: whitesmoke;
 	border-bottom: none;
+	background: lightgray;
 	padding-top: 6px;
 	padding-bottom: 8px;
 	margin-top: -4px;
@@ -107,6 +120,9 @@ div.menubar {
 	float: left;
 }
 
+/*********************/
+/* Login Form Styles */
+/*********************/
 #loginform, #newuserform {
 	background-color: white;
 	margin-left: auto;
@@ -131,4 +147,34 @@ div.menubar {
     list-style-type: none;
     clear:left;
     padding-bottom:5px;
+}
+
+/*************************/
+/* Survey Selection Menu */
+/*************************/
+#projectMenu {
+	background-color: white;
+	text-align: right;
+	padding: 2px;
+	margin: 2px 3px;
+}
+
+#projectMenu select {
+	width: 150px;
+}
+
+#projectMenu img {
+	vertical-align: middle;
+}
+
+#projectMenu span.menuOption {
+	background-color: whitesmoke;
+    border-radius: 3px;
+    padding: 0px 6px 3px;
+    margin-right: 2px;
+    cursor: pointer;
+}
+
+#projectMenu span.menuOptionHover {
+	background-color: lightgray;
 }
