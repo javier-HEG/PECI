@@ -357,6 +357,7 @@ if (isset($_SESSION['loginID']))
 
         include('../admin/surveylist.php');
     }
+    
     if (!isset($assessmentsoutput) && !isset($statisticsoutput) && !isset($browseoutput) &&
         !isset($savedsurveyoutput) && !isset($listcolumnoutput) && !isset($conditionsoutput) &&
         !isset($importoldresponsesoutput) && !isset($exportroutput) && !isset($vvoutput) &&
@@ -368,7 +369,11 @@ if (isset($_SESSION['loginID']))
         {
             $_SESSION['FileManagerContext']="edit:survey:$surveyid";
         }
-        include('../admin/html_functions.php');
+        
+        if ($action != '') {
+        	include('../admin/html_functions.php');
+        }
+        
         include('../admin/html.php');
         include('html.php');
     }

@@ -65,10 +65,27 @@ div.menubar {
     width: auto;
 }
 
-.limebutton {
-   padding: 2px;
-   cursor:pointer;
-   text-align: center;
+.limebutton  {
+	background-image: none;
+	background-color: lightgray;
+	border: 0px;
+	padding: 2px;
+	margin: 4px;
+	cursor: pointer;
+	text-align: center;
+	color: white;
+}
+
+.ui-state-default {
+	background-image: none;
+	background-color: gray;
+	border: 0px;
+}
+
+.ui-state-hover {
+	background-image: none;
+	background-color: darkgray;
+	border: 0px;
 }
 
 /*************/
@@ -82,7 +99,7 @@ div.menubar {
 .usabilityTabName {
 	border: 2px solid darkgray;
 	border-bottom: none;
-	background: whitesmoke;
+	background: lightgray;
 	padding: 4px;
 	margin-right: 4px;
 	border-radius: 5px 5px 0px 0px;
@@ -92,7 +109,7 @@ div.menubar {
 .usabilityTabSelected {
 	border: 2px solid gray;
 	border-bottom: none;
-	background: lightgray;
+	background: white;
 	padding-top: 6px;
 	padding-bottom: 8px;
 	margin-top: -4px;
@@ -154,13 +171,17 @@ div.menubar {
 /*************************/
 #projectMenu {
 	background-color: white;
-	text-align: right;
-	padding: 2px;
-	margin: 2px 3px;
+    border-bottom: 2px solid gray;
+    margin: 0;
+    padding: 4px;
+    position: relative;
+    text-align: right;
+    top: -1px;
 }
 
 #projectMenu select {
 	width: 150px;
+	color: black;
 }
 
 #projectMenu img {
@@ -168,13 +189,115 @@ div.menubar {
 }
 
 #projectMenu span.menuOption {
-	background-color: whitesmoke;
+	background-color: lightgray;
     border-radius: 3px;
-    padding: 0px 6px 3px;
-    margin-right: 2px;
+    padding: 1px 6px 4px;
+    margin-right: 4px;
     cursor: pointer;
 }
 
 #projectMenu span.menuOptionHover {
-	background-color: lightgray;
+	background-color: #eaeaea;
+}
+
+/*********************/
+/* Survey PECI Steps */
+/*********************/
+#surveyPeciStepContainer {
+	display: table;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 10px;
+}
+
+div.surveyPeciStep {
+	display: table-cell;
+	border: 1px solid gray;
+	border-radius: 5px;
+	background-color: darkgray;
+	color: white;
+	padding: 2px;
+	width: 150px;
+	vertical-align: middle;
+}
+
+div.currentPeciStep {
+	background-color: whitesmoke;
+	color: black;
+}
+
+div.surveyPeciStepArrow {
+	background-image: url('http://localhost/usability/images/user/silk/arrow_right.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+	display: table-cell;
+	width: 30px;
+}
+
+/******************/
+/* Survey Details */
+/******************/
+#surveyContainer {
+    background-color: white;
+    border: 1px solid gray;
+    margin: 4px 100px 8px;
+    padding: 6px;
+}
+
+#surveyContainer h1.peciStep {
+	font-size: large;
+	margin: 4px 8px;
+}
+
+#surveyContainer h2 {
+	font-weight: normal;
+	font-size: medium;
+	margin: 6px 12px;
+}
+
+#surveyDetails {
+	margin: 8px;
+	padding-bottom: 8px;
+	border-radius: 6px;
+	background-color: white;
+	border: 1px solid lightgray;
+}
+
+#surveyDetails p {
+	text-align: left;
+	margin: 0px;
+	padding-left: 12px;
+}
+
+/********************/
+/* Survey Questions */
+/********************/
+div.questionGroup {
+    border: 1px solid black;
+    margin: 8px;
+}
+
+div.questionGroup h1.questionGroupName {
+	background-color: black;
+    color: white;
+    font-size: small;
+    margin: 0;
+    padding: 2px 4px;
+}
+
+div.question {
+    border: 1px dashed gray;
+    border-radius: 6px 6px 6px 6px;
+    margin: 6px;
+    padding: 6px;
+}
+
+div.question h1.questionTitle {
+	font-size: small;
+	margin: 4px;
+}
+
+div.question div.questionHeader {
+	font-style: italic;
 }

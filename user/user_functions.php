@@ -35,7 +35,7 @@ function getProjectSelectorMenu() {
 	global $imageurl;
 	
 	$output = '<div id="projectMenu">';
-	$output .= '<span id="menuOptionOpen" class="menuOption">Open ' . getUserSurveySelect() . "<img src=\"$imageurl/user/silk/page_go.png\" title=\"Open\" /></span>";
+	$output .= '<span id="menuOptionOpen" class="menuOption">' . getUserSurveySelect() . " Open <img src=\"$imageurl/user/silk/page_go.png\" title=\"Open\" /></span>";
 	$output .= "<span id=\"menuOptionCreate\" class=\"menuOption\">Create new <img src=\"$imageurl/user/silk/page_add.png\" title=\"Open\" /></span>";
 	$output .= "<span id=\"menuOptionSave\" class=\"menuOption\" style=\"margin-right: 0px;\">Save <img src=\"$imageurl/user/silk/page_save.png\" title=\"Open\" /></span>";
 	
