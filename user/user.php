@@ -45,9 +45,6 @@ if (!isset($editedaction)) {$editedaction=returnglobal('editedaction');} // for 
 
 if ($action != 'showprintablesurvey' && substr($action,0,4)!= 'ajax') {
 	$adminoutput = "<div id='wrapper'>";
-	
-	// Add the user menu for choose among existing surveys
-	$adminoutput .= getProjectSelectorMenu();
 } else {
     $adminoutput='';
 }
@@ -66,6 +63,9 @@ if ( $action == 'FakeGET')
 
 if (isset($_SESSION['loginID']))
 {
+	// Add the user menu for choosing among existing surveys
+	$adminoutput .= getProjectSelectorMenu();
+	
 	// Analogous to what we do in 'admin/admin.php', should the
 	// user have super-admin rights we send him to the interface
 	// in '/admin'.
