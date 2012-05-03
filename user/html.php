@@ -23,42 +23,41 @@ include_once("login_check.php");
 if (isset($_POST['uid'])) { $postuserid=sanitize_int($_POST['uid']); }
 if (isset($_POST['ugid'])) { $postusergroupid=sanitize_int($_POST['ugid']); }
 
+require_once(dirname(__FILE__).'/../qanda.php');
+
 // Show selected survey
 if (isset($surveyid) && $surveyid && $action=='') {
 	if(bHasSurveyPermission($surveyid,'survey','read'))	{
 		$baselang = GetBaseLanguageFromSurveyID($surveyid);
 		
-		// Getting a count of questions for this survey
-		$sumquery3 = "SELECT * FROM ".db_table_name('questions')." WHERE sid={$surveyid} AND parent_qid=0 AND language='".$baselang."'";
-		$sumresult3 = $connect->Execute($sumquery3);
-		$sumcount3 = $sumresult3->RecordCount();
-		// Getting a count of conditions for this survey
-		$sumquery6 = "SELECT count(*) FROM ".db_table_name('conditions')." as c, ".db_table_name('questions')." as q WHERE c.qid = q.qid AND q.sid=$surveyid";
-		$sumcount6 = $connect->GetOne($sumquery6);
-		// Getting a count of groups for this survey
-		$sumquery2 = "SELECT * FROM ".db_table_name('groups')." WHERE sid={$surveyid} AND language='".$baselang."'";
-		$sumresult2 = $connect->Execute($sumquery2);
-		$sumcount2 = $sumresult2->RecordCount();
 		// Getting data for this survey
-		$sumquery1 = "SELECT * FROM ".db_table_name('surveys')." inner join ".db_table_name('surveys_languagesettings')." on (surveyls_survey_id=sid and surveyls_language=language) WHERE sid=$surveyid";
-		$sumresult1 = db_select_limit_assoc($sumquery1, 1);
+		$sumquery = "SELECT * FROM ".db_table_name('surveys')." inner join ".db_table_name('surveys_languagesettings')." on (surveyls_survey_id=sid and surveyls_language=language) WHERE sid=$surveyid";
+		$sumresult = db_select_limit_assoc($sumquery, 1);
 
 		// If surveyid is invalid then die to prevent errors at a later time
-		if ($sumresult1->RecordCount()==0){
+		if ($sumresult->RecordCount()==0){
 			die('Invalid survey id');
 		}
 	
-		$surveyinfo = $sumresult1->FetchRow();
-		$surveyinfo = array_map('FlattenText', $surveyinfo);
+		$thissurvey = $sumresult->FetchRow();
+		$thissurvey = array_map('FlattenText', $thissurvey);
 		
-		if (!$surveyinfo['language']) {
+		if (!$thissurvey['language']) {
 			$language = getLanguageNameFromCode($currentadminlang, false);
 		} else {
-			$language = getLanguageNameFromCode($surveyinfo['language'], false);
+			$language = getLanguageNameFromCode($thissurvey['language'], false);
 		}
 		
 		// Output starts here...
-		$surveysummary = '<div style="background-color: lightgray; width: 100%; margin: -1px 0px; padding-bottom: 6px;">';
+		$surveysummary = '<!-- JAVASCRIPT FOR CONDITIONAL QUESTIONS -->
+			<script type="text/javascript">
+	        /* <![CDATA[ */
+	            function checkconditions(value, name, type) { }
+				function noop_checkconditions(value, name, type) { }
+	        /* ]]> */
+			</script>';
+		
+		$surveysummary .= '<div style="background-color: lightgray; width: 100%; margin: -1px 0px; padding-bottom: 6px;">';
 		
 		$surveysummary .= '<div id="surveyPeciStepContainer">'
 			. '<div class="surveyPeciStep">Evaluate usefulness</div>'
@@ -80,23 +79,66 @@ if (isset($surveyid) && $surveyid && $action=='') {
 			. '<div id="surveyDetails">'
 			. '<button style="float: right;" onclick="$(\'#surveyDetails\').hide();  $(\'#showDetailsBtn\').show();">(hide)</button>'
 			. '<h2>Survey details</h2>'
-			. '<p><u>Title:</u>' . $surveyinfo['surveyls_title'] . '<br />'
+			. '<p><u>Title:</u>' . $thissurvey['surveyls_title'] . '<br />'
 			. '<u>' . $clang->gT("Base language:") . '</u> ' . $language
-			. '<br /><u>' . $clang->gT("Welcome:") . '</u> ' . $surveyinfo['surveyls_welcometext'] . '</p>'	
+			. '<br /><u>' . $clang->gT("Welcome:") . '</u> ' . $thissurvey['surveyls_welcometext'] . '</p>'	
 			. '</div>';
 		
 		// Hide the survey details
 		$surveysummary .= '<script type="text/javascript">$("#surveyDetails").hide();</script>';
 		
-		$surveysummary .= '<div class="questionGroup"><h1 class="questionGroupName">A: Group 1</h1>'
-			. '<div class="question"><div class="questionHeader">Question 1</div><h1 class="questionTitle">How old are you?</h1></div>'
-			. '<div class="question"><div class="questionHeader">Question 1</div><h1 class="questionTitle">How old are you?</h1></div>'
-			. '</div>';
+		// Find all question groups in this survey
+		$gidquery = "SELECT gid, group_name FROM " . db_table_name('groups')
+			. " WHERE sid=$surveyid AND language='" . $thissurvey['language'] . "' ORDER BY group_order";
+		$gidresult = db_execute_assoc($gidquery);
 		
-		$surveysummary .= '<div class="questionGroup"><h1 class="questionGroupName">B: Group 2</h1>'
-			. '<div class="question"><div class="questionHeader">Question 1</div><h1 class="questionTitle">How old are you?</h1></div>'
-			. '<div class="question"><div class="questionHeader">Question 1</div><h1 class="questionTitle">How old are you?</h1></div>'
-			. '</div>';
+		$groupIndex = 'A';
+		$questionIndex = 1;
+		if ($gidresult->RecordCount() > 0) {
+			while($gv = $gidresult->FetchRow()) {
+				$surveysummary .= '<div class="questionGroup"><h1 class="questionGroupName">' . $groupIndex++ . ': ';
+	
+				if (strip_tags($gv['group_name'])) {
+					$surveysummary .= htmlspecialchars(strip_tags($gv['group_name']));
+				} else {
+					$surveysummary .= htmlspecialchars($gv['group_name']);
+				}
+				
+				$surveysummary .= '</h1>';
+				
+				$qquery = 'SELECT * FROM ' . db_table_name('questions')
+					. " WHERE sid=$surveyid AND gid={$gv['gid']} AND language='{$thissurvey['language']}' and parent_qid=0 order by question_order";
+				$qresult = db_execute_assoc($qquery);
+				
+				if ($qresult->RecordCount() > 0) {
+					while($qrows = $qresult->FetchRow()) {
+						$ia = array(0 => $qrows['qid'],
+							1 => $surveyid.'X'.$qrows['gid'].'X'.$qrows['qid'],
+							2 => $qrows['title'],
+							3 => $qrows['question'],
+							4 => $qrows['type'],
+							5 => $qrows['gid'],
+							6 => $qrows['mandatory'],
+							//7 => $qrows['other']); // ia[7] is conditionsexist not other
+							7 => 'N',
+							8 => 'N' ); // ia[8] is usedinconditions
+						
+						// Session values are needed to use qanda.php::retrieveAnswers()
+						$_SESSION['s_lang'] = $thissurvey['language'];
+						$_SESSION['dateformats'] = getDateFormatData($thissurvey['surveyls_dateformat']);
+						list($plus_qanda, $plus_inputnames)=retrieveAnswers($ia);
+						
+						$surveysummary .= '<div class="question">'
+							. '<div class="questionHeader">Question ' . $questionIndex++ . '</div>'
+							. '<h1 class="questionTitle">' . $qrows['question'] . '</h1>'
+							. $plus_qanda[1]
+							. '</div>';	
+					}
+				}
+				
+				$surveysummary .= '</div>';	
+			}
+		}
 		
 		$surveysummary .= '</div></div>';
 	}

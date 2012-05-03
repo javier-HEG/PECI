@@ -374,14 +374,12 @@ if (isset($_SESSION['loginID']))
         	include('../admin/html_functions.php');
         }
         
-        include('../admin/html.php');
         include('html.php');
     }
 
     if ($action == "listsurveys"){
-        include('../admin/html_functions.php');
-        include('../admin/html.php');
         include('html.php');
+        include('../admin/html_functions.php');
         include('../admin/surveylist.php');
     }
 

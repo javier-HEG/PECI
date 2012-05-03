@@ -127,7 +127,7 @@ div.menubar {
 .footer {
     text-align: center;
     color: gray;
-    background-color: lightgray;
+    background-color: #efefef;
     margin: 12px;
 }
 
@@ -241,7 +241,7 @@ div.surveyPeciStepArrow {
 #surveyContainer {
     background-color: white;
     border: 1px solid gray;
-    margin: 4px 100px 8px;
+    margin: 4px 150px 8px;
     padding: 6px;
 }
 
