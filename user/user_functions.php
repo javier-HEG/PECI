@@ -81,9 +81,12 @@ function getProjectSelectorMenu() {
  * <strong>NB.</strong> Code based on <code>admin/surveylist.php</code>.
  */
 function getUserSurveySelect() {
-	$query = " SELECT a.*, c.*, u.users_name FROM ".db_table_name('surveys')." as a "
-		." INNER JOIN ".db_table_name('surveys_languagesettings')." as c ON ( surveyls_survey_id = a.sid AND surveyls_language = a.language ) AND surveyls_survey_id=a.sid and surveyls_language=a.language "
-		." INNER JOIN ".db_table_name('users')." as u ON (u.uid=a.owner_id) ";
+	$query = " SELECT a.*, c.*, u.users_name FROM " . db_table_name('surveys')." as a "
+		. " INNER JOIN " . db_table_name('surveys_languagesettings')
+			. " as c ON ( surveyls_survey_id = a.sid AND surveyls_language = a.language )"
+			. " AND surveyls_survey_id=a.sid and surveyls_language=a.language "
+		. " INNER JOIN ".db_table_name('users')." as u ON (u.uid=a.owner_id) "
+		. " WHERE a.owner_id={$_SESSION['loginID']}";
 	
 	$query .= " ORDER BY surveyls_title";
 	
