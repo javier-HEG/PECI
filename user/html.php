@@ -171,30 +171,3 @@ function showUserMenu() {
 
 	return $adminmenu;
 }
-
-/**
- * Returns html text for the "first steps help" which should have
- * originally be returned by "showUserMenu()" if we had kept the
- * code in "admin/html.php:showadminmenu()".
- */
-function showUserFirstStepsHelp() {
-	global $surveyid, $imageurl, $clang, $action;
-
-	$firstStepsHelp = "";
-
-	//  $adminmenu .= "<p style='margin:0;font-size:1px;line-height:1px;height:1px;'>&nbsp;</p>"; //CSS Firefox 2 transition fix
-	if (!isset($action) && !isset($surveyid) && count(getsurveylist(true))==0)
-	{
-		$firstStepsHelp = '<div style="width:500px;margin:0 auto;">'
-		.'<h2>'.sprintf($clang->gT("Welcome to %s!"),'LimeSurvey').'</h2>'
-		.'<p>'.$clang->gT("Some piece-of-cake steps to create your very own first survey:").'<br/>'
-		.'<ol>'
-		.'<li>'.sprintf($clang->gT('Create a new survey clicking on the %s icon in the upper right.'),"<img src='$imageurl/add_20.png' name='ShowHelp' title='' alt='". $clang->gT("Add survey")."'/>").'</li>'
-		.'<li>'.$clang->gT('Create a new question group inside your survey.').'</li>'
-		.'<li>'.$clang->gT('Create one or more questions inside the new question group.').'</li>'
-		.'<li>'.sprintf($clang->gT('Done. Test your survey using the %s icon.'),"<img src='$imageurl/do_20.png' name='ShowHelp' title='' alt='". $clang->gT("Test survey")."'/>").'</li>'
-		.'</ol></p><br />&nbsp;</div>';
-	}
-
-	return $firstStepsHelp;
-}

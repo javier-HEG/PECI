@@ -49,7 +49,14 @@ function getProjectSelectorMenu() {
 		
     	// Manage the click on the 'Open' option of the menu
 		$('#menuOptionOpen').click(
-			function(){ window.open('user.php?sid=' + $('#userMenuSurveySelect').val(), '_self', false); }
+			function(){
+				if ($('#userMenuSurveySelect').val() != 'none')
+					window.open('user.php?sid=' + $('#userMenuSurveySelect').val(), '_self', false);
+				else {
+					alert('Please choose a survey from the drop-down menu inside the button.');
+					event.stopPropagation();
+				}
+			}
 		);
 		$('#userMenuSurveySelect').click(
 			function(event){ event.stopPropagation(); }
@@ -82,13 +89,14 @@ function getUserSurveySelect() {
 	
 	$result = db_execute_assoc($query) or safe_die($connect->ErrorMsg());
 	
-	$output = '<select name="menu1" disabled="true" />';
+	$output = '<select name="menu1" disabled="true"><option selected="true">(No surveys yet)</option></select>';
 	
 	if($result->RecordCount() > 0) {
 		$output = '<select id="userMenuSurveySelect">';
-	
+		$output .= "<option value=\"none\" selected=\"true\">Choose a survey ...</option>";
+		
 		while($rows = $result->FetchRow()) {
-			$output .="<option value=\"{$rows['sid']}\">{$rows['surveyls_title']}</option>";
+			$output .= "<option value=\"{$rows['sid']}\">{$rows['surveyls_title']}</option>";
 		}
 	
 		$output .= '</select>';

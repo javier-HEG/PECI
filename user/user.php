@@ -480,7 +480,6 @@ if (isset($_SESSION['loginID']))
     (substr($action,0,4)!= 'ajax') && $action!='update' && $action!='showphpinfo')
     {
         $adminoutput .= showUserMenu();
-        $adminoutput .= showUserFirstStepsHelp();
     }
 
     if (isset($databaseoutput))  {$adminoutput.= $databaseoutput;}
@@ -545,7 +544,13 @@ if (isset($_SESSION['loginID']))
     if (isset($exportroutput)) {$adminoutput.= $exportroutput;}
     if (isset($loginsummary)) {$adminoutput.= $loginsummary;}
 
-
+    // If a user is logged in, but no survey has been loaded, then show instructions.
+	if (!isset($surveyid)) {
+		$adminoutput .= '<div class="messagebox ui-corner-all">'
+			. '<div class="header ui-widget-header">Instructions</div>'
+			. 'Instructions on opening/creating a survey</div>';
+	}
+    
     if (!isset($printablesurveyoutput) && $subaction!='export' && (substr($action,0,4)!= 'ajax'))
     {
         if (!isset($_SESSION['metaHeader'])) {$_SESSION['metaHeader']='';}

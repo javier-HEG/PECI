@@ -165,10 +165,10 @@ if (!isset($_SESSION['loginID'])) {
 						}
 						$login = true;
 
-						$loginsummary .= "<div class='messagebox ui-corner-all'>\n";
-						$loginsummary .= "<div class='header ui-widget-header'>" . $clang->gT("Logged in") . "</div>";
-						$loginsummary .= "<br />".sprintf($clang->gT("Welcome %s!"),$_SESSION['full_name'])."<br />&nbsp;";
-						$loginsummary .= "</div>\n";
+ 						$loginsummary .= "<div class='messagebox ui-corner-all' id='loggedInMessageBox'>\n";
+ 						$loginsummary .= sprintf($clang->gT("Welcome %s!"),$_SESSION['full_name']) . "</div>\n";
+ 						// Set the summary to hide itself after 5 seconds
+ 						$loginsummary .= "<script type='text/javascript'>setTimeout(\"$('#loggedInMessageBox').hide('fast');\", 5000);</script>";
 
 						if (isset($_POST['refererargs']) && $_POST['refererargs'] &&
 						strpos($_POST['refererargs'], "action=logout") === FALSE)
@@ -181,7 +181,7 @@ if (!isset($_SESSION['loginID'])) {
 							. " content=\"1;URL={$scriptname}?".$sRefererArg."\" />";
 							$loginsummary .= "<p><font size='1'><i>".$clang->gT("Reloading screen. Please wait.")."</i></font>\n";
 						}
-						$loginsummary .= "<br /><br />\n";
+						
 						GetSessionUserRights($_SESSION['loginID']);
 					}
 					else
