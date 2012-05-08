@@ -197,13 +197,12 @@ div.messagebox .header {
 /* Survey Selection Menu */
 /*************************/
 #projectMenu {
-	background-color: white;
+    background-color: white;
     border-bottom: 2px solid gray;
     margin: 0;
-    padding: 4px;
+    padding: 8px 6px;
     position: relative;
     text-align: right;
-    top: -1px;
 }
 
 #projectMenu select {
@@ -218,9 +217,9 @@ div.messagebox .header {
 #projectMenu span.menuOption {
 	background-color: lightgray;
     border-radius: 3px;
-    padding: 1px 6px 4px;
-    margin-right: 4px;
     cursor: pointer;
+    margin-right: 4px;
+    padding: 4px 6px 6px;
 }
 
 #projectMenu span.menuOptionHover {
@@ -297,6 +296,23 @@ div.surveyPeciStepArrow {
 	padding-left: 12px;
 }
 
+/******************/
+/* Action buttons */
+/******************/
+.peciActionButtons button {
+	border: 1px solid black;
+	margin: 0px;
+	color: black
+}
+
+.peciActionButtons .ui-state-default {
+	background-color: white;
+}
+
+.peciActionButtons .ui-state-hover {
+	background-color: lightgray;
+}
+
 /********************/
 /* Survey Questions */
 /********************/
@@ -309,34 +325,9 @@ div.surveyPeciStepArrow {
     color: white;
     font-size: medium;
     font-weight: bold;
-    padding: 2px 4px;
+    padding: 1px 4px;
     margin: 0px;
 	background-color: black;
-}
-
-.groupAction {
-	color: black;
-    margin: 0 2px;
-    padding: 2px;
-    position: relative;
-    top: -2px;
-    left: 50px;
-}
-
-.groupCollapser {
-	color: black;
-	float: right;
-	margin: 1px -2px;
-	padding: 2px;
-	width: 2em;
-}
-
-.peciQuestionGroupName .ui-state-default {
-	background-color: white;
-}
-
-.peciQuestionGroupName .ui-state-hover {
-	background-color: lightgray;
 }
 
 .peciQuestion {
@@ -353,23 +344,4 @@ div.surveyPeciStepArrow {
 
 .peciQuestion .questionHeader {
 	font-style: italic;
-}
-
-.questionHeader .questionButtonContainer {
-	float: right;
-}
-
-.questionHeader .questionAction {
-	border: 1px solid black;
-	color: black;
-    margin: 0px;
-    padding: 2px;
-}
-
-.questionHeader .ui-state-default {
-	background-color: white;
-}
-
-.questionHeader .ui-state-hover {
-	background-color: lightgray;
 }

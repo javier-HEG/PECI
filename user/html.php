@@ -59,33 +59,44 @@ if (isset($surveyid) && $surveyid && $action=='') {
 		
 		$surveysummary .= '<div style="background-color: lightgray; width: 100%; margin: -1px 0px; padding-bottom: 6px;">';
 		
-		$surveysummary .= '<div id="surveyPeciStepContainer">'
-			. '<div class="surveyPeciStep">Evaluate usefulness</div>'
-			. '<div class="surveyPeciStepArrow">&nbsp;</div>'
-			. '<div class="surveyPeciStep">Select questions</div>'
-			. '<div class="surveyPeciStepArrow">&nbsp;</div>'
-			. '<div class="surveyPeciStep currentPeciStep">Modify the questionnaire</div>'
-			. '<div class="surveyPeciStepArrow">&nbsp;</div>'
-			. '<div class="surveyPeciStep">Start survey</div>'
-			. '<div class="surveyPeciStepArrow">&nbsp;</div>'
-			. '<div class="surveyPeciStep">Analyze the data</div>'
-			. '<div class="surveyPeciStepArrow">&nbsp;</div>'
-			. '<div class="surveyPeciStep">Create the report</div>'
-			. '</div>';
+		$surveysummary .= "<div id=\"surveyPeciStepContainer\">
+				<div class=\"surveyPeciStep\">Evaluate usefulness</div>
+				<div class=\"surveyPeciStepArrow\">&nbsp;</div>
+				<div class=\"surveyPeciStep\">Select questions</div>
+				<div class=\"surveyPeciStepArrow\">&nbsp;</div>
+				<div class=\"surveyPeciStep currentPeciStep\">Modify the questionnaire</div>
+				<div class=\"surveyPeciStepArrow\">&nbsp;</div>
+				<div class=\"surveyPeciStep\">Start survey</div>
+				<div class=\"surveyPeciStepArrow\">&nbsp;</div>
+				<div class=\"surveyPeciStep\">Analyze the data</div>
+				<div class=\"surveyPeciStepArrow\">&nbsp;</div>
+				<div class=\"surveyPeciStep\">Create the report</div>
+			</div>";
 		
-		$surveysummary .= '<div id="surveyContainer">'
-			. '<button id="showDetailsBtn" style="float: right;" onclick="$(\'#surveyDetails\').show(); $(\'#showDetailsBtn\').hide();">(show survey details)</button>'
-			. '<h1 class="peciStep">Modify the questionnaire</h1>'
-			. '<div id="surveyDetails">'
-			. '<button style="float: right;" onclick="$(\'#surveyDetails\').hide();  $(\'#showDetailsBtn\').show();">(hide)</button>'
-			. '<h2>Survey details</h2>'
-			. '<p><u>Title:</u>' . $thissurvey['surveyls_title'] . '<br />'
-			. '<u>' . $clang->gT("Base language:") . '</u> ' . $language
-			. '<br /><u>' . $clang->gT("Welcome:") . '</u> ' . $thissurvey['surveyls_welcometext'] . '</p>'	
-			. '</div>';
+		$surveysummary .= "<div id=\"surveyContainer\">
+			<button id=\"showDetailsBtn\" style=\"float: right; margin: 4px 8px;\"
+				onclick=\"$('#surveyDetails').show(); $('#showDetailsBtn').hide();\">(show survey details)</button>
+			<h1 class=\"peciStep\">Modify the questionnaire</h1>
+			<div id=\"surveyDetails\">
+				<h2>Survey details
+					<div class=\"peciActionButtons\" style=\"float: right; margin-right: -6px;\">
+						<button>Edit</button>
+						<button onclick=\"$('#surveyDetails').hide();  $('#showDetailsBtn').show();\">Hide</button>
+					</div>
+				</h2>
+				<p><u>Title:</u> {$thissurvey['surveyls_title']} <br />
+				<u>{$clang->gT("Base language:")}</u> $language <br />
+				<u>{$clang->gT("Welcome:")}</u> {$thissurvey['surveyls_welcometext']}</p>	
+			</div>";
 		
 		// Hide the survey details
 		$surveysummary .= '<script type="text/javascript">$("#surveyDetails").hide();</script>';
+		
+		// Create buttons for adding new groups and questions
+		$surveysummary .= "<div class=\"peciActionButtons\" style=\"margin-left: 8px;\">
+			<button>Add a new group</button>
+			<button>Add a new question</button>
+		</div>";
 		
 		// Find all question groups in this survey
 		$gidquery = "SELECT gid, group_name FROM " . db_table_name('groups')
@@ -108,11 +119,15 @@ if (isset($surveyid) && $surveyid && $action=='') {
 					$surveysummary .= htmlspecialchars($gv['group_name']);
 				}
 				
-				$surveysummary .= "<button class=\"groupCollapser\" id=\"groupCollapser{$gv['gid']}\">-</button>\n";
-				$surveysummary .= "<button class=\"groupCollapser\" id=\"groupExpander{$gv['gid']}\" style=\"display: none;\">+</button>\n";
+				$surveysummary .= "<div class=\"peciActionButtons\" style=\"float: right; display: inline; margin: 0px -3px;\">
+					<button style=\"width: 2em;\" id=\"groupCollapser{$gv['gid']}\">-</button>
+					<button style=\"width: 2em; display: none;\" id=\"groupExpander{$gv['gid']}\">+</button>
+				</div>";
 				
-				$surveysummary .= '<button class="groupAction">Edit</button>';
-				$surveysummary .= '<button class="groupAction">Delete</button>';
+				$surveysummary .= "<div class=\"peciActionButtons\" style=\"position: relative; left: 50px; top: -2px; display: inline;\">
+					<button>Edit</button>
+					<button>Delete</button>
+				</div>";
 				
 				$surveysummary .= "<input type=\"hidden\" id=\"groupExpansionState{$gv['gid']}\" value=\"shown\"/>";
 				
@@ -143,21 +158,25 @@ if (isset($surveyid) && $surveyid && $action=='') {
 						list($plus_qanda, $plus_inputnames)=retrieveAnswers($ia);
 						
 						$surveysummary .= "<div class=\"peciQuestion\">
-							<div class=\"questionHeader\">Question $questionIndex
-							<div class=\"questionButtonContainer\">
-								<button class=\"questionAction\">Edit</button>
-								<button class=\"questionAction\">Move</button>
-								<button class=\"questionAction\">Add condition</button>
-								<button class=\"questionAction\">Delete</button>
-							</div>
-							</div>
-							<h1 class=\"questionTitle\">{$qrows['question']}</h1>
-							{$plus_qanda[1]}
-						</div>";
+								<div class=\"questionHeader\">Question $questionIndex
+									<div class=\"peciActionButtons\" style=\"float: right;\">
+										<button>Edit</button>
+										<button>Move</button>
+										<button>Add condition</button>
+										<button>Delete</button>
+									</div>
+								</div>
+								<h1 class=\"questionTitle\">{$qrows['question']}</h1>
+								{$plus_qanda[1]}
+							</div>";
 
 						$questionIndex++;
 					}
 				}
+				
+				$surveysummary .= "<div class=\"peciActionButtons\" style=\"margin: 6px;\">
+						<button>Add a question</button>
+					</div>";
 				
 				$surveysummary .= "</div>\n";
 				$surveysummary .= "<script type=\"text/javascript\">
