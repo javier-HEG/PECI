@@ -105,6 +105,15 @@ div.messagebox .header {
 	padding: 10px;
 }
 
+/****************************************************************/
+/* Problem with vertical scrolling and jQueri-ui and Limesurvey */
+/* http://bugs.limesurvey.org/print_bug_page.php?bug_id=5990    */
+/****************************************************************/
+.ui-helper-hidden-accessible {
+  position: relative;
+  display: none;
+}
+
 /*************/
 /* PECI Tabs */
 /*************/
