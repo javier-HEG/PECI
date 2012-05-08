@@ -96,16 +96,30 @@ if (isset($surveyid) && $surveyid && $action=='') {
 		$questionIndex = 1;
 		if ($gidresult->RecordCount() > 0) {
 			while($gv = $gidresult->FetchRow()) {
-				$surveysummary .= '<div class="questionGroup"><h1 class="questionGroupName">' . $groupIndex++ . ': ';
-	
+				$surveysummary .= "<div class=\"peciQuestionGroup\">\n";
+				
+				// Question group name
+				$surveysummary .= "<div class=\"peciQuestionGroupName\">$groupIndex: ";
+				$groupIndex++;
+				
 				if (strip_tags($gv['group_name'])) {
 					$surveysummary .= htmlspecialchars(strip_tags($gv['group_name']));
 				} else {
 					$surveysummary .= htmlspecialchars($gv['group_name']);
 				}
 				
-				$surveysummary .= '</h1>';
+				$surveysummary .= "<button class=\"groupCollapser\" id=\"groupCollapser{$gv['gid']}\">-</button>\n";
+				$surveysummary .= "<button class=\"groupCollapser\" id=\"groupExpander{$gv['gid']}\" style=\"display: none;\">+</button>\n";
 				
+				$surveysummary .= '<button class="groupAction">Edit</button>';
+				$surveysummary .= '<button class="groupAction">Delete</button>';
+				
+				$surveysummary .= "<input type=\"hidden\" id=\"groupExpansionState{$gv['gid']}\" value=\"shown\"/>";
+				
+				$surveysummary .= '</div>';
+				
+				// Question group questions
+				$surveysummary .= '<div id="peciQuestionGroup' . $gv['gid'] . '">';
 				$qquery = 'SELECT * FROM ' . db_table_name('questions')
 					. " WHERE sid=$surveyid AND gid={$gv['gid']} AND language='{$thissurvey['language']}' and parent_qid=0 order by question_order";
 				$qresult = db_execute_assoc($qquery);
@@ -128,16 +142,42 @@ if (isset($surveyid) && $surveyid && $action=='') {
 						$_SESSION['dateformats'] = getDateFormatData($thissurvey['surveyls_dateformat']);
 						list($plus_qanda, $plus_inputnames)=retrieveAnswers($ia);
 						
-						$surveysummary .= '<div class="question">'
-							. '<div class="questionHeader">Question ' . $questionIndex++ . '</div>'
-							. '<h1 class="questionTitle">' . $qrows['question'] . '</h1>'
-							. $plus_qanda[1]
-							. '</div>';	
+						$surveysummary .= "<div class=\"peciQuestion\">
+							<div class=\"questionHeader\">Question $questionIndex
+							<div class=\"questionButtonContainer\">
+								<button class=\"questionAction\">Edit</button>
+								<button class=\"questionAction\">Move</button>
+								<button class=\"questionAction\">Add condition</button>
+								<button class=\"questionAction\">Delete</button>
+							</div>
+							</div>
+							<h1 class=\"questionTitle\">{$qrows['question']}</h1>
+							{$plus_qanda[1]}
+						</div>";
+
+						$questionIndex++;
 					}
 				}
 				
-				$surveysummary .= '</div>';	
+				$surveysummary .= "</div>\n";
+				$surveysummary .= "<script type=\"text/javascript\">
+					$('#groupCollapser{$gv['gid']}').click(
+						function() {
+							$('#peciQuestionGroup{$gv['gid']}').hide();
+							$('#groupCollapser{$gv['gid']}').hide();
+							$('#groupExpander{$gv['gid']}').show();
+					});
+						
+					$('#groupExpander{$gv['gid']}').click(
+						function() {
+							$('#peciQuestionGroup{$gv['gid']}').show();
+							$('#groupCollapser{$gv['gid']}').show();
+							$('#groupExpander{$gv['gid']}').hide();
+					});
+				</script>";				
+				$surveysummary .= "</div>\n";
 			}
+			
 		}
 		
 		$surveysummary .= '</div></div>';

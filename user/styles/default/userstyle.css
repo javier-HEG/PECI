@@ -291,31 +291,76 @@ div.surveyPeciStepArrow {
 /********************/
 /* Survey Questions */
 /********************/
-div.questionGroup {
+.peciQuestionGroup {
     border: 1px solid black;
     margin: 8px;
 }
 
-div.questionGroup h1.questionGroupName {
-	background-color: black;
+.peciQuestionGroupName {
     color: white;
-    font-size: small;
-    margin: 0;
+    font-size: medium;
+    font-weight: bold;
     padding: 2px 4px;
+    margin: 0px;
+	background-color: black;
 }
 
-div.question {
+.groupAction {
+	color: black;
+    margin: 0 2px;
+    padding: 2px;
+    position: relative;
+    top: -2px;
+    left: 50px;
+}
+
+.groupCollapser {
+	color: black;
+	float: right;
+	margin: 1px -2px;
+	padding: 2px;
+	width: 2em;
+}
+
+.peciQuestionGroupName .ui-state-default {
+	background-color: white;
+}
+
+.peciQuestionGroupName .ui-state-hover {
+	background-color: lightgray;
+}
+
+.peciQuestion {
     border: 1px dashed gray;
     border-radius: 6px 6px 6px 6px;
     margin: 6px;
     padding: 6px;
 }
 
-div.question h1.questionTitle {
+.peciQuestion .questionTitle {
 	font-size: small;
 	margin: 4px;
 }
 
-div.question div.questionHeader {
+.peciQuestion .questionHeader {
 	font-style: italic;
+}
+
+.questionHeader .questionButtonContainer {
+	float: right;
+}
+
+.questionHeader .questionAction {
+	border: 1px solid black;
+	color: black;
+    margin: 0px;
+    padding: 2px;
+}
+
+.questionHeader .ui-state-default {
+	background-color: white;
+}
+
+.questionHeader .ui-state-hover {
+	background-color: lightgray;
 }
