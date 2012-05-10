@@ -114,6 +114,88 @@ div.messagebox .header {
   display: none;
 }
 
+/***********************/
+/* Rendering questions */
+/***********************/
+.helptext, .tip {
+	color: black;
+	font-size: 10px;
+	font-style: italic;
+	padding-top: 12px;
+}
+
+table {
+	color: black;
+}
+
+/* Ranking */
+table.rank {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+table.rank select, table.rank input, table.rank strong {
+	color: black;
+	font-weight: normal;
+}
+
+/* Arrays */
+table.question {
+	font-size: 8px;
+	margin: 4px auto;
+}
+
+table.question thead, .question td {
+	text-align: center;	
+}
+
+table.question th {
+	font-weight: normal;
+	background-color: #eeeeee;	
+}
+
+/* Date picker */
+#ui-datepicker-div {
+	border-color: gray;
+}
+
+#ui-datepicker-div .ui-widget-header {
+	border: none;
+	background: none #efefef;
+}
+
+#ui-datepicker-div .ui-widget-content {
+	background: none whitesmoke;
+}
+
+#ui-datepicker-div input,
+#ui-datepicker-div select,
+#ui-datepicker-div textarea,
+#ui-datepicker-div button {
+	color: black;
+}
+
+table.ui-datepicker-calendar .ui-state-default {
+	color: black;
+	background: none lightgray;
+	border-color: gray;
+}
+
+table.ui-datepicker-calendar .ui-state-hover {
+	color: black;
+	background: none whitesmoke;
+}
+
+table.ui-datepicker-calendar th {
+	font-weight: normal;
+	background: none;
+	color: gray;
+}
+
+table.ui-datepicker-calendar th.ui-datepicker-week-end {
+	color: darkgray;
+}
+
 /*************/
 /* PECI Tabs */
 /*************/
