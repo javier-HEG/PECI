@@ -114,10 +114,11 @@ div.messagebox .header {
   display: none;
 }
 
-/***********************/
-/* Rendering questions */
-/***********************/
-.helptext, .tip {
+/*************************************************/
+/* Rendering questions, as returned by qanda.php */
+/*************************************************/
+.tip,
+.helptext {
 	color: black;
 	font-size: 10px;
 	font-style: italic;
@@ -134,7 +135,9 @@ table.rank {
 	margin-right: auto;
 }
 
-table.rank select, table.rank input, table.rank strong {
+table.rank input,
+table.rank select,
+table.rank strong {
 	color: black;
 	font-weight: normal;
 }
@@ -145,7 +148,8 @@ table.question {
 	margin: 4px auto;
 }
 
-table.question thead, .question td {
+table.question thead,
+table.question td {
 	text-align: center;	
 }
 

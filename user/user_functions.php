@@ -48,13 +48,12 @@ function getProjectSelectorMenu() {
     	);
 		
     	// Manage the click on the 'Open' option of the menu
-		$('#menuOptionOpen').click(
+		$('#menuOptionOpen').unbind('click').click(
 			function(){
 				if ($('#userMenuSurveySelect').val() != 'none')
 					window.open('user.php?sid=' + $('#userMenuSurveySelect').val(), '_self', false);
 				else {
 					alert('Please choose a survey from the drop-down menu inside the button.');
-					event.stopPropagation();
 				}
 			}
 		);
@@ -63,10 +62,9 @@ function getProjectSelectorMenu() {
 		);
 		
 		// Temporally alert user that the other items are coming soon
-		$('#menuOptionCreate, #menuOptionSave').click(
+		$('#menuOptionCreate, #menuOptionSave').unbind('click').click(
 			function(){
 				alert('This function coming soon');
-				event.stopPropagation();
 			}
 		);
 	</script>";
