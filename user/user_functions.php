@@ -17,12 +17,14 @@ function getUserHeader($meta=false) {
 	// Add our custom made JavaScript scripts
 	$adminCoreScript = "<script type=\"text/javascript\" src=\"{$homeurl}/scripts/admin_core.js\"></script>";
 	$userTabsScript = "<script type=\"text/javascript\" src=\"{$rooturl}/user/scripts/tabs.js\"></script>";
-	$adminHeader = str_replace($adminCoreScript, $adminCoreScript . "\n" . $userTabsScript, $adminHeader);
+	$userCreateEditScript = "<script type=\"text/javascript\" src=\"{$rooturl}/user/scripts/create_edit.js\"></script>";
+	$adminHeader = str_replace($adminCoreScript, $adminCoreScript . "\n" . $userTabsScript . "\n" . $userCreateEditScript, $adminHeader);
 	
 	// Add our custom made JavaScript scripts
 	$jQueryScript = "<script type=\"text/javascript\" src=\"{$rooturl}/scripts/jquery/jquery.js\"></script>";
 	$jQueryCookieScript = "<script type=\"text/javascript\" src=\"{$rooturl}/user/scripts/jquery.cookie.js\"></script>";
-	$adminHeader = str_replace($jQueryScript, $jQueryScript . "\n" . $jQueryCookieScript, $adminHeader);
+	$jQuerySimpleModalScript = "<script type=\"text/javascript\" src=\"{$rooturl}/user/scripts/jquery.simplemodal.js\"></script>";
+	$adminHeader = str_replace($jQueryScript, $jQueryScript . "\n" . $jQueryCookieScript . "\n" . $jQuerySimpleModalScript, $adminHeader);
 	
 	return $adminHeader;
 }
