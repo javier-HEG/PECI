@@ -95,7 +95,7 @@ if (isset($surveyid) && $surveyid && $action=='') {
 		// Create buttons for adding new groups and questions
 		$surveysummary .= "<div class=\"peciActionButtons\" style=\"margin-left: 8px;\">
 			<button onClick=\"javascript:openGroupPopup('addgroup', 'surveyid=$surveyid');\">Add a new group</button>
-			<button>Add a new question</button>
+			<button disabled=\"true\">Add a new question</button>
 		</div>";
 		
 		// Find all question groups in this survey
@@ -124,12 +124,12 @@ if (isset($surveyid) && $surveyid && $action=='') {
 					<button style=\"width: 2em; display: none;\" id=\"groupExpander{$gv['gid']}\">+</button>
 				</div>";
 				
-				$deleteData = '{action:\'delgroup\', sid:\'' . $surveyid . '\', gid: \'' . $gv['gid'] . '\', checksessionbypost:\'' . $_SESSION['checksessionpost'] . '\'}';
+				$deleteGroupData = '{action:\'delgroup\', sid:\'' . $surveyid . '\', gid: \'' . $gv['gid'] . '\', checksessionbypost:\'' . $_SESSION['checksessionpost'] . '\'}';
 				$surveysummary .= "<div class=\"peciActionButtons\" style=\"position: relative; left: 50px; top: -2px; display: inline;\">\n"
 					. "<button onclick=\"javascript:openGroupPopup('editgroup', 'surveyid=$surveyid&gid={$gv['gid']}');\">Edit</button>\n"
 					. "<button onclick=\"if (confirm('"
 					. $clang->gT("Deleting this group will also delete any questions and answers it contains. Are you sure you want to continue?", "js")
-					. "')) {submitAsParent($deleteData); }\">Delete</button>
+					. "')) {submitAsParent($deleteGroupData); }\">Delete</button>
 				</div>";
 				
 				$surveysummary .= "<input type=\"hidden\" id=\"groupExpansionState{$gv['gid']}\" value=\"shown\"/>";
@@ -160,13 +160,16 @@ if (isset($surveyid) && $surveyid && $action=='') {
 						$_SESSION['dateformats'] = getDateFormatData($thissurvey['surveyls_dateformat']);
 						list($plus_qanda, $plus_inputnames)=retrieveAnswers($ia);
 						
+						$deleteQuestionData = '{action:\'delquestion\', sid:\'' . $surveyid . '\', gid: \'' . $gv['gid'] . '\', qid: \'' . $qrows['qid'] . '\', checksessionbypost:\'' . $_SESSION['checksessionpost'] . '\'}';
 						$surveysummary .= "<div class=\"peciQuestion\">
 								<div class=\"questionHeader\">Question $questionIndex
 									<div class=\"peciActionButtons\" style=\"float: right;\">
-										<button>Edit</button>
-										<button>Move</button>
-										<button>Add condition</button>
-										<button>Delete</button>
+										<button disabled=\"true\">Edit</button>
+										<button disabled=\"true\">Move</button>
+										<button disabled=\"true\">Add condition</button>&nbsp;"
+							. "<button onclick=\"if (confirm('"
+							. $clang->gT("Deleting this question will also delete any answer options and subquestions it includes. Are you sure you want to continue?","js")
+							. "')) {submitAsParent($deleteQuestionData); }\">Delete</button>
 									</div>
 								</div>
 								<h1 class=\"questionTitle\">{$qrows['question']}</h1>
@@ -178,7 +181,7 @@ if (isset($surveyid) && $surveyid && $action=='') {
 				}
 				
 				$surveysummary .= "<div class=\"peciActionButtons\" style=\"margin: 6px;\">
-						<button>Add a question</button>
+						<button onClick=\"javascript:openGroupPopup('addquestion', 'surveyid=$surveyid&gid={$gv['gid']}&activated={$thissurvey['active']}');\">Add a question</button>
 					</div>";
 				
 				$surveysummary .= "</div>\n";

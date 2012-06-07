@@ -21,15 +21,41 @@
 require_once(dirname(__FILE__).'/../config-defaults.php');
 require_once(dirname(__FILE__).'/../common.php');
 
+require_once('user_functions.php');
+
 // include_once("login_check.php");
-include('questiongrouphandling.php');
+$action = $_REQUEST["action"];
+
+if (in_array($action, array("addgroup", "editgroup"))) {
+	include('questiongrouphandling.php');
+} else {
+	include('questionhandling.php');
+}
 
 ?>
 
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="../admin/styles/default/adminstyle.css" />
-<link rel="stylesheet" type="text/css" href="styles/default/userstyle.css" />
+<script type="text/javascript" src="http://localhost/usability/admin/scripts/tabpane/js/tabpane.js"></script>
+<script type="text/javascript" src="http://localhost/usability/scripts/jquery/jquery.js"></script>
+<script type="text/javascript" src="http://localhost/usability/scripts/jquery/jquery.dd.js"></script>
+<!-- <script type="text/javascript" src="http://localhost/usability/user/scripts/jquery.cookie.js"></script> -->
+<!-- <script type="text/javascript" src="http://localhost/usability/user/scripts/jquery.simplemodal.js"></script> -->
+<script type="text/javascript" src="http://localhost/usability/scripts/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="http://localhost/usability/scripts/jquery/jquery.qtip.js"></script>
+<script type="text/javascript" src="http://localhost/usability/scripts/jquery/jquery.notify.js"></script>
+<script type="text/javascript" src="http://localhost/usability/admin/scripts/admin_core.js"></script>
+<!-- <script type="text/javascript" src="http://localhost/usability/user/scripts/tabs.js"></script> -->
+<!-- <script type="text/javascript" src="http://localhost/usability/user/scripts/create_edit.js"></script> -->
+<title>Usefulness.ch</title>
+<!-- <link rel="stylesheet" type="text/css" media="all" href="http://localhost/usability/admin//styles/default/tab.webfx.css " /> -->
+<link rel="stylesheet" type="text/css" media="all" href="http://localhost/usability/scripts/jquery/css/start/jquery-ui.css" />
+<!-- <link rel="stylesheet" type="text/css" href="http://localhost/usability/admin/styles/default/printablestyle.css" media="print" /> -->
+<link rel="stylesheet" type="text/css" href="http://localhost/usability/admin/styles/default/adminstyle.css" />
+<link rel="stylesheet" type="text/css" href="http://localhost/usability/user/styles/default/userstyle.css" />
+<link rel="shortcut icon" href="http://localhost/usability/admin/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="http://localhost/usability/admin/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" media="all" href="../scripts/jquery/dd.css" />
 <style type=" text/css">
 	.groupDescription {
 		background-color: gray;
@@ -41,6 +67,7 @@ include('questiongrouphandling.php');
 <?php 
 	if (isset($newgroupoutput)) print $newgroupoutput;
 	if (isset($editgroup)) print $editgroup;
+	if (isset($editquestion)) print $editquestion;
 ?>
 
 </body>

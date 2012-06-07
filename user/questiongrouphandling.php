@@ -22,7 +22,6 @@
 include_once("login_check.php");
 
 if ($action == "addgroup") {
-	$action = $_REQUEST["action"];
 	$surveyid = $_REQUEST["surveyid"];
 	
 	$baselang = GetBaseLanguageFromSurveyID($surveyid);
@@ -60,7 +59,6 @@ if ($action == "addgroup") {
 
 
 if ($action == "editgroup") {
-	$action = $_REQUEST["action"];
 	$surveyid = $_REQUEST["surveyid"];
 	$gid = $_REQUEST["gid"];
 	
