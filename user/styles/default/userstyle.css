@@ -386,6 +386,7 @@ div.surveyPeciStepArrow {
 /* Action buttons */
 /******************/
 .peciActionButtons button {
+	border-radius: 6px;
 	border: 1px solid black;
 	margin: 0px;
 	color: black
