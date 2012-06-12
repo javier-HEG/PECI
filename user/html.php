@@ -80,7 +80,7 @@ if (isset($surveyid) && $surveyid && $action=='') {
 			<div id=\"surveyDetails\">
 				<h2>Survey details
 					<div class=\"peciActionButtons\" style=\"float: right; margin-right: -6px;\">
-						<button>Edit</button>
+						<button disabled=\"true\">Edit</button>
 						<button onclick=\"$('#surveyDetails').hide();  $('#showDetailsBtn').show();\">Hide</button>
 					</div>
 				</h2>
