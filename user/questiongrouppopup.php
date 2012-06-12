@@ -26,10 +26,16 @@ require_once('user_functions.php');
 // include_once("login_check.php");
 $action = $_REQUEST["action"];
 
-if (in_array($action, array("addgroup", "editgroup"))) {
-	include('questiongrouphandling.php');
-} else {
-	include('questionhandling.php');
+switch ($action) {
+	case 'addgroup':
+	case 'editgroup':
+		include('questiongrouphandling.php');
+		break;
+	case 'newsurvey':
+		include('editsurveysettings.php');
+		break;
+	default:
+		include('questionhandling.php');
 }
 
 ?>
@@ -68,6 +74,7 @@ if (in_array($action, array("addgroup", "editgroup"))) {
 	if (isset($newgroupoutput)) print $newgroupoutput;
 	if (isset($editgroup)) print $editgroup;
 	if (isset($editquestion)) print $editquestion;
+	if (isset($editsurvey)) print $editsurvey;
 ?>
 
 </body>

@@ -38,7 +38,7 @@ function getProjectSelectorMenu() {
 	
 	$output = '<div id="projectMenu">';
 	$output .= '<span id="menuOptionOpen" class="menuOption">' . getUserSurveySelect() . " Open <img src=\"$imageurl/user/silk/page_go.png\" title=\"Open\" /></span>";
-	$output .= "<span id=\"menuOptionCreate\" class=\"menuOption\">Create new <img src=\"$imageurl/user/silk/page_add.png\" title=\"Open\" /></span>";
+	$output .= "<span id=\"menuOptionCreate\" class=\"menuOption\">Create new <img src=\"$imageurl/user/silk/page_add.png\" title=\"Create new survey\" /></span>";
 	$output .= "<span id=\"menuOptionSave\" class=\"menuOption\" style=\"margin-right: 0px;\">Save <img src=\"$imageurl/user/silk/page_save.png\" title=\"Open\" /></span>";
 	
 	// Add hover style
@@ -63,8 +63,15 @@ function getProjectSelectorMenu() {
 			function(event){ event.stopPropagation(); }
 		);
 		
+		// Set the click on the 'Create new' option of the menu
+		$('#menuOptionCreate').unbind('click').click(
+			function() {
+				openGroupPopup('newsurvey', '');
+			}
+		);
+		
 		// Temporally alert user that the other items are coming soon
-		$('#menuOptionCreate, #menuOptionSave').unbind('click').click(
+		$('#menuOptionSave').unbind('click').click(
 			function(){
 				alert('This function coming soon');
 			}
