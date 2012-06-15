@@ -34,6 +34,9 @@ switch ($action) {
 	case 'newsurvey':
 		include('editsurveysettings.php');
 		break;
+	case 'editsurveylocalesettings':
+		include('editsurveytextelements.php');
+		break;
 	default:
 		include('questionhandling.php');
 }

@@ -80,13 +80,15 @@ if (isset($surveyid) && $surveyid && $action=='') {
 			<div id=\"surveyDetails\">
 				<h2>Survey details
 					<div class=\"peciActionButtons\" style=\"float: right; margin-right: -6px;\">
-						<button disabled=\"true\">Edit</button>
-						<button onclick=\"$('#surveyDetails').hide();  $('#showDetailsBtn').show();\">Hide</button>
+						<button onClick=\"javascript:openGroupPopup('editsurveylocalesettings', 'surveyid=$surveyid');\">Edit</button>
+						<button onClick=\"javascript:$('#surveyDetails').hide();  $('#showDetailsBtn').show();\">Hide</button>
 					</div>
 				</h2>
 				<p><u>Title:</u> {$thissurvey['surveyls_title']} <br />
 				<u>{$clang->gT("Base language:")}</u> $language <br />
-				<u>{$clang->gT("Welcome:")}</u> {$thissurvey['surveyls_welcometext']}</p>	
+				<u>{$clang->gT("Description:")}</u> {$thissurvey['surveyls_description']} <br />
+				<u>{$clang->gT("Welcome text:")}</u> {$thissurvey['surveyls_welcometext']} <br />
+				<u>{$clang->gT("End text:")}</u> {$thissurvey['surveyls_endtext']}</p>
 			</div>";
 		
 		// Hide the survey details

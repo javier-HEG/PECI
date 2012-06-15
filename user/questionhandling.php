@@ -65,7 +65,7 @@ if ($action == "addquestion") {
 	$eqrow['preg']='';
 
 	$toSubmit = array('sid', 'gid', 'type', 'title', "question_$baselang", 'preg', "help_$baselang",
-		'other', 'mandatory', 'questionposition', 'language', 'action', 'sid', 'checksessionbypost');
+		'other', 'mandatory', 'questionposition', 'language', 'action', 'checksessionbypost');
 	$onSubmit = "if (frmeditquestion.title.value.length > 0) { javascript: parent.submitAsParent({";
 	foreach ($toSubmit as $toSubmitKey) {
 		$onSubmit .= $toSubmitKey . ': frmeditquestion.' . $toSubmitKey . '.value, ';
