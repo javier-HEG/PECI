@@ -37,8 +37,19 @@ switch ($action) {
 	case 'editsurveylocalesettings':
 		include('editsurveytextelements.php');
 		break;
-	default:
+	case 'addquestion':
+	case 'editquestion':
 		include('questionhandling.php');
+		break;
+	case 'editsubquestions':
+		include('editsubquestions.php');
+		break;
+}
+
+$scriptsToLoad = '';
+$js_admin_includes = array_unique($js_admin_includes);
+foreach ($js_admin_includes as $jsinclude) {
+	$scriptsToLoad .= "<script type=\"text/javascript\" src=\"".$jsinclude."\"></script>\n";
 }
 
 ?>
@@ -55,7 +66,8 @@ switch ($action) {
 <script type="text/javascript" src="http://localhost/usability/scripts/jquery/jquery.notify.js"></script>
 <script type="text/javascript" src="http://localhost/usability/admin/scripts/admin_core.js"></script>
 <!-- <script type="text/javascript" src="http://localhost/usability/user/scripts/tabs.js"></script> -->
-<!-- <script type="text/javascript" src="http://localhost/usability/user/scripts/create_edit.js"></script> -->
+<script type="text/javascript" src="http://localhost/usability/user/scripts/create_edit.js"></script>
+<?php echo $scriptsToLoad; ?>
 <title>Usefulness.ch</title>
 <!-- <link rel="stylesheet" type="text/css" media="all" href="http://localhost/usability/admin//styles/default/tab.webfx.css " /> -->
 <link rel="stylesheet" type="text/css" media="all" href="http://localhost/usability/scripts/jquery/css/start/jquery-ui.css" />
@@ -78,6 +90,7 @@ switch ($action) {
 	if (isset($editgroup)) print $editgroup;
 	if (isset($editquestion)) print $editquestion;
 	if (isset($editsurvey)) print $editsurvey;
+	if (isset($vasummary)) print $vasummary;
 ?>
 
 </body>

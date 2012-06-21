@@ -48,5 +48,26 @@ function openGroupPopup(action, parameters) {
 }
 
 function submitAsParent(data) {
+//	alert("user.php" + JSON.stringify(data, undefined, 2));
 	$.post("user.php", data, function() {location.reload();});
+}
+
+/**
+ * Takes a form name, builds the JSON data object needed to
+ * submit the action and submits it from the parent.
+ * @param form
+ */
+function submitFormAsParent(form) {
+	var elements = form.elements;
+	var jsonString = '';
+	
+	for (var i = 0; i < elements.length; i++) {
+		if (elements[i].type != 'radio' && elements[i].type != 'button') {
+			jsonString += '"' + elements[i].name + '": ' + '"' + elements[i].value + '", ';
+		}
+	}
+
+	var jsonObject = eval('({' + jsonString + '})');
+	
+	parent.submitAsParent(jsonObject);
 }

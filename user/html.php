@@ -162,13 +162,30 @@ if (isset($surveyid) && $surveyid && $action=='') {
 						$_SESSION['dateformats'] = getDateFormatData($thissurvey['surveyls_dateformat']);
 						list($plus_qanda, $plus_inputnames)=retrieveAnswers($ia);
 						
+						// Check if the question has subquestions or answer options
+						$subquestions = '';
+						$answeroptions = '';
+						$qtypes = getqtypelist('','array');
+
+						if ($qtypes[$qrows['type']]['subquestions'] > 0) {
+							$subquestions = "<button onClick=\"javascript:openGroupPopup('editsubquestions', 'surveyid=$surveyid&gid={$gv['gid']}&qid={$qrows['qid']}');\">Edit subquestions</button>&nbsp;";
+						}
+						
+						if ($qtypes[$qrows['type']]['answerscales'] >0) {
+							$answeroptions = "<button onClick=\"javascript:openGroupPopup('editansweroptions', 'surveyid=$surveyid&gid={$gv['gid']}&qid={$qrows['qid']}');\">Edit possible answers</button>&nbsp;";
+						}
+						
+						// Code for question delete button
 						$deleteQuestionData = '{action:\'delquestion\', sid:\'' . $surveyid . '\', gid: \'' . $gv['gid'] . '\', qid: \'' . $qrows['qid'] . '\', checksessionbypost:\'' . $_SESSION['checksessionpost'] . '\'}';
+						
+						// Buttons
 						$surveysummary .= "<div class=\"peciQuestion\">
 								<div class=\"questionHeader\">Question $questionIndex
-									<div class=\"peciActionButtons\" style=\"float: right;\">
-										<button disabled=\"true\">Edit</button>
-										<button disabled=\"true\">Move</button>
-										<button disabled=\"true\">Add condition</button>&nbsp;"
+									<div class=\"peciActionButtons\" style=\"float: right;\">"
+							. "<button onClick=\"javascript:openGroupPopup('editquestion', 'surveyid=$surveyid&gid={$gv['gid']}&qid={$qrows['qid']}');\">Edit</button>&nbsp;"
+							. $subquestions . $answeroptions
+							. "<button disabled=\"true\">Move</button>
+							   <button disabled=\"true\">Add condition</button>&nbsp;"
 							. "<button onclick=\"if (confirm('"
 							. $clang->gT("Deleting this question will also delete any answer options and subquestions it includes. Are you sure you want to continue?","js")
 							. "')) {submitAsParent($deleteQuestionData); }\">Delete</button>
@@ -177,7 +194,7 @@ if (isset($surveyid) && $surveyid && $action=='') {
 								<h1 class=\"questionTitle\">{$qrows['question']}</h1>
 								{$plus_qanda[1]}
 							</div>";
-
+						
 						$questionIndex++;
 					}
 				}
