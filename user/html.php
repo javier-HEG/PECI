@@ -20,17 +20,59 @@
 
 // Ensure script is not run directly, avoid path disclosure
 include_once("login_check.php");
-if (isset($_POST['uid'])) { $postuserid=sanitize_int($_POST['uid']); }
-if (isset($_POST['ugid'])) { $postusergroupid=sanitize_int($_POST['ugid']); }
-
-require_once(dirname(__FILE__).'/../qanda.php');
+if (isset($_POST['uid'])) {
+	$postuserid=sanitize_int($_POST['uid']);
+}
+if (isset($_POST['ugid'])) {
+	$postusergroupid=sanitize_int($_POST['ugid']);
+}
 
 // Show selected survey
 if (isset($surveyid) && $surveyid && $action=='') {
 	if(bHasSurveyPermission($surveyid,'survey','read'))	{
-		$baselang = GetBaseLanguageFromSurveyID($surveyid);
+
+		// Output starts here...
+		$surveysummary = '<script type="text/javascript">
+				function setCurrentPeciStep(stepId) {
+					$("#surveyPeciStepContainer .surveyPeciStep").removeClass("currentPeciStep");
+					$("#" + stepId).addClass("currentPeciStep");
+					
+					if ($("#" + stepId + "Content").length > 0) {
+						// hide other peci step container
+						$(".peciStepContainer").hide();
+						$("#" + stepId + "Content").show();
+					}
+				}
+				
+				function disablePeciSteps(stepIdsArray) {
+					for (var i = 0; i < stepIdsArray.length; i++) {
+					    $("#" + stepIdsArray[i]).addClass("disabledPeciStep");
+					    $("#" + stepIdsArray[i]).attr("onclick", "");
+					}
+				}
+			</script>';
 		
-		// Getting data for this survey
+		$surveysummary .= '<div style="background-color: lightgray; width: 100%; margin: -1px 0px; padding-bottom: 6px;">';
+		
+		// Create the default buttons for the peci steps
+		$surveysummary .= '<div id="surveyPeciStepContainer">
+				<div id="evaluatePeciStep" onClick="setCurrentPeciStep(\'evaluatePeciStep\');" class="surveyPeciStep">About evaluating usefulness</div>
+				<div class="surveyPeciStepArrow" style="background-image: none;">&nbsp;</div>
+				<div class="surveyPeciStepArrow" style="background-image: none;">&nbsp;</div>
+				<div id="selectQuestionPeciStep" onClick="setCurrentPeciStep(\'selectQuestionPeciStep\');" class="surveyPeciStep">Select questions</div>
+				<div class="surveyPeciStepArrow">&nbsp;</div>
+				<div id="modifySurveyPeciStep" onClick="setCurrentPeciStep(\'modifySurveyPeciStep\');" class="surveyPeciStep">Modify the questionnaire</div>
+				<div class="surveyPeciStepArrow">&nbsp;</div>
+				<div id="startSurveyPeciStep" onClick="setCurrentPeciStep(\'startSurveyPeciStep\');" class="surveyPeciStep">Start survey</div>
+				<div class="surveyPeciStepArrow">&nbsp;</div>
+				<div id="analyzeDataPeciStep" onClick="setCurrentPeciStep(\'analyzeDataPeciStep\');" class="surveyPeciStep">Analyze the data</div>
+			</div>';
+		
+		$surveysummary .= "<div id=\"evaluatePeciStepContent\" class=\"peciStepContainer\" >
+				<p>About using surveys to evaluate usability</p>
+			</div>";
+
+		// Load information about the survey
 		$sumquery = "SELECT * FROM ".db_table_name('surveys')." inner join ".db_table_name('surveys_languagesettings')." on (surveyls_survey_id=sid and surveyls_language=language) WHERE sid=$surveyid";
 		$sumresult = db_select_limit_assoc($sumquery, 1);
 
@@ -38,193 +80,29 @@ if (isset($surveyid) && $surveyid && $action=='') {
 		if ($sumresult->RecordCount()==0){
 			die('Invalid survey id');
 		}
-	
+
 		$thissurvey = $sumresult->FetchRow();
 		$thissurvey = array_map('FlattenText', $thissurvey);
-		
-		if (!$thissurvey['language']) {
-			$language = getLanguageNameFromCode($currentadminlang, false);
-		} else {
-			$language = getLanguageNameFromCode($thissurvey['language'], false);
-		}
-		
-		// Output starts here...
-		$surveysummary = '<!-- JAVASCRIPT FOR CONDITIONAL QUESTIONS -->
-			<script type="text/javascript">
-	        /* <![CDATA[ */
-	            function checkconditions(value, name, type) { }
-				function noop_checkconditions(value, name, type) { }
-	        /* ]]> */
-			</script>';
-		
-		$surveysummary .= '<div style="background-color: lightgray; width: 100%; margin: -1px 0px; padding-bottom: 6px;">';
-		
-		$surveysummary .= "<div id=\"surveyPeciStepContainer\">
-				<div class=\"surveyPeciStep\">Evaluate usefulness</div>
-				<div class=\"surveyPeciStepArrow\">&nbsp;</div>
-				<div class=\"surveyPeciStep\">Select questions</div>
-				<div class=\"surveyPeciStepArrow\">&nbsp;</div>
-				<div class=\"surveyPeciStep currentPeciStep\">Modify the questionnaire</div>
-				<div class=\"surveyPeciStepArrow\">&nbsp;</div>
-				<div class=\"surveyPeciStep\">Start survey</div>
-				<div class=\"surveyPeciStepArrow\">&nbsp;</div>
-				<div class=\"surveyPeciStep\">Analyze the data</div>
-				<div class=\"surveyPeciStepArrow\">&nbsp;</div>
-				<div class=\"surveyPeciStep\">Create the report</div>
-			</div>";
-		
-		$surveysummary .= "<div id=\"surveyContainer\">
-			<button id=\"showDetailsBtn\" style=\"float: right; margin: 4px 8px;\"
-				onclick=\"$('#surveyDetails').show(); $('#showDetailsBtn').hide();\">(show survey details)</button>
-			<h1 class=\"peciStep\">Modify the questionnaire</h1>
-			<div id=\"surveyDetails\">
-				<h2>Survey details
-					<div class=\"peciActionButtons\" style=\"float: right; margin-right: -6px;\">
-						<button onClick=\"javascript:openGroupPopup('editsurveylocalesettings', 'surveyid=$surveyid');\">Edit</button>
-						<button onClick=\"javascript:$('#surveyDetails').hide();  $('#showDetailsBtn').show();\">Hide</button>
-					</div>
-				</h2>
-				<p><u>Title:</u> {$thissurvey['surveyls_title']} <br />
-				<u>{$clang->gT("Base language:")}</u> $language <br />
-				<u>{$clang->gT("Description:")}</u> {$thissurvey['surveyls_description']} <br />
-				<u>{$clang->gT("Welcome text:")}</u> {$thissurvey['surveyls_welcometext']} <br />
-				<u>{$clang->gT("End text:")}</u> {$thissurvey['surveyls_endtext']}</p>
-			</div>";
-		
-		// Hide the survey details
-		$surveysummary .= '<script type="text/javascript">$("#surveyDetails").hide();</script>';
-		
-		// Create buttons for adding new groups and questions
-		$surveysummary .= "<div class=\"peciActionButtons\" style=\"margin-left: 8px;\">
-			<button onClick=\"javascript:openGroupPopup('addgroup', 'surveyid=$surveyid');\">Add a new group</button>
-			<button disabled=\"true\">Add a new question</button>
-		</div>";
-		
-		// Find all question groups in this survey
-		$gidquery = "SELECT gid, group_name FROM " . db_table_name('groups')
-			. " WHERE sid=$surveyid AND language='" . $thissurvey['language'] . "' ORDER BY group_order";
-		$gidresult = db_execute_assoc($gidquery);
-		
-		$groupIndex = 'A';
-		$questionIndex = 1;
-		if ($gidresult->RecordCount() > 0) {
-			while($gv = $gidresult->FetchRow()) {
-				$surveysummary .= "<div class=\"peciQuestionGroup\">\n";
-				
-				// Question group name
-				$surveysummary .= "<div class=\"peciQuestionGroupName\">$groupIndex: ";
-				$groupIndex++;
-				
-				if (strip_tags($gv['group_name'])) {
-					$surveysummary .= htmlspecialchars(strip_tags($gv['group_name']));
-				} else {
-					$surveysummary .= htmlspecialchars($gv['group_name']);
-				}
-				
-				$surveysummary .= "<div class=\"peciActionButtons\" style=\"float: right; display: inline; margin: 0px -3px;\">
-					<button style=\"width: 2em;\" id=\"groupCollapser{$gv['gid']}\">-</button>
-					<button style=\"width: 2em; display: none;\" id=\"groupExpander{$gv['gid']}\">+</button>
-				</div>";
-				
-				$deleteGroupData = '{action:\'delgroup\', sid:\'' . $surveyid . '\', gid: \'' . $gv['gid'] . '\', checksessionbypost:\'' . $_SESSION['checksessionpost'] . '\'}';
-				$surveysummary .= "<div class=\"peciActionButtons\" style=\"position: relative; left: 50px; top: -2px; display: inline;\">\n"
-					. "<button onclick=\"javascript:openGroupPopup('editgroup', 'surveyid=$surveyid&gid={$gv['gid']}');\">Edit</button>\n"
-					. "<button onclick=\"if (confirm('"
-					. $clang->gT("Deleting this group will also delete any questions and answers it contains. Are you sure you want to continue?", "js")
-					. "')) {submitAsParent($deleteGroupData); }\">Delete</button>
-				</div>";
-				
-				$surveysummary .= "<input type=\"hidden\" id=\"groupExpansionState{$gv['gid']}\" value=\"shown\"/>";
-				
-				$surveysummary .= '</div>';
-				
-				// Question group questions
-				$surveysummary .= '<div id="peciQuestionGroup' . $gv['gid'] . '">';
-				$qquery = 'SELECT * FROM ' . db_table_name('questions')
-					. " WHERE sid=$surveyid AND gid={$gv['gid']} AND language='{$thissurvey['language']}' and parent_qid=0 order by question_order";
-				$qresult = db_execute_assoc($qquery);
-				
-				if ($qresult->RecordCount() > 0) {
-					while($qrows = $qresult->FetchRow()) {
-						$ia = array(0 => $qrows['qid'],
-							1 => $surveyid.'X'.$qrows['gid'].'X'.$qrows['qid'],
-							2 => $qrows['title'],
-							3 => $qrows['question'],
-							4 => $qrows['type'],
-							5 => $qrows['gid'],
-							6 => $qrows['mandatory'],
-							//7 => $qrows['other']); // ia[7] is conditionsexist not other
-							7 => 'N',
-							8 => 'N' ); // ia[8] is usedinconditions
-						
-						// Session values are needed to use qanda.php::retrieveAnswers()
-						$_SESSION['s_lang'] = $thissurvey['language'];
-						$_SESSION['dateformats'] = getDateFormatData($thissurvey['surveyls_dateformat']);
-						list($plus_qanda, $plus_inputnames)=retrieveAnswers($ia);
-						
-						// Check if the question has subquestions or answer options
-						$subquestions = '';
-						$answeroptions = '';
-						$qtypes = getqtypelist('','array');
 
-						if ($qtypes[$qrows['type']]['subquestions'] > 0) {
-							$subquestions = "<button onClick=\"javascript:openGroupPopup('editsubquestions', 'surveyid=$surveyid&gid={$gv['gid']}&qid={$qrows['qid']}');\">Edit subquestions</button>&nbsp;";
-						}
-						
-						if ($qtypes[$qrows['type']]['answerscales'] >0) {
-							$answeroptions = "<button onClick=\"javascript:openGroupPopup('editansweroptions', 'surveyid=$surveyid&gid={$gv['gid']}&qid={$qrows['qid']}');\">Edit possible answers</button>&nbsp;";
-						}
-						
-						// Code for question delete button
-						$deleteQuestionData = '{action:\'delquestion\', sid:\'' . $surveyid . '\', gid: \'' . $gv['gid'] . '\', qid: \'' . $qrows['qid'] . '\', checksessionbypost:\'' . $_SESSION['checksessionpost'] . '\'}';
-						
-						// Buttons
-						$surveysummary .= "<div class=\"peciQuestion\">
-								<div class=\"questionHeader\">Question $questionIndex
-									<div class=\"peciActionButtons\" style=\"float: right;\">"
-							. "<button onClick=\"javascript:openGroupPopup('editquestion', 'surveyid=$surveyid&gid={$gv['gid']}&qid={$qrows['qid']}');\">Edit</button>&nbsp;"
-							. $subquestions . $answeroptions
-							. "<button disabled=\"true\">Move</button>
-							   <button disabled=\"true\">Add condition</button>&nbsp;"
-							. "<button onclick=\"if (confirm('"
-							. $clang->gT("Deleting this question will also delete any answer options and subquestions it includes. Are you sure you want to continue?","js")
-							. "')) {submitAsParent($deleteQuestionData); }\">Delete</button>
-									</div>
-								</div>
-								<h1 class=\"questionTitle\">{$qrows['question']}</h1>
-								{$plus_qanda[1]}
-							</div>";
-						
-						$questionIndex++;
-					}
-				}
-				
-				$surveysummary .= "<div class=\"peciActionButtons\" style=\"margin: 6px;\">
-						<button onClick=\"javascript:openGroupPopup('addquestion', 'surveyid=$surveyid&gid={$gv['gid']}&activated={$thissurvey['active']}');\">Add a question</button>
-					</div>";
-				
-				$surveysummary .= "</div>\n";
-				$surveysummary .= "<script type=\"text/javascript\">
-					$('#groupCollapser{$gv['gid']}').click(
-						function() {
-							$('#peciQuestionGroup{$gv['gid']}').hide();
-							$('#groupCollapser{$gv['gid']}').hide();
-							$('#groupExpander{$gv['gid']}').show();
-					});
-						
-					$('#groupExpander{$gv['gid']}').click(
-						function() {
-							$('#peciQuestionGroup{$gv['gid']}').show();
-							$('#groupCollapser{$gv['gid']}').show();
-							$('#groupExpander{$gv['gid']}').hide();
-					});
-				</script>";				
-				$surveysummary .= "</div>\n";
-			}
+		// It is already possible to detect if the PECI state is the last one
+		// - If the survey is active and the end-date is in the past, the "ANALYZE THE SURVEY"
+		if ($thissurvey['active'] == 'Y' && time() > strtotime($thissurvey['expires']) ) {
+			$surveysummary .= "<h1>ANALYZE THE DATA</h1>";
+		} else {
+			// At first it seemed enought to check if the survey had at least one
+			// question group to chose between the "select questions" and the "modify
+			// survey" steps. However, I finally decided to use the "faxto" property
+			// to tell if the survey has already gone through import.
 			
+			if ($thissurvey['faxto'] != '') {
+				include('states/select_questions.php');
+			} else {
+				// faxto is to be set to empty to continue
+				include('states/modify_survey.php');
+			}
 		}
-		
-		$surveysummary .= '</div></div>';
+
+		$surveysummary .= '</div>';
 	}
 }
 

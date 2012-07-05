@@ -340,6 +340,13 @@ div.currentPeciStep {
 	color: black;
 }
 
+div.disabledPeciStep {
+    font-style: italic;
+    border: 1px dashed whitesmoke;
+    background-color: lightgray;
+    color: gray;
+}
+
 div.surveyPeciStepArrow {
 	background-image: url('http://localhost/usability/images/user/silk/arrow_right.png');
     background-position: center center;
@@ -348,22 +355,27 @@ div.surveyPeciStepArrow {
 	width: 30px;
 }
 
-/******************/
-/* Survey Details */
-/******************/
-#surveyContainer {
-    background-color: white;
+div.peciStepContainer {
+	background-color: white;
     border: 1px solid gray;
     margin: 4px 150px 8px;
     padding: 6px;
 }
 
-#surveyContainer h1.peciStep {
+/******************/
+/* Survey Details */
+/******************/
+#modifySurveyPeciStepContent {
+    margin: 4px 150px 8px;
+    padding: 6px;
+}
+
+#modifySurveyPeciStepContent h1.peciStep {
 	font-size: large;
 	margin: 4px 8px;
 }
 
-#surveyContainer h2 {
+#modifySurveyPeciStepContent h2 {
 	font-weight: normal;
 	font-size: medium;
 	margin: 6px 12px;

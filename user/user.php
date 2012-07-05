@@ -79,7 +79,7 @@ if (isset($_SESSION['loginID']))
     {
         include('../admin/database.php');
     }
-
+    
     sendcacheheaders();
     
     if ($action == 'importsurvey' || $action == 'copysurvey') {
@@ -88,6 +88,11 @@ if (isset($_SESSION['loginID']))
         } else {
         	include('../admin/access_denied.php');
         }
+    }
+    
+    if ($action == 'updateFaxTo') {
+    	// The user version of the database.php file
+   		include('database.php');
     }
     
     if ($action == 'activate') {
@@ -475,7 +480,7 @@ if (isset($_SESSION['loginID']))
     if (!isset($labelsoutput)  && !isset($templatesoutput) && !isset($printablesurveyoutput) &&
     !isset($assessmentsoutput) && !isset($tokenoutput) && !isset($browseoutput) && !isset($exportspssoutput) &&  !isset($exportroutput) &&
     !isset($dataentryoutput) && !isset($statisticsoutput)&& !isset($savedsurveyoutput)  && !isset($translateoutput) && //<AdV>
-    !isset($exportoutput) && !isset($importoldresponsesoutput) && !isset($conditionsoutput) &&
+    !isset($exportoutput) && !isset($importoldresponsesoutput) && !isset($conditionsoutput) && !isset($databaseoutput) &&
     !isset($vvoutput) && !isset($listcolumnoutput) && !isset($importlabelresources) && !isset($iteratesurveyoutput) &&
     (substr($action,0,4)!= 'ajax') && $action!='update' && $action!='showphpinfo')
     {

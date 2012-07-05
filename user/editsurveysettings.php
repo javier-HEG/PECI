@@ -141,7 +141,7 @@ if(!bHasSurveyPermission($surveyid,'surveysettings','read') && !bHasGlobalPermis
 
 		// Hidden fields with default values not set in $esrow
 		$hiddenFieldsWithDefaults = array('navigationdelay' => 0, 'showprogress' => 'Y', 'showXquestions' => 'Y',
-			'showgroupinfo' => 'C', 'shownoanswer' => 'Y', 'faxto' => '', 'bounce_email' => $owner['bounce_email'],
+			'showgroupinfo' => 'C', 'shownoanswer' => 'Y', 'faxto' => 'new', 'bounce_email' => $owner['bounce_email'],
 			'adminemail' => $owner['email'], 'admin' => $owner['full_name'], 'url' => 'http://', 'urldescrip' => '',
 			'dateformat' => getDateFormatData($_SESSION["dateformat"]));
 
@@ -158,7 +158,7 @@ if(!bHasSurveyPermission($surveyid,'surveysettings','read') && !bHasGlobalPermis
         	'language', 'navigationdelay', 'nokeyboard', 'printanswers', 'public', 'publicgraphs', 'publicstatistics', 'refurl',
         	'savetimings', 'showXquestions', 'showgroupinfo', 'shownoanswer', 'showprogress', 'showqnumcode', 'showwelcome',
         	'startdate', 'surveyls_title', 'template', 'tokenanswerspersistence', 'tokenlength', 'url', 'urldescrip',
-        	'usecaptcha', 'usecookie', 'welcome', 'checksessionbypost');
+        	'usecaptcha', 'usecookie', 'welcome', 'checksessionbypost', 'faxto');
 		$onSubmit = 'javascript: if (addnewsurvey.surveyls_title.value.length > 0) { parent.submitAsParent({';
 		foreach ($toSubmit as $toSubmitKey) {
 			$onSubmit .= $toSubmitKey . ': addnewsurvey.' . $toSubmitKey . '.value, ';
