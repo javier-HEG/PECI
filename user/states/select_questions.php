@@ -19,8 +19,8 @@
 */
 
 $surveysummary .= '<script type="text/javascript">
-		disablePeciSteps(["startSurveyPeciStep", "analyzeDataPeciStep"]);
-		setCurrentPeciStep("selectQuestionPeciStep");
+		disablePeciSteps(["startSurveyPeciStep", "analyzeDataPeciStep", "modifySurveyPeciStep"]);
+		setCurrentPeciStep("evaluatePeciStep");
 		
 		function setSurveyFaxto(value) {
 			$.post("user.php", {sid: "' . $surveyid . '", faxto: value, action: "updateFaxTo",

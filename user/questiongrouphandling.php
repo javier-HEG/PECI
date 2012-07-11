@@ -35,7 +35,7 @@ if ($action == "addgroup") {
 	
 	$newgroupoutput = "<div class='header ui-widget-header'>".$clang->gT("Add question group")."</div>\n";
 	$newgroupoutput .= "<div id='tabs'>\n";
- 	$newgroupoutput .= "<form class='form30' id='newquestiongroup' name='newquestiongroup' method='post'>";
+ 	$newgroupoutput .= "<form class='form30' id='newquestiongroup' name='newquestiongroup'>";
 	
 	$newgroupoutput .= '<div id="' . $baselang . '">';
 	$newgroupoutput .= "<ul>"

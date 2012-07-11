@@ -44,6 +44,10 @@ switch ($action) {
 	case 'editsubquestions':
 		include('editsubquestions.php');
 		break;
+	case 'activatesurvey':
+		$surveyid = $_GET['sid'];
+		include('activate.php');
+		break;
 }
 
 $scriptsToLoad = '';
@@ -91,6 +95,7 @@ foreach ($js_admin_includes as $jsinclude) {
 	if (isset($editquestion)) print $editquestion;
 	if (isset($editsurvey)) print $editsurvey;
 	if (isset($vasummary)) print $vasummary;
+	if (isset($activateoutput)) print $activateoutput;
 ?>
 
 </body>

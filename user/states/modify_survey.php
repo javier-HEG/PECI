@@ -40,9 +40,7 @@ $surveysummary .= '<script type="text/javascript">
 	</script>';
 
 // The "Start survey window"
-$surveysummary .= "<div id=\"startSurveyPeciStepContent\" class=\"peciStepContainer\">";
-$surveysummary .= "<p>This is a container for the instructions when starting a survey.</p>";
-$surveysummary .= "</div>";
+include("start_survey.php");
 
 // The "Modify survey window"
 $surveysummary .= "<div id=\"modifySurveyPeciStepContent\" class=\"peciStepContainer\">
@@ -52,7 +50,7 @@ $surveysummary .= "<div id=\"modifySurveyPeciStepContent\" class=\"peciStepConta
 	<div id=\"surveyDetails\">
 		<h2>Survey details
 			<div class=\"peciActionButtons\" style=\"float: right; margin-right: -6px;\">
-				<button onClick=\"javascript:openGroupPopup('editsurveylocalesettings', 'surveyid=$surveyid');\">Edit</button>
+				<button onClick=\"javascript:openPeciPopup('editsurveylocalesettings', 'surveyid=$surveyid');\">Edit</button>
 				<button onClick=\"javascript:$('#surveyDetails').hide();  $('#showDetailsBtn').show();\">Hide</button>
 			</div>
 		</h2>
@@ -68,7 +66,7 @@ $surveysummary .= '<script type="text/javascript">$("#surveyDetails").hide();</s
 
 // Create buttons for adding new groups and questions
 $surveysummary .= "<div class=\"peciActionButtons\" style=\"margin-left: 8px;\">
-		<button onClick=\"javascript:openGroupPopup('addgroup', 'surveyid=$surveyid');\">Add a new group</button>
+		<button onClick=\"javascript:openPeciPopup('addgroup', 'surveyid=$surveyid');\">Add a new group</button>
 		<button disabled=\"true\">Add a new question</button>
 	</div>";
 
@@ -100,7 +98,7 @@ if ($gidresult->RecordCount() > 0) {
 
 		$deleteGroupData = '{action:\'delgroup\', sid:\'' . $surveyid . '\', gid: \'' . $gv['gid'] . '\', checksessionbypost:\'' . $_SESSION['checksessionpost'] . '\'}';
 		$surveysummary .= "<div class=\"peciActionButtons\" style=\"position: relative; left: 50px; top: -2px; display: inline;\">\n"
-		. "<button onclick=\"javascript:openGroupPopup('editgroup', 'surveyid=$surveyid&gid={$gv['gid']}');\">Edit</button>\n"
+		. "<button onclick=\"javascript:openPeciPopup('editgroup', 'surveyid=$surveyid&gid={$gv['gid']}');\">Edit</button>\n"
 		. "<button onclick=\"if (confirm('"
 		. $clang->gT("Deleting this group will also delete any questions and answers it contains. Are you sure you want to continue?", "js")
 		. "')) {submitAsParent($deleteGroupData); }\">Delete</button>
@@ -140,11 +138,11 @@ if ($gidresult->RecordCount() > 0) {
 				$qtypes = getqtypelist('','array');
 
 				if ($qtypes[$qrows['type']]['subquestions'] > 0) {
-					$subquestions = "<button onClick=\"javascript:openGroupPopup('editsubquestions', 'surveyid=$surveyid&gid={$gv['gid']}&qid={$qrows['qid']}');\">Edit subquestions</button>&nbsp;";
+					$subquestions = "<button onClick=\"javascript:openPeciPopup('editsubquestions', 'surveyid=$surveyid&gid={$gv['gid']}&qid={$qrows['qid']}');\">Edit subquestions</button>&nbsp;";
 				}
 
 				if ($qtypes[$qrows['type']]['answerscales'] >0) {
-					$answeroptions = "<button onClick=\"javascript:openGroupPopup('editansweroptions', 'surveyid=$surveyid&gid={$gv['gid']}&qid={$qrows['qid']}');\">Edit possible answers</button>&nbsp;";
+					$answeroptions = "<button onClick=\"javascript:openPeciPopup('editansweroptions', 'surveyid=$surveyid&gid={$gv['gid']}&qid={$qrows['qid']}');\">Edit possible answers</button>&nbsp;";
 				}
 
 				// Code for question delete button
@@ -154,7 +152,7 @@ if ($gidresult->RecordCount() > 0) {
 				$surveysummary .= "<div class=\"peciQuestion\">
 						<div class=\"questionHeader\">Question $questionIndex
 						<div class=\"peciActionButtons\" style=\"float: right;\">"
-					. "<button onClick=\"javascript:openGroupPopup('editquestion', 'surveyid=$surveyid&gid={$gv['gid']}&qid={$qrows['qid']}');\">Edit</button>&nbsp;"
+					. "<button onClick=\"javascript:openPeciPopup('editquestion', 'surveyid=$surveyid&gid={$gv['gid']}&qid={$qrows['qid']}');\">Edit</button>&nbsp;"
 					. $subquestions . $answeroptions
 					. "<button disabled=\"true\">Move</button>
 						<button disabled=\"true\">Add condition</button>&nbsp;"
@@ -172,7 +170,7 @@ if ($gidresult->RecordCount() > 0) {
 		}
 
 		$surveysummary .= "<div class=\"peciActionButtons\" style=\"margin: 6px;\">
-				<button onClick=\"javascript:openGroupPopup('addquestion', 'surveyid=$surveyid&gid={$gv['gid']}&activated={$thissurvey['active']}');\">Add a question</button>
+				<button onClick=\"javascript:openPeciPopup('addquestion', 'surveyid=$surveyid&gid={$gv['gid']}&activated={$thissurvey['active']}');\">Add a question</button>
 			</div>";
 
 		$surveysummary .= "</div>\n";

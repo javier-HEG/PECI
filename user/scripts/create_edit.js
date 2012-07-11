@@ -17,8 +17,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-function openGroupPopup(action, parameters) {
-	var url = 'questiongrouppopup.php?action=' + action + '&' + parameters;
+function openPeciPopup(action, parameters) {
+	var url = 'popup_maker.php?action=' + action + '&' + parameters;
 
 	$.modal('<iframe src="' + url + '" style="width: 830px; height: 430px; border: 0px;">', {
 		closeHTML:"",

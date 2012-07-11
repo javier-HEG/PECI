@@ -90,9 +90,11 @@ if (isset($_SESSION['loginID']))
         }
     }
     
+    // Actions added to the usual set of actions
     if ($action == 'updateFaxTo') {
-    	// The user version of the database.php file
-   		include('database.php');
+    	include('database.php');
+    } else if ($action == 'stopSurvey') {
+		include('stopsurvey.php');
     }
     
     if ($action == 'activate') {
@@ -476,16 +478,8 @@ if (isset($_SESSION['loginID']))
     }
 
 
-    // For some output we dont want to have the standard admin menu bar
-    if (!isset($labelsoutput)  && !isset($templatesoutput) && !isset($printablesurveyoutput) &&
-    !isset($assessmentsoutput) && !isset($tokenoutput) && !isset($browseoutput) && !isset($exportspssoutput) &&  !isset($exportroutput) &&
-    !isset($dataentryoutput) && !isset($statisticsoutput)&& !isset($savedsurveyoutput)  && !isset($translateoutput) && //<AdV>
-    !isset($exportoutput) && !isset($importoldresponsesoutput) && !isset($conditionsoutput) && !isset($databaseoutput) &&
-    !isset($vvoutput) && !isset($listcolumnoutput) && !isset($importlabelresources) && !isset($iteratesurveyoutput) &&
-    (substr($action,0,4)!= 'ajax') && $action!='update' && $action!='showphpinfo')
-    {
-        $adminoutput .= showUserMenu();
-    }
+    // The user menu bar
+    $adminoutput .= showUserMenu();
 
     if (isset($databaseoutput))  {$adminoutput.= $databaseoutput;}
     if (isset($templatesoutput)) {$adminoutput.= $templatesoutput;}

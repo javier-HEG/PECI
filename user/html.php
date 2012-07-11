@@ -27,8 +27,92 @@ if (isset($_POST['ugid'])) {
 	$postusergroupid=sanitize_int($_POST['ugid']);
 }
 
+// If the user want to change its personal settings
+if ($action == "personalsettings") {
+	// prepare data for the htmleditormode preference
+	$edmod1='';
+	$edmod2='';
+	$edmod3='';
+	$edmod4='';
+	switch ($_SESSION['htmleditormode'])
+	{
+		case 'none':
+			$edmod2="selected='selected'";
+			break;
+		case 'inline':
+			$edmod3="selected='selected'";
+			break;
+		case 'popup':
+			$edmod4="selected='selected'";
+			break;
+		default:
+			$edmod1="selected='selected'";
+		break;
+	}
+
+	$cssummary = "<div class='formheader'>"
+	. "<strong>".$clang->gT("Your personal settings")."</strong>\n"
+	. "</div>\n"
+	. "<div>\n"
+	. "<form action='{$scriptname}' id='personalsettings' method='post'>"
+	. "<ul>\n";
+
+	$sSavedLanguage=$connect->GetOne("select lang from ".db_table_name('users')." where uid={$_SESSION['loginID']}");
+
+    // Current language
+	$cssummary .=  "<li>\n"
+    . "<label for='lang'>".$clang->gT("Interface language").":</label>\n"
+    . "<select id='lang' name='lang'>\n";
+    $cssummary .= "<option value='auto'";
+    if ($sSavedLanguage == 'auto') {
+	$cssummary .= " selected='selected'";
+}
+    $cssummary .= ">".$clang->gT("(Autodetect)")."</option>\n";
+    foreach (getlanguagedata(true) as $langkey=>$languagekind)
+	{
+	$cssummary .= "<option value='$langkey'";
+        if ($langkey == $sSavedLanguage) {
+	$cssummary .= " selected='selected'";
+}
+        $cssummary .= ">".$languagekind['nativedescription']." - ".$languagekind['description']."</option>\n";
+    }
+    $cssummary .= "</select>\n"
+	. "</li>\n";
+
+    // Current htmleditormode
+	$cssummary .=  "<li>\n"
+	. "<label for='htmleditormode'>".$clang->gT("HTML editor mode").":</label>\n"
+    . "<select id='htmleditormode' name='htmleditormode'>\n"
+    . "<option value='default' {$edmod1}>".$clang->gT("Default")."</option>\n"
+    . "<option value='inline' {$edmod3}>".$clang->gT("Inline HTML editor")."</option>\n"
+    . "<option value='popup' {$edmod4}>".$clang->gT("Popup HTML editor")."</option>\n"
+    . "<option value='none' {$edmod2}>".$clang->gT("No HTML editor")."</option>\n";
+    $cssummary .= "</select>\n"
+	. "</li>\n";
+
+    // Date format
+    $cssummary .=  "<li>\n"
+	. "<label for='dateformat'>".$clang->gT("Date format").":</label>\n"
+	. "<select name='dateformat' id='dateformat'>\n";
+    foreach (getDateFormatData() as $index=>$dateformatdata)
+	{
+	$cssummary.= "<option value='{$index}'";
+		if ($index==$_SESSION['dateformat'])
+		{
+		$cssummary.= "selected='selected'";
+        }
+
+		$cssummary.= ">".$dateformatdata['dateformat'].'</option>';
+		}
+		$cssummary .= "</select>\n"
+		. "</li>\n"
+    . "</ul>\n"
+    . "<p><input type='hidden' name='action' value='savepersonalsettings' /><input class='submit' type='submit' value='".$clang->gT("Save settings")
+    ."' /></p></form></div>";
+}
+
 // Show selected survey
-if (isset($surveyid) && $surveyid && $action=='') {
+else if (isset($surveyid) && $surveyid && $action=='') {
 	if(bHasSurveyPermission($surveyid,'survey','read'))	{
 
 		// Output starts here...
@@ -83,11 +167,11 @@ if (isset($surveyid) && $surveyid && $action=='') {
 
 		$thissurvey = $sumresult->FetchRow();
 		$thissurvey = array_map('FlattenText', $thissurvey);
-
+				
 		// It is already possible to detect if the PECI state is the last one
 		// - If the survey is active and the end-date is in the past, the "ANALYZE THE SURVEY"
-		if ($thissurvey['active'] == 'Y' && time() > strtotime($thissurvey['expires']) ) {
-			$surveysummary .= "<h1>ANALYZE THE DATA</h1>";
+		if ($thissurvey['active'] == 'Y') { // && time() > strtotime($thissurvey['expires']) ) {
+			include('states/analyze_survey.php');
 		} else {
 			// At first it seemed enought to check if the survey had at least one
 			// question group to chose between the "select questions" and the "modify

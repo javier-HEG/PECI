@@ -66,7 +66,7 @@ function getProjectSelectorMenu() {
 		// Set the click on the 'Create new' option of the menu
 		$('#menuOptionCreate').unbind('click').click(
 			function() {
-				openGroupPopup('newsurvey', '');
+				openPeciPopup('newsurvey', '');
 			}
 		);
 		

@@ -66,8 +66,7 @@ if(!bHasSurveyPermission($surveyid,'surveysettings','read') && !bHasGlobalPermis
 		$esrow['showwelcome'] = 'Y';
 		$esrow['emailresponseto'] = '';
 		$esrow['assessments'] = 'N';
-
-		$dateformatdetails = getDateFormatData($_SESSION['dateformat']);
+		$esrow['dateformat'] = $_SESSION["dateformat"];
 
 		$editsurvey ="<script type=\"text/javascript\">
                         standardtemplaterooturl='$standardtemplaterooturl';
@@ -133,7 +132,7 @@ if(!bHasSurveyPermission($surveyid,'surveysettings','read') && !bHasGlobalPermis
 			'showqnumcode', 'startdate', 'expires', 'usecookie', 'usecaptcha', 'emailnotificationto',
 			'emailresponseto', 'datestamp', 'ipaddr', 'refurl', 'assesments', 'savetimings', 'allowsave',
 			'anonymized', 'alloweditaftercompletion', 'tokenanswerspersistence', 'allowregister',
-			'htmlemail', 'tokenlength', 'assessments');
+			'htmlemail', 'tokenlength', 'assessments', 'dateformat');
 
 		foreach ($hiddenFieldNames as $fieldName) {
 			$editsurvey .= "<input type='hidden' id='$fieldName' name='$fieldName' value='{$esrow[$fieldName]}' />\n";
@@ -142,8 +141,7 @@ if(!bHasSurveyPermission($surveyid,'surveysettings','read') && !bHasGlobalPermis
 		// Hidden fields with default values not set in $esrow
 		$hiddenFieldsWithDefaults = array('navigationdelay' => 0, 'showprogress' => 'Y', 'showXquestions' => 'Y',
 			'showgroupinfo' => 'C', 'shownoanswer' => 'Y', 'faxto' => 'new', 'bounce_email' => $owner['bounce_email'],
-			'adminemail' => $owner['email'], 'admin' => $owner['full_name'], 'url' => 'http://', 'urldescrip' => '',
-			'dateformat' => getDateFormatData($_SESSION["dateformat"]));
+			'adminemail' => $owner['email'], 'admin' => $owner['full_name'], 'url' => 'http://', 'urldescrip' => '');
 
 		foreach ($hiddenFieldsWithDefaults as $fieldName => $defaultValue) {
 			$editsurvey .= "<input type='hidden' id='$fieldName' name='$fieldName' value='$defaultValue' />\n";

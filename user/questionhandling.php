@@ -60,8 +60,7 @@ if ($action == "addquestion") {
 	$eqrow['mandatory']='N';
 	$eqrow['preg']='';
 
-
-	$editquestion .=  "<form name='frmeditquestion' id='frmeditquestion' action='$scriptname' method='post' onsubmit=\"return isEmpty(document.getElementById('title'), '".$clang->gT("Error: You have to enter a question code.",'js')."');\">\n";
+	$editquestion .=  "<form name='frmeditquestion' id='frmeditquestion');\">\n";
 	
 	$editquestion .= '<div id="'.$eqrow['language'].'">';
 
@@ -168,18 +167,8 @@ if ($action == "addquestion") {
 	}
 
 	$editquestion .= "</ul>\n";
-
-	// Submit button
-	$toSubmit = array('sid', 'gid', 'type', 'title', "question_$baselang", 'preg', "help_$baselang",
-		'other', 'mandatory', 'questionposition', 'language', 'action', 'checksessionbypost');
-	$onSubmit = "if (frmeditquestion.title.value.length > 0) { javascript: parent.submitAsParent({";
-	foreach ($toSubmit as $toSubmitKey) {
-		$onSubmit .= $toSubmitKey . ': frmeditquestion.' . $toSubmitKey . '.value, ';
-	}
-	$onSubmit .= '}); } else { alert("You have to enter a question title!"); }';
 	
-	$onSubmit = 'getAllFieldsInForm(frmeditquestion);';
-	$editquestion .= "<p><input type='button' onClick='$onSubmit' value='".$clang->gT("Save")."' />";
+	$editquestion .= '<p><input type="button" onClick="parent.submitFormAsParent(frmeditquestion);" value="' . $clang->gT("Save") . '" />';
 
 	$editquestion .= "\t<input type='hidden' name='action' value='insertquestion' />\n"
 		. "<input type='hidden' name='checksessionbypost' value='{$_SESSION['checksessionpost']}' />"
