@@ -90,26 +90,12 @@ if(!isset($_SESSION['loginID']) && $action != "forgotpass" && ($action != "logou
 								<li><label for='user'>".$clang->gT("Username")."</label>
                                 <input name='user' id='user' type='text' size='40' maxlength='40' value='' /></li>
                                 <li><label for='password'>".$clang->gT("Password")."</label>
-                                <input name='password' id='password' type='password' size='40' maxlength='40' /></li>
-                                <li><label for='loginlang'>".$clang->gT("Language")."</label>
-                                <select id='loginlang' name='loginlang' style='width:216px;'>\n";
-            $loginsummary .='<option value="default" selected="selected">'.$clang->gT('Default').'</option>';
+                                <input name='password' id='password' type='password' size='40' maxlength='40' /></li>\n";
             
-            $lan = array();
-            foreach (getlanguagedata(true) as $langkey=>$languagekind) {
-				array_push($lan, $langkey);
-			}
-
-			foreach (getlanguagedata(true) as $langkey=>$languagekind) {
-				//The following conditional statements select the browser language in the language drop down box and echoes the other options.
-                $loginsummary .= "\t\t\t\t<option value='$langkey'>".$languagekind['nativedescription']." - ".$languagekind['description']."</option>\n";
-            }
-            
-            $loginsummary .= "\t\t\t</select>\n"
-            	. "</li>
-						</ul>
+            $loginsummary .= "</ul>
                         <p><input type='hidden' name='action' value='login' />
                         <input type='hidden' name='refererargs' value='".$refererargs."' />
+                        <input type='hidden' name='loginlang' value='default' />
                         <input class='action' type='submit' value='".$clang->gT("Login")."' /><br />&nbsp;\n<br/>";
             
             $loginsummary .= '<p><a href="#" onclick="$(\'#loginform\').hide(); $(\'#newuserform\').show();">' . $clang->gT("Create new user") . '</a></p>';
@@ -127,18 +113,18 @@ if(!isset($_SESSION['loginID']) && $action != "forgotpass" && ($action != "logou
         $loginsummary .= "<form name='newuserform' id='newuserform' method='post' action='$rooturl/user/user.php' style='display:none;'>";
         $loginsummary .= '<p><strong>' . $clang->gT('Create new user') . '</strong></p><br />';
         $loginsummary .= "<ul>
-                              <li><label for='new_full_name'>".$clang->gT("Full name")."</label>
-                              <input name='new_full_name' id='new_full_name' type='text' size='40' maxlength='40' value='' /></li>
-                              <li><label for='new_user'>".$clang->gT("Username")."</label>
-                              <input name='new_user' id='new_user' type='text' size='40' maxlength='40' value='' /></li>
-                              <li><label for='new_email'>".$clang->gT("Email address")."</label>
-                              <input name='new_email' id='new_email' type='text' size='40' maxlength='40' value='' /></li>
-                              <li><label for='password'>".$clang->gT("Password")."</label>
-                              <input name='new_password' id='new_password' type='password' size='40' maxlength='40' value='' /></li>
-                              <li><label for='password-check'>".$clang->gT("Repeat Password")."</label>
-                              <input name='new_password_check' id='new_password_check' type='password' size='40' maxlength='40' /></li>
-                              <li><label for='loginlang'>".$clang->gT("Interface language")."</label>
-                              <select id='loginlang' name='loginlang' style='width:216px;'>";
+	        <li><label for='new_full_name'>".$clang->gT("Full name")."</label>
+	        <input name='new_full_name' id='new_full_name' type='text' size='40' maxlength='40' value='' /></li>
+	        <li><label for='new_user'>".$clang->gT("Username")."</label>
+	        <input name='new_user' id='new_user' type='text' size='40' maxlength='40' value='' /></li>
+	        <li><label for='new_email'>".$clang->gT("Email address")."</label>
+	        <input name='new_email' id='new_email' type='text' size='40' maxlength='40' value='' /></li>
+	        <li><label for='password'>".$clang->gT("Password")."</label>
+	        <input name='new_password' id='new_password' type='password' size='40' maxlength='40' value='' /></li>
+	        <li><label for='password-check'>".$clang->gT("Repeat Password")."</label>
+	        <input name='new_password_check' id='new_password_check' type='password' size='40' maxlength='40' /></li>
+	        <li><label for='loginlang'>".$clang->gT("Interface language")."</label>
+	        <select id='loginlang' name='loginlang' style='width:216px;'>";
         
         $loginsummary .= '<option value="default" selected="selected">' . $clang->gT('Default') . '</option>';
 

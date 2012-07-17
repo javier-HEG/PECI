@@ -236,9 +236,9 @@ if (!isset($_SESSION['loginID'])) {
 		
 		if ($valid_email && $valid_user) {
 			$uquery = "INSERT INTO {$dbprefix}users (users_name, password,full_name,parent_id,lang,email,"
-			. "create_survey,create_user,delete_user,superadmin,configurator,manage_template,manage_label) "
+			. "create_survey,create_user,delete_user,superadmin,configurator,manage_template,manage_label,htmleditormode) "
 			. "VALUES ('".db_quote($new_user)."', '".SHA256::hashing($postnew_password)."', '".db_quote($postnew_full_name)
-			. "', '1', '".db_quote($new_loginlang)."', '".db_quote($postnew_email)."',1,0,0,0,0,0,0)";
+			. "', '1', '".db_quote($new_loginlang)."', '".db_quote($postnew_email)."',1,0,0,0,0,0,0,'none')";
 
 			$uresult = $connect->Execute($uquery); //Checked
 

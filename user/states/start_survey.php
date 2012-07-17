@@ -19,7 +19,6 @@
 */
 
 $surveysummary .= "<div id=\"startSurveyPeciStepContent\" class=\"peciStepContainer\">";
-$surveysummary .= "<p>This is a container for the instructions when starting a survey.</p>";
 
 // Export
 

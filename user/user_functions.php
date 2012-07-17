@@ -39,7 +39,6 @@ function getProjectSelectorMenu() {
 	$output = '<div id="projectMenu">';
 	$output .= '<span id="menuOptionOpen" class="menuOption">' . getUserSurveySelect() . " Open <img src=\"$imageurl/user/silk/page_go.png\" title=\"Open\" /></span>";
 	$output .= "<span id=\"menuOptionCreate\" class=\"menuOption\">Create new <img src=\"$imageurl/user/silk/page_add.png\" title=\"Create new survey\" /></span>";
-	$output .= "<span id=\"menuOptionSave\" class=\"menuOption\" style=\"margin-right: 0px;\">Save <img src=\"$imageurl/user/silk/page_save.png\" title=\"Open\" /></span>";
 	
 	// Add hover style
 	$output .= "<script>
@@ -67,13 +66,6 @@ function getProjectSelectorMenu() {
 		$('#menuOptionCreate').unbind('click').click(
 			function() {
 				openPeciPopup('newsurvey', '');
-			}
-		);
-		
-		// Temporally alert user that the other items are coming soon
-		$('#menuOptionSave').unbind('click').click(
-			function(){
-				alert('This function coming soon');
 			}
 		);
 	</script>";

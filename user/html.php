@@ -29,86 +29,59 @@ if (isset($_POST['ugid'])) {
 
 // If the user want to change its personal settings
 if ($action == "personalsettings") {
-	// prepare data for the htmleditormode preference
-	$edmod1='';
-	$edmod2='';
-	$edmod3='';
-	$edmod4='';
-	switch ($_SESSION['htmleditormode'])
-	{
-		case 'none':
-			$edmod2="selected='selected'";
-			break;
-		case 'inline':
-			$edmod3="selected='selected'";
-			break;
-		case 'popup':
-			$edmod4="selected='selected'";
-			break;
-		default:
-			$edmod1="selected='selected'";
-		break;
-	}
-
 	$cssummary = "<div class='formheader'>"
-	. "<strong>".$clang->gT("Your personal settings")."</strong>\n"
-	. "</div>\n"
-	. "<div>\n"
-	. "<form action='{$scriptname}' id='personalsettings' method='post'>"
-	. "<ul>\n";
+		. "<strong>".$clang->gT("Your personal settings")."</strong>\n"
+		. "</div>\n"
+		. "<div>\n"
+		. "<form action='{$scriptname}' id='personalsettings' method='post'>"
+		. "<ul>\n";
 
-	$sSavedLanguage=$connect->GetOne("select lang from ".db_table_name('users')." where uid={$_SESSION['loginID']}");
+	$sSavedLanguage = $connect->GetOne("select lang from " . db_table_name('users') . " where uid={$_SESSION['loginID']}");
 
-    // Current language
+    // Language selector
 	$cssummary .=  "<li>\n"
-    . "<label for='lang'>".$clang->gT("Interface language").":</label>\n"
-    . "<select id='lang' name='lang'>\n";
-    $cssummary .= "<option value='auto'";
+    	. "<label for='lang'>".$clang->gT("Interface language").":</label>\n"
+    	. "<select id='lang' name='lang'>\n";
+    
+	$cssummary .= "<option value='auto'";
     if ($sSavedLanguage == 'auto') {
-	$cssummary .= " selected='selected'";
-}
+		$cssummary .= " selected='selected'";
+	}
     $cssummary .= ">".$clang->gT("(Autodetect)")."</option>\n";
-    foreach (getlanguagedata(true) as $langkey=>$languagekind)
-	{
-	$cssummary .= "<option value='$langkey'";
+    foreach (getlanguagedata(true) as $langkey=>$languagekind) {
+		$cssummary .= "<option value='$langkey'";
+        
         if ($langkey == $sSavedLanguage) {
-	$cssummary .= " selected='selected'";
-}
-        $cssummary .= ">".$languagekind['nativedescription']." - ".$languagekind['description']."</option>\n";
+			$cssummary .= " selected='selected'";
+		}
+        
+		$cssummary .= ">".$languagekind['nativedescription']." - ".$languagekind['description']."</option>\n";
     }
-    $cssummary .= "</select>\n"
-	. "</li>\n";
+    $cssummary .= "</select>\n</li>\n";
 
-    // Current htmleditormode
-	$cssummary .=  "<li>\n"
-	. "<label for='htmleditormode'>".$clang->gT("HTML editor mode").":</label>\n"
-    . "<select id='htmleditormode' name='htmleditormode'>\n"
-    . "<option value='default' {$edmod1}>".$clang->gT("Default")."</option>\n"
-    . "<option value='inline' {$edmod3}>".$clang->gT("Inline HTML editor")."</option>\n"
-    . "<option value='popup' {$edmod4}>".$clang->gT("Popup HTML editor")."</option>\n"
-    . "<option value='none' {$edmod2}>".$clang->gT("No HTML editor")."</option>\n";
-    $cssummary .= "</select>\n"
-	. "</li>\n";
+    // Html editor is disabled in this interface
+    $cssummary .= "<input type='hidden' name='htmleditormode' value='none' />\n";
 
     // Date format
     $cssummary .=  "<li>\n"
-	. "<label for='dateformat'>".$clang->gT("Date format").":</label>\n"
-	. "<select name='dateformat' id='dateformat'>\n";
-    foreach (getDateFormatData() as $index=>$dateformatdata)
-	{
-	$cssummary.= "<option value='{$index}'";
-		if ($index==$_SESSION['dateformat'])
-		{
-		$cssummary.= "selected='selected'";
+		. "<label for='dateformat'>".$clang->gT("Date format").":</label>\n"
+		. "<select name='dateformat' id='dateformat'>\n";
+    
+    foreach (getDateFormatData() as $index=>$dateformatdata) {
+		$cssummary.= "<option value='{$index}'";
+		
+		if ($index==$_SESSION['dateformat']) {
+			$cssummary.= "selected='selected'";
         }
 
 		$cssummary.= ">".$dateformatdata['dateformat'].'</option>';
-		}
-		$cssummary .= "</select>\n"
+	}
+	
+	$cssummary .= "</select>\n"
 		. "</li>\n"
-    . "</ul>\n"
-    . "<p><input type='hidden' name='action' value='savepersonalsettings' /><input class='submit' type='submit' value='".$clang->gT("Save settings")
-    ."' /></p></form></div>";
+    	. "</ul>\n"
+    	. "<p><input type='hidden' name='action' value='savepersonalsettings' /><input class='submit' type='submit' value='".$clang->gT("Save settings")
+    	."' /></p></form></div>";
 }
 
 // Show selected survey

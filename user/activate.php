@@ -22,14 +22,12 @@ include_once("../admin/activate_functions.php");
 
 $postsid = returnglobal('sid');
 
-$activateoutput = isset($_POST['ok']) ? "{$_POST['ok']}<br />" : "OK NOT SET<br />";
+$activateoutput = '';
 
-$qtypes=getqtypelist('','array');
+$qtypes = getqtypelist('', 'array');
 
-if (!isset($_POST['ok']) || !$_POST['ok'])
-{
-	if (isset($_GET['fixnumbering']) && $_GET['fixnumbering'])
-	{
+if (!isset($_POST['ok']) || !$_POST['ok']) {
+	if (isset($_GET['fixnumbering']) && $_GET['fixnumbering']) {
 		fixNumbering($_GET['fixnumbering']);
 	}
 
@@ -38,8 +36,7 @@ if (!isset($_POST['ok']) || !$_POST['ok'])
 	$failedcheck = checkQuestions($postsid, $surveyid, $qtypes);
 
 	//IF ANY OF THE CHECKS FAILED, PRESENT THIS SCREEN
-	if ((isset($failedcheck) && $failedcheck) || (isset($failedgroupcheck) && $failedgroupcheck))
-	{
+	if ((isset($failedcheck) && $failedcheck) || (isset($failedgroupcheck) && $failedgroupcheck)) {
 		$activateoutput .= "<br />\n<div class='messagebox ui-corner-all'>\n";
 		$activateoutput .= "<div class='header ui-widget-header'>".$clang->gT("Activate Survey")." ($surveyid)</div>\n";
 		$activateoutput .= "<div class='warningheader'>\n".$clang->gT("Error")."<br />\n";
