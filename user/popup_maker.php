@@ -29,24 +29,27 @@ $action = $_REQUEST["action"];
 switch ($action) {
 	case 'addgroup':
 	case 'editgroup':
-		include('questiongrouphandling.php');
+		include('popups/questiongrouphandling.php');
 		break;
 	case 'newsurvey':
-		include('editsurveysettings.php');
+		include('popups/editsurveysettings.php');
 		break;
 	case 'editsurveylocalesettings':
-		include('editsurveytextelements.php');
+		include('popups/editsurveytextelements.php');
 		break;
 	case 'addquestion':
 	case 'editquestion':
-		include('questionhandling.php');
+		include('popups/questionhandling.php');
 		break;
 	case 'editsubquestions':
-		include('editsubquestions.php');
+		include('popups/editsubquestions.php');
+		break;
+	case 'editansweroptions':
+		include('popups/editansweroptions.php');
 		break;
 	case 'activatesurvey':
 		$surveyid = $_GET['sid'];
-		include('activate.php');
+		include('popups/activate.php');
 		break;
 }
 

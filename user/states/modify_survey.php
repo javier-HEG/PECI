@@ -81,16 +81,22 @@ if ($gidresult->RecordCount() > 0) {
 	while($gv = $gidresult->FetchRow()) {
 		$surveysummary .= "<div class=\"peciQuestionGroup\">\n";
 
-		// Question group name
+		// Question group index
 		$surveysummary .= "<div class=\"peciQuestionGroupName\">$groupIndex: ";
 		$groupIndex++;
-
-		if (strip_tags($gv['group_name'])) {
-			$surveysummary .= htmlspecialchars(strip_tags($gv['group_name']));
-		} else {
-			$surveysummary .= htmlspecialchars($gv['group_name']);
+		
+		// Question group name
+		$groupName = trim($gv['group_name']);
+		if (strip_tags($groupName)) {
+			$groupName = trim(strip_tags($gv['group_name']));
 		}
+		if ($groupName == '') {
+			$groupName = '(No group name has been given)';
+		}
+		
+		$surveysummary .= htmlspecialchars($groupName);
 
+		// Control buttons
 		$surveysummary .= "<div class=\"peciActionButtons\" style=\"float: right; display: inline; margin: 0px -3px;\">
 						<button style=\"width: 2em;\" id=\"groupCollapser{$gv['gid']}\">-</button>
 						<button style=\"width: 2em; display: none;\" id=\"groupExpander{$gv['gid']}\">+</button>
@@ -98,14 +104,13 @@ if ($gidresult->RecordCount() > 0) {
 
 		$deleteGroupData = '{action:\'delgroup\', sid:\'' . $surveyid . '\', gid: \'' . $gv['gid'] . '\', checksessionbypost:\'' . $_SESSION['checksessionpost'] . '\'}';
 		$surveysummary .= "<div class=\"peciActionButtons\" style=\"position: relative; left: 50px; top: -2px; display: inline;\">\n"
-		. "<button onclick=\"javascript:openPeciPopup('editgroup', 'surveyid=$surveyid&gid={$gv['gid']}');\">Edit</button>\n"
-		. "<button onclick=\"if (confirm('"
-		. $clang->gT("Deleting this group will also delete any questions and answers it contains. Are you sure you want to continue?", "js")
-		. "')) {submitAsParent($deleteGroupData); }\">Delete</button>
-			</div>";
+			. "<button onclick=\"javascript:openPeciPopup('editgroup', 'surveyid=$surveyid&gid={$gv['gid']}');\">Edit</button>\n"
+			. "<button onclick=\"if (confirm('"
+			. $clang->gT("Deleting this group will also delete any questions and answers it contains. Are you sure you want to continue?", "js")
+			. "')) {submitAsParent($deleteGroupData); }\">Delete</button>"
+			. "</div>";
 
 		$surveysummary .= "<input type=\"hidden\" id=\"groupExpansionState{$gv['gid']}\" value=\"shown\"/>";
-
 		$surveysummary .= '</div>';
 
 		// Question group questions

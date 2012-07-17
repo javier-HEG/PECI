@@ -33,7 +33,7 @@ function openPeciPopup(action, parameters) {
 			backgroundColor: "gray",
 		},
 		onClose: function (dialog) {
-			if (confirm('All changes will be lost!')) {
+//			if (confirm('All changes will be lost!')) {
 //				dialog.data.fadeOut('slow', function () {
 //					dialog.container.slideUp('slow', function () {
 //						dialog.overlay.fadeOut('slow', function () {
@@ -41,7 +41,7 @@ function openPeciPopup(action, parameters) {
 //						});
 //					});
 //				});
-			}
+//			}
 		},
 		overlayClose:true
 	});
