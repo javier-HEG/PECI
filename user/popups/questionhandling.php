@@ -60,7 +60,7 @@ if ($action == "addquestion") {
 	$eqrow['mandatory']='N';
 	$eqrow['preg']='';
 
-	$editquestion .=  "<form name='frmeditquestion' id='frmeditquestion');\">\n";
+	$editquestion .=  "<form name='frmeditquestion' id='frmeditquestion'>\n";
 	
 	$editquestion .= '<div id="'.$eqrow['language'].'">';
 
