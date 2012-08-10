@@ -64,21 +64,16 @@ $surveyinfo = array_map('FlattenText', $surveyinfo);
 ///////////////////////////////////////////
 // Dates
 $dateformatdetails=getDateFormatData($_SESSION['dateformat']);
-$startdate='';
-if (trim($esrow['startdate']) != '') {
-	$datetimeobj = new Date_Time_Converter($esrow['startdate'] , "Y-m-d H:i:s");
-	$startdate=$datetimeobj->convert($dateformatdetails['phpdate'].' H:i');
-}
-
-$surveysummary .= "<ul><li><label for='startdate'>".$clang->gT("Start date/time:")."</label>\n"
-. "<input type='text' class='popupdatetime' id='startdate' size='20' name='startdate' value=\"{$startdate}\" /></li>\n";
-
+// - Start date set to now
+$startdate = date($dateformatdetails['phpdate'] . ' H:i', time());
+$surveysummary .= "<input type='hidden' id='startdate' name='startdate' value=\"{$startdate}\" />\n";
+// - Expiracy date to be set or left empty
 $expires='';
 if (trim($esrow['expires']) != '') {
 	$datetimeobj = new Date_Time_Converter($esrow['expires'] , "Y-m-d H:i:s");
 	$expires=$datetimeobj->convert($dateformatdetails['phpdate'].' H:i');
 }
-$surveysummary .="<li><label for='expires'>".$clang->gT("Expiry date/time:")."</label>\n"
+$surveysummary .="<ul><li><label for='expires'>".$clang->gT("Expiry date/time:")."</label>\n"
 . "<input type='text' class='popupdatetime' id='expires' size='20' name='expires' value=\"{$expires}\" /></li>\n";
 
 ///////////////////////////////////////////

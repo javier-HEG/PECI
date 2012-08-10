@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LimeSurvey French language file\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-27 16:11+0100\n"
-"PO-Revision-Date: 2012-03-27 16:12+0100\n"
+"POT-Creation-Date: 2012-08-10 12:05+0100\n"
+"PO-Revision-Date: 2012-08-10 12:06+0100\n"
 "Last-Translator: Javier Belmonte <javier.belmonte@hesge.ch>\n"
 "Language-Team: Sébastien GAUGRY <_>\n"
 "MIME-Version: 1.0\n"
@@ -11549,295 +11549,221 @@ msgstr "Point (.)"
 msgid "Comma (,)"
 msgstr "Virgule (,)"
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:156
-msgid "Albanian"
-msgstr "Albanais"
-
-# D:\www\limesurvey/admin/tokens.php:1506
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:163
-msgid "Arabic"
-msgstr "Arabe"
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:170
-msgid "Basque"
-msgstr "Basque"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:66
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:177
-msgid "Belarusian"
-msgstr "Biélorusse"
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:184
-msgid "Bosnian"
-msgstr "Bosniaque"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:66
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:191
-msgid "Bulgarian"
-msgstr "Bulgare"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:123
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:198
-msgid "Catalan"
-msgstr "Catalan"
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:205
-msgid "Welsh"
-msgstr "Gallois"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:74
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:212
-msgid "Chinese (Simplified)"
-msgstr "Chinois (Simplifié)"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:70
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:219
-msgid "Chinese (Traditional - Hong Kong)"
-msgstr "Chinois (Traditionnel - Hong Kong)"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:70
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:226
-msgid "Chinese (Traditional - Taiwan)"
-msgstr "Chinois (Traditionnel - Taïwan)"
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:233
-msgid "Croatian"
-msgstr "Croate"
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:240
-msgid "Czech"
-msgstr "Tchèque"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:82
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:247
-msgid "Danish"
-msgstr "Danois"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:86
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:254
-msgid "Dutch"
-msgstr "Néerlandais"
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:261
-msgid "Dutch Informal"
-msgstr "Néerlandais (tutoiement)"
-
 # C:\wamp\www\limesurvey/classes/core/surveytranslator.php:90
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:268
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:156
 msgid "English"
 msgstr "Anglais"
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:275
-msgid "Estonian"
-msgstr "Estonien"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:94
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:282
-msgid "Finnish"
-msgstr "Finlandais"
-
 # C:\wamp\www\limesurvey/classes/core/surveytranslator.php:99
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:289
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:163
 msgid "French"
 msgstr "Français"
 
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:123
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:296
-msgid "Galician"
-msgstr "Galicien"
-
 # C:\wamp\www\limesurvey/classes/core/surveytranslator.php:103
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:303
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:170
 msgid "German"
 msgstr "Allemand"
 
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:107
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:310
-msgid "German informal"
-msgstr "Allemand (tutoiement)"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:111
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:317
-msgid "Greek"
-msgstr "Grec"
-
-# D:\www\limesurvey/admin/html.php:760
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:324
-msgid "Hindi"
-msgstr "Hindi"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:115
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:331
-msgid "Hebrew"
-msgstr "Hébreux"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:119
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:338
-msgid "Hungarian"
-msgstr "Hongrois"
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:345
-msgid "Icelandic"
-msgstr "Islandais"
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:352
-msgid "Indonesian"
-msgstr "Indonésien"
-
-# D:\www\limesurvey/classes/core/surveytranslator.php:169
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:359
-msgid "Irish"
-msgstr "Irlandais"
-
 # C:\wamp\www\limesurvey/classes/core/surveytranslator.php:123
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:366
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:177
 msgid "Italian"
 msgstr "Italien"
 
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:123
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:373
-msgid "Italian (formal)"
-msgstr "Italien (vouvoiement)"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:127
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:380
-msgid "Japanese"
-msgstr "Japonais"
-
-# D:\www\limesurvey/admin/tokens.php:1514
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:387
-msgid "Korean"
-msgstr "Coréen"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:131
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:394
-msgid "Lithuanian"
-msgstr "Lituanien"
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:401
-msgid "Latvian"
-msgstr "Letton"
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:408
-msgid "Macedonian"
-msgstr "Macédonien"
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:415
-msgid "Malay"
-msgstr "Malais"
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:422
-msgid "Maltese"
-msgstr "Maltais"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:135
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:429
-msgid "Norwegian (Bokmal)"
-msgstr "Norvégien (Bokmal)"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:135
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:436
-msgid "Norwegian (Nynorsk)"
-msgstr "Norvégien (Nynorsk)"
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:443
-msgid "Persian"
-msgstr "Perse"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:90
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:450
-msgid "Polish"
-msgstr "Polonais"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:139
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:457
-msgid "Portuguese"
-msgstr "Portugais"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:143
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:464
-msgid "Portuguese (Brazilian)"
-msgstr "Portugais (Brésil)"
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:471
-msgid "Punjabi"
-msgstr "Pendjjabi"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:148
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:478
-msgid "Russian"
-msgstr "Russe"
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:485
-msgid "Romanian"
-msgstr "Roumain"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:156
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:492
-msgid "Slovak"
-msgstr "Slovaque"
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:499
-msgid "Sinhala"
-msgstr "Singhalais"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:156
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:506
-msgid "Slovenian"
-msgstr "Slovène"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:156
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:513
-msgid "Serbian"
-msgstr "Serbe"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:160
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:520
-msgid "Spanish"
-msgstr "Espagnol"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:160
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:527
-msgid "Spanish (Mexico)"
-msgstr "Espagnol (Mexique)"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:164
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:534
-msgid "Swedish"
-msgstr "Suédois"
-
-# D:\www\limesurvey/classes/core/surveytranslator.php:169
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:541
-msgid "Turkish"
-msgstr "Turc"
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:548
-msgid "Thai"
-msgstr "Thaïlandais"
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:556
-msgid "Urdu"
-msgstr "Urdu"
-
-# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:168
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:563
-msgid "Vietnamese"
-msgstr "Vietnamien"
-
-# E:\www\limesurvey/common.php:219
-# E:\www\limesurvey/common.php:220
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/login_check.php:121
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/login_check.php:127
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/login_check.php:141
-msgid "Create new user"
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/login_check.php:101
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/login_check.php:114
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/login_check.php:143
+msgid "PECI: Create new user"
 msgstr "Créer un nouvel utilisateur"
 
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/login_check.php:145
+msgid "PECI: Back to login form"
+msgstr "Retour à la page de login"
+
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:549
+msgid "PECI: Instructions"
+msgstr "Instructions"
+
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:550
+msgid "PECI: The opening/creating survey instructions"
+msgstr "Instructions pour ouvrir ou créer des questionnaires."
+
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/states/export_results.php:91
+#, php-format
+msgid "PECI: Active until %s"
+msgstr "Votre questionnaire restera active jusqu'au %s. Vous pouvez aussi le désactiver à n'importe quel moment."
+
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/states/export_results.php:97
+msgid "PECI: Stop survey warning"
+msgstr "Voulez-vous vraiment désactiver le questionnaire? Une fois désactivé il ne pourra plus être re-activé."
+
+#~ msgid ""
+#~ "Do you want to stop the survey? Once stopped the survey cannot be re-"
+#~ "activated later!"
+#~ msgstr ""
+#~ "Voulez-vous vraiment désactiver le questionnaire? Une fois désactivé il "
+#~ "ne pourra plus être re-activé."
+
+#~ msgid ""
+#~ "Your survey will remain active until %s. You can also deactivate it at "
+#~ "any time."
+#~ msgstr ""
+#~ "Votre questionnaire restera active jusqu'au %s. Vous pouvez aussi le "
+#~ "désactiver à n'importe quel moment."
+
+#, fuzzy
+#~ msgid "Your survey is still active"
+#~ msgstr "Ce questionnaire est actuellement activé"
+
+#~ msgid "Albanian"
+#~ msgstr "Albanais"
+
+# D:\www\limesurvey/admin/tokens.php:1506
+#~ msgid "Arabic"
+#~ msgstr "Arabe"
+#~ msgid "Basque"
+#~ msgstr "Basque"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:66
+#~ msgid "Belarusian"
+#~ msgstr "Biélorusse"
+#~ msgid "Bosnian"
+#~ msgstr "Bosniaque"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:66
+#~ msgid "Bulgarian"
+#~ msgstr "Bulgare"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:123
+#~ msgid "Catalan"
+#~ msgstr "Catalan"
+#~ msgid "Welsh"
+#~ msgstr "Gallois"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:74
+#~ msgid "Chinese (Simplified)"
+#~ msgstr "Chinois (Simplifié)"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:70
+#~ msgid "Chinese (Traditional - Hong Kong)"
+#~ msgstr "Chinois (Traditionnel - Hong Kong)"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:70
+#~ msgid "Chinese (Traditional - Taiwan)"
+#~ msgstr "Chinois (Traditionnel - Taïwan)"
+#~ msgid "Croatian"
+#~ msgstr "Croate"
+#~ msgid "Czech"
+#~ msgstr "Tchèque"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:82
+#~ msgid "Danish"
+#~ msgstr "Danois"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:86
+#~ msgid "Dutch"
+#~ msgstr "Néerlandais"
+#~ msgid "Dutch Informal"
+#~ msgstr "Néerlandais (tutoiement)"
+#~ msgid "Estonian"
+#~ msgstr "Estonien"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:94
+#~ msgid "Finnish"
+#~ msgstr "Finlandais"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:123
+#~ msgid "Galician"
+#~ msgstr "Galicien"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:107
+#~ msgid "German informal"
+#~ msgstr "Allemand (tutoiement)"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:111
+#~ msgid "Greek"
+#~ msgstr "Grec"
+# D:\www\limesurvey/admin/html.php:760
+#~ msgid "Hindi"
+#~ msgstr "Hindi"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:115
+#~ msgid "Hebrew"
+#~ msgstr "Hébreux"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:119
+#~ msgid "Hungarian"
+#~ msgstr "Hongrois"
+#~ msgid "Icelandic"
+#~ msgstr "Islandais"
+#~ msgid "Indonesian"
+#~ msgstr "Indonésien"
+# D:\www\limesurvey/classes/core/surveytranslator.php:169
+#~ msgid "Irish"
+#~ msgstr "Irlandais"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:123
+#~ msgid "Italian (formal)"
+#~ msgstr "Italien (vouvoiement)"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:127
+#~ msgid "Japanese"
+#~ msgstr "Japonais"
+# D:\www\limesurvey/admin/tokens.php:1514
+#~ msgid "Korean"
+#~ msgstr "Coréen"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:131
+#~ msgid "Lithuanian"
+#~ msgstr "Lituanien"
+#~ msgid "Latvian"
+#~ msgstr "Letton"
+#~ msgid "Macedonian"
+#~ msgstr "Macédonien"
+#~ msgid "Malay"
+#~ msgstr "Malais"
+#~ msgid "Maltese"
+#~ msgstr "Maltais"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:135
+#~ msgid "Norwegian (Bokmal)"
+#~ msgstr "Norvégien (Bokmal)"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:135
+#~ msgid "Norwegian (Nynorsk)"
+#~ msgstr "Norvégien (Nynorsk)"
+#~ msgid "Persian"
+#~ msgstr "Perse"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:90
+#~ msgid "Polish"
+#~ msgstr "Polonais"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:139
+#~ msgid "Portuguese"
+#~ msgstr "Portugais"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:143
+#~ msgid "Portuguese (Brazilian)"
+#~ msgstr "Portugais (Brésil)"
+#~ msgid "Punjabi"
+#~ msgstr "Pendjjabi"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:148
+#~ msgid "Russian"
+#~ msgstr "Russe"
+#~ msgid "Romanian"
+#~ msgstr "Roumain"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:156
+#~ msgid "Slovak"
+#~ msgstr "Slovaque"
+#~ msgid "Sinhala"
+#~ msgstr "Singhalais"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:156
+#~ msgid "Slovenian"
+#~ msgstr "Slovène"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:156
+#~ msgid "Serbian"
+#~ msgstr "Serbe"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:160
+#~ msgid "Spanish"
+#~ msgstr "Espagnol"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:160
+#~ msgid "Spanish (Mexico)"
+#~ msgstr "Espagnol (Mexique)"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:164
+#~ msgid "Swedish"
+#~ msgstr "Suédois"
+# D:\www\limesurvey/classes/core/surveytranslator.php:169
+#~ msgid "Turkish"
+#~ msgstr "Turc"
+#~ msgid "Thai"
+#~ msgstr "Thaïlandais"
+#~ msgid "Urdu"
+#~ msgstr "Urdu"
+# C:\wamp\www\limesurvey/classes/core/surveytranslator.php:168
+#~ msgid "Vietnamese"
+#~ msgstr "Vietnamien"
 #~ msgid "Please specify"
 #~ msgstr "Veuillez préciser"
-
 #~ msgid "Setting as Administrator Child"
 #~ msgstr "Définir comme enfant de l'administrateur"
-
 # E:\www\limesurvey/admin/usercontrol.php:120
 #~ msgid "Set Parent successful."
 #~ msgstr "Définition du parent réussie."
@@ -11995,8 +11921,6 @@ msgstr "Créer un nouvel utilisateur"
 #~ msgstr "Fermer la fenêtre"
 #~ msgid "This survey is not currently active"
 #~ msgstr "Ce questionnaire est actuellement inactivé"
-#~ msgid "This survey is currently active"
-#~ msgstr "Ce questionnaire est actuellement activé"
 #~ msgid "Responses will be date stamped"
 #~ msgstr "Les réponses seront datées"
 #~ msgid "Base Language:"

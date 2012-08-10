@@ -98,7 +98,7 @@ if(!isset($_SESSION['loginID']) && $action != "forgotpass" && ($action != "logou
                         <input type='hidden' name='loginlang' value='default' />
                         <input class='action' type='submit' value='".$clang->gT("Login")."' /><br />&nbsp;\n<br/>";
             
-            $loginsummary .= '<p><a href="#" onclick="$(\'#loginform\').hide(); $(\'#newuserform\').show();">' . $clang->gT("Create new user") . '</a></p>';
+            $loginsummary .= '<p><a href="#" onclick="$(\'#loginform\').hide(); $(\'#newuserform\').show();">' . $clang->gT("PECI: Create new user") . '</a></p>';
         } else {
             $loginsummary .= "<p>".sprintf($clang->gT("You have exceeded you maximum login attempts. Please wait %d minutes before trying again"),($timeOutTime/60))."<br /></p>";
         }
@@ -111,7 +111,7 @@ if(!isset($_SESSION['loginID']) && $action != "forgotpass" && ($action != "logou
         
         // Create new user
         $loginsummary .= "<form name='newuserform' id='newuserform' method='post' action='$rooturl/user/user.php' style='display:none;'>";
-        $loginsummary .= '<p><strong>' . $clang->gT('Create new user') . '</strong></p><br />';
+        $loginsummary .= '<p><strong>' . $clang->gT('PECI: Create new user') . '</strong></p><br />';
         $loginsummary .= "<ul>
 	        <li><label for='new_full_name'>".$clang->gT("Full name")."</label>
 	        <input name='new_full_name' id='new_full_name' type='text' size='40' maxlength='40' value='' /></li>
@@ -140,9 +140,9 @@ if(!isset($_SESSION['loginID']) && $action != "forgotpass" && ($action != "logou
 
         $loginsummary .= "</select></li></ul>                            
 				<p><input type='hidden' value='addonlineuser' name='action'>
-                <input class='action' type='submit' value='".$clang->gT("Create new user")."' /><br /><br /></p>";
+                <input class='action' type='submit' value='".$clang->gT("PECI: Create new user")."' /><br /><br /></p>";
         
-        $loginsummary .= '<p><a href="#" onclick="$(\'#newuserform\').hide(); $(\'#loginform\').show();">' . $clang->gT("Back to login form") . '</a></p>';
+        $loginsummary .= '<p><a href="#" onclick="$(\'#newuserform\').hide(); $(\'#loginform\').show();">' . $clang->gT("PECI: Back to login form") . '</a></p>';
 
         $loginsummary .= "</form>";
         

@@ -74,7 +74,7 @@ if (!$exportstyle) {
     }
     
     $answercount = "<div class='header ui-widget-header' style='text-align: center;'>".$clang->gT("Response summary")."</div>"
-    . "<p>Your survey is still active <br /> $surveyurl</p>"
+    . "<p>" . $clang->gT("This survey is currently active.") . "<br /> $surveyurl</p>"
     . "<p><table class='statisticssummary'>\n"
     . "<tfoot><tr><th>".$clang->gT("Total responses:")."</th><td>".$num_total_answers."</td></tr></tfoot>"
     . "\t<tbody>"
@@ -82,34 +82,45 @@ if (!$exportstyle) {
     . "</table></p>";
     
     // Print the Stop survey segment
+    $expiresOutput = '';
+    if ($thissurvey['expires'] != '') {
+    	$datetimeobj = new Date_Time_Converter($thissurvey['expires'] , "Y-m-d H:i:s");
+    	$dateformatdetails = getDateFormatData($_SESSION['dateformat']);
+    	$expires = $datetimeobj->convert($dateformatdetails['phpdate'] . ' H:i');
+    	
+    	$expiresOutput .= '<p>' . sprintf($clang->gT("PECI: Active until %s"), $expires) . '</p>';
+    }
+    
     $exportoutput .= '<div id="surveystop" style="display: none">'
-    	. $answercount
-    	. '<p><input type="button"
-    		onclick="if (confirm(\'Do you want to stop the survey? Once stopped the survey cannot be re-activated later!\')) { stopSurvey(); }"
-    		value="Stop survey" /></p>'
+    	. $answercount . $expiresOutput
+    	. '<p><input type="button" onclick="if (confirm(\''
+    	. $clang->gT('PECI: Stop survey warning', 'js')
+    	. '\')) { stopSurvey(); }" value="'
+    	. $clang->gT('Deactivate Survey')
+    	. '" /></p>'
     	. '</div>';
     
     $exportoutput .= "<div class='header ui-widget-header'>".$clang->gT("Export results").'</div>'
     ."<div id='exportresultswrapper' class='wrap2columns'>\n"
     ."<form id='resultexport' action='$scriptname?action=exportresults' method='post'><div class='left'>\n";
 
-    if (isset($_POST['sql'])) {$exportoutput .= " - ".$clang->gT("Filtered from statistics script");}
-    if (returnglobal('id')<>'') {$exportoutput .= " - ".$clang->gT("Single response");}
+    if (isset($_POST['sql'])) {
+    	$exportoutput .= " - ".$clang->gT("Filtered from statistics script");
+    }
+    
+    if (returnglobal('id') <> '') {
+    	$exportoutput .= " - ".$clang->gT("Single response");
+    }
 
-    if (incompleteAnsFilterstate() == "filter")
-    {
+    if (incompleteAnsFilterstate() == "filter") {
         $selecthide="selected='selected'";
         $selectshow="";
         $selectinc="";
-    }
-    elseif (incompleteAnsFilterstate() == "inc")
-    {
+    } elseif (incompleteAnsFilterstate() == "inc") {
         $selecthide="";
         $selectshow="";
         $selectinc="selected='selected'";
-    }
-    else
-    {
+    } else {
         $selecthide="";
         $selectshow="selected='selected'";
         $selectinc="";

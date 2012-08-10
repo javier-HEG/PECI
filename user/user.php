@@ -546,8 +546,8 @@ if (isset($_SESSION['loginID']))
     // If a user is logged in, but no survey has been loaded, then show instructions.
 	if (!isset($surveyid)) {
 		$adminoutput .= '<div class="messagebox ui-corner-all">'
-			. '<div class="header ui-widget-header">Instructions</div>'
-			. 'Instructions on opening/creating a survey</div>';
+			. '<div class="header ui-widget-header">' . $clang->gT('PECI: Instructions') . '</div>'
+			. $clang->gT('PECI: The opening/creating survey instructions') . '</div>';
 	}
     
     if (!isset($printablesurveyoutput) && $subaction!='export' && (substr($action,0,4)!= 'ajax'))

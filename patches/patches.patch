@@ -65,13 +65,13 @@ Index: admin/sessioncontrol.php
  returnglobal('action') != 'forgotpass' &&
  returnglobal('action') != 'ajaxquestionattributes' &&
  returnglobal('action') != '')
- Index: classes/core/surveytranslator.php
+Index: classes/core/surveytranslator.php
 ===================================================================
 --- classes/core/surveytranslator.php	(revision 12170)
 +++ classes/core/surveytranslator.php	(working copy)
 @@ -152,118 +152,6 @@
      if (isset($result[$orderbynative])) return $result[$orderbynative];
- 
+
      if (!isset($supportedLanguages)) {
 -    // Albanian
 -    $supportedLanguages['sq']['description'] = $clang->gT('Albanian');
@@ -191,7 +191,7 @@ Index: admin/sessioncontrol.php
 @@ -271,20 +159,6 @@
      $supportedLanguages['en']['dateformat'] = 9;
      $supportedLanguages['en']['radixpoint'] = 0;
- 
+
 -    // Estonian
 -    $supportedLanguages['et']['description'] = $clang->gT('Estonian');
 -    $supportedLanguages['et']['nativedescription'] = 'Eesti';
@@ -209,10 +209,10 @@ Index: admin/sessioncontrol.php
      // French
      $supportedLanguages['fr']['description'] = $clang->gT('French');
      $supportedLanguages['fr']['nativedescription'] = 'Fran&#231;ais';
-@@ -292,13 +166,6 @@
+@@ -292,279 +166,12 @@
      $supportedLanguages['fr']['dateformat'] = 2;
      $supportedLanguages['fr']['radixpoint'] = 1;
- 
+
 -    // Galician
 -    $supportedLanguages['gl']['description'] = $clang->gT('Galician');
 -    $supportedLanguages['gl']['nativedescription'] = 'Galego';
@@ -223,10 +223,10 @@ Index: admin/sessioncontrol.php
      // German
      $supportedLanguages['de']['description'] = $clang->gT('German');
      $supportedLanguages['de']['nativedescription'] = 'Deutsch';
-@@ -306,265 +173,12 @@
+     $supportedLanguages['de']['rtl'] = false;
      $supportedLanguages['de']['dateformat'] = 1;
      $supportedLanguages['de']['radixpoint'] = 1;
- 
+-
 -    // German informal
 -    $supportedLanguages['de-informal']['description'] = $clang->gT('German informal');
 -    $supportedLanguages['de-informal']['nativedescription'] = 'Deutsch (Du)';
@@ -283,12 +283,12 @@ Index: admin/sessioncontrol.php
 -    $supportedLanguages['ie']['dateformat'] = 2;
 -    $supportedLanguages['ie']['radixpoint'] = 0;
 -
-     // Italian
-     $supportedLanguages['it']['description'] = $clang->gT('Italian');
-     $supportedLanguages['it']['nativedescription'] = 'Italiano';
-     $supportedLanguages['it']['rtl'] = false;
-     $supportedLanguages['it']['dateformat'] = 5;
-     $supportedLanguages['it']['radixpoint'] = 1;
+-    // Italian
+-    $supportedLanguages['it']['description'] = $clang->gT('Italian');
+-    $supportedLanguages['it']['nativedescription'] = 'Italiano';
+-    $supportedLanguages['it']['rtl'] = false;
+-    $supportedLanguages['it']['dateformat'] = 5;
+-    $supportedLanguages['it']['radixpoint'] = 1;
 -
 -    // Italian-Formal
 -    $supportedLanguages['it-formal']['description'] = $clang->gT('Italian (formal)');
@@ -487,6 +487,5 @@ Index: admin/sessioncontrol.php
 -    $supportedLanguages['vi']['dateformat'] = 5;
 -    $supportedLanguages['vi']['radixpoint'] = 1;
      }
- 
+
      if ($orderbynative)
- 

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LimeSurvey\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-03-27 18:24+0100\n"
-"PO-Revision-Date: 2012-03-27 18:25+0100\n"
+"POT-Creation-Date: 2012-08-10 12:04+0100\n"
+"PO-Revision-Date: 2012-08-10 12:05+0100\n"
 "Last-Translator: Javier Belmonte <javier.belmonte@hesge.ch>\n"
 "Language-Team: LimeSurvey <c_schmitz@users.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -11713,247 +11713,53 @@ msgid "Comma (,)"
 msgstr ""
 
 #: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:156
-msgid "Albanian"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:163
-msgid "Arabic"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:170
-msgid "Basque"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:177
-msgid "Belarusian"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:184
-msgid "Bosnian"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:191
-msgid "Bulgarian"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:198
-msgid "Catalan"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:205
-msgid "Welsh"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:212
-msgid "Chinese (Simplified)"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:219
-msgid "Chinese (Traditional - Hong Kong)"
-msgstr "Chinese (Traditional; Hong Kong)"
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:226
-msgid "Chinese (Traditional - Taiwan)"
-msgstr "Chinese (Traditional; Taiwan)"
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:233
-msgid "Croatian"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:240
-msgid "Czech"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:247
-msgid "Danish"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:254
-msgid "Dutch"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:261
-msgid "Dutch Informal"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:268
 msgid "English"
 msgstr ""
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:275
-msgid "Estonian"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:282
-msgid "Finnish"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:289
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:163
 msgid "French"
 msgstr ""
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:296
-msgid "Galician"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:303
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:170
 msgid "German"
 msgstr ""
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:310
-msgid "German informal"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:317
-msgid "Greek"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:324
-msgid "Hindi"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:331
-msgid "Hebrew"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:338
-msgid "Hungarian"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:345
-msgid "Icelandic"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:352
-msgid "Indonesian"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:359
-msgid "Irish"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:366
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:177
 msgid "Italian"
 msgstr ""
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:373
-msgid "Italian (formal)"
-msgstr ""
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/login_check.php:101
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/login_check.php:114
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/login_check.php:143
+msgid "PECI: Create new user"
+msgstr "Create new user"
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:380
-msgid "Japanese"
-msgstr ""
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/login_check.php:145
+msgid "PECI: Back to login form"
+msgstr "Back to login form"
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:387
-msgid "Korean"
-msgstr ""
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:549
+msgid "PECI: Instructions"
+msgstr "Instructions"
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:394
-msgid "Lithuanian"
-msgstr ""
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:550
+msgid "PECI: The opening/creating survey instructions"
+msgstr "Instructions about opening and creating surveys."
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:401
-msgid "Latvian"
-msgstr ""
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/states/export_results.php:91
+#, php-format
+msgid "PECI: Active until %s"
+msgstr "The survey will remain active until %s. You can also deactivate it at any time."
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:408
-msgid "Macedonian"
-msgstr ""
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/states/export_results.php:97
+msgid "PECI: Stop survey warning"
+msgstr "Do you really want to stop the survey now? Once stopped it can not be re-activated."
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:415
-msgid "Malay"
-msgstr ""
+#~ msgid "Chinese (Traditional - Hong Kong)"
+#~ msgstr "Chinese (Traditional; Hong Kong)"
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:422
-msgid "Maltese"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:429
-msgid "Norwegian (Bokmal)"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:436
-msgid "Norwegian (Nynorsk)"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:443
-msgid "Persian"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:450
-msgid "Polish"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:457
-msgid "Portuguese"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:464
-msgid "Portuguese (Brazilian)"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:471
-msgid "Punjabi"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:478
-msgid "Russian"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:485
-msgid "Romanian"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:492
-msgid "Slovak"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:499
-msgid "Sinhala"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:506
-msgid "Slovenian"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:513
-msgid "Serbian"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:520
-msgid "Spanish"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:527
-msgid "Spanish (Mexico)"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:534
-msgid "Swedish"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:541
-msgid "Turkish"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:548
-msgid "Thai"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:556
-msgid "Urdu"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:563
-msgid "Vietnamese"
-msgstr ""
-
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/login_check.php:115
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/login_check.php:128
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/login_check.php:142
-#, fuzzy
-msgid "Create new user"
-msgstr "Create user"
+#~ msgid "Chinese (Traditional - Taiwan)"
+#~ msgstr "Chinese (Traditional; Taiwan)"
 
 #~ msgid "Modify Quota"
 #~ msgstr "Modify quota"
