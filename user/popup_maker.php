@@ -63,26 +63,26 @@ foreach ($js_admin_includes as $jsinclude) {
 
 <html>
 <head>
-<script type="text/javascript" src="http://localhost/usability/admin/scripts/tabpane/js/tabpane.js"></script>
-<script type="text/javascript" src="http://localhost/usability/scripts/jquery/jquery.js"></script>
-<script type="text/javascript" src="http://localhost/usability/scripts/jquery/jquery.dd.js"></script>
-<!-- <script type="text/javascript" src="http://localhost/usability/user/scripts/jquery.cookie.js"></script> -->
-<!-- <script type="text/javascript" src="http://localhost/usability/user/scripts/jquery.simplemodal.js"></script> -->
-<script type="text/javascript" src="http://localhost/usability/scripts/jquery/jquery-ui.js"></script>
-<script type="text/javascript" src="http://localhost/usability/scripts/jquery/jquery.qtip.js"></script>
-<script type="text/javascript" src="http://localhost/usability/scripts/jquery/jquery.notify.js"></script>
-<script type="text/javascript" src="http://localhost/usability/admin/scripts/admin_core.js"></script>
-<!-- <script type="text/javascript" src="http://localhost/usability/user/scripts/tabs.js"></script> -->
-<script type="text/javascript" src="http://localhost/usability/user/scripts/create_edit.js"></script>
+<script type="text/javascript" src="<?php echo $rooturl; ?>/admin/scripts/tabpane/js/tabpane.js"></script>
+<script type="text/javascript" src="<?php echo $rooturl; ?>/scripts/jquery/jquery.js"></script>
+<script type="text/javascript" src="<?php echo $rooturl; ?>/scripts/jquery/jquery.dd.js"></script>
+<!-- <script type="text/javascript" src="<?php echo $rooturl; ?>/user/scripts/jquery.cookie.js"></script> -->
+<!-- <script type="text/javascript" src="<?php echo $rooturl; ?>/user/scripts/jquery.simplemodal.js"></script> -->
+<script type="text/javascript" src="<?php echo $rooturl; ?>/scripts/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="<?php echo $rooturl; ?>/scripts/jquery/jquery.qtip.js"></script>
+<script type="text/javascript" src="<?php echo $rooturl; ?>/scripts/jquery/jquery.notify.js"></script>
+<script type="text/javascript" src="<?php echo $rooturl; ?>/admin/scripts/admin_core.js"></script>
+<!-- <script type="text/javascript" src="<?php echo $rooturl; ?>/user/scripts/tabs.js"></script> -->
+<script type="text/javascript" src="<?php echo $rooturl; ?>/user/scripts/create_edit.js"></script>
 <?php echo $scriptsToLoad; ?>
 <title>Usefulness.ch</title>
-<!-- <link rel="stylesheet" type="text/css" media="all" href="http://localhost/usability/admin//styles/default/tab.webfx.css " /> -->
-<link rel="stylesheet" type="text/css" media="all" href="http://localhost/usability/scripts/jquery/css/start/jquery-ui.css" />
-<!-- <link rel="stylesheet" type="text/css" href="http://localhost/usability/admin/styles/default/printablestyle.css" media="print" /> -->
-<link rel="stylesheet" type="text/css" href="http://localhost/usability/admin/styles/default/adminstyle.css" />
-<link rel="stylesheet" type="text/css" href="http://localhost/usability/user/styles/default/userstyle.css" />
-<link rel="shortcut icon" href="http://localhost/usability/admin/favicon.ico" type="image/x-icon" />
-<link rel="icon" href="http://localhost/usability/admin/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo $rooturl; ?>/admin/styles/default/tab.webfx.css " />
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo $rooturl; ?>/scripts/jquery/css/start/jquery-ui.css" />
+<!-- <link rel="stylesheet" type="text/css" href="<?php echo $rooturl; ?>/admin/styles/default/printablestyle.css" media="print" /> -->
+<link rel="stylesheet" type="text/css" href="<?php echo $rooturl; ?>/admin/styles/default/adminstyle.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo $rooturl; ?>/user/styles/default/userstyle.css" />
+<link rel="shortcut icon" href="<?php echo $rooturl; ?>/admin/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="<?php echo $rooturl; ?>/admin/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" type="text/css" media="all" href="../scripts/jquery/dd.css" />
 <style type=" text/css">
 	.groupDescription {

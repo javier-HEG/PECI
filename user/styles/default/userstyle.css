@@ -348,7 +348,7 @@ div.disabledPeciStep {
 }
 
 div.surveyPeciStepArrow {
-	background-image: url('http://localhost/usability/images/user/silk/arrow_right.png');
+	background-image: url('../images/user/silk/arrow_right.png');
     background-position: center center;
     background-repeat: no-repeat;
 	display: table-cell;
