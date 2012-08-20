@@ -1,6 +1,7 @@
 Copyright: (C) 2012, HEG - Haute École de Gestion de Genève
 Author: Javier Belmonte <javier.belmonte@hesge.ch>
 License: GNU/GPL v3.0 or later
+Credits: Icons used from the Silk Icon Set under Creative Commons Attributtion 3.0 License found here: http://www.famfamfam.com/lab/icons/silk/
 
 This package implements an simplified intermediary interface to LimeSurvey.
 
