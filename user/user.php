@@ -64,7 +64,7 @@ if ( $action == 'FakeGET')
 if (isset($_SESSION['loginID']))
 {
 	// Add the user menu for choosing among existing surveys
-	$adminoutput .= getProjectSelectorMenu();
+	$adminoutput .= getProjectSelectorMenu($surveyid);
 	
 	// Analogous to what we do in 'admin/admin.php', should the
 	// user have super-admin rights we send him to the interface
@@ -545,9 +545,8 @@ if (isset($_SESSION['loginID']))
 
     // If a user is logged in, but no survey has been loaded, then show instructions.
 	if (!isset($surveyid)) {
-		$adminoutput .= '<div class="messagebox ui-corner-all">'
-			. '<div class="header ui-widget-header">' . $clang->gT('PECI: Instructions') . '</div>'
-			. $clang->gT('PECI: The opening/creating survey instructions') . '</div>';
+		$adminoutput .= '<div class="messagebox ui-corner-all" style="wdith: 80%;">'
+			. file_get_contents("tabs/create_{$clang->getlangcode()}.html") . '</div>';
 	}
     
     if (!isset($printablesurveyoutput) && $subaction!='export' && (substr($action,0,4)!= 'ajax'))
@@ -629,17 +628,41 @@ if (isset($_SESSION['loginID']))
 // Regardless of the user being logged in or not
 $adminFooter = getUserFooter("http://www.hesge.ch/heg/", "© 2012 Haute École de Gestion de Genève");
 
-$adminoutput .= <<<EOF
-	<div id="mainTitleMenu"></div>
-	<div id="usabilityTabNameBar"></div>
-	<div id="usabilityTabContainer"></div>
+$tabTextSuffix = $clang->getlangcode();
+
+$adminoutput .= "
+	<div id=\"mainTitleMenu\"></div>\n
+	<div id=\"usabilityTabNameBar\"></div>\n
+	<div id=\"usabilityTabContainer\"></div>\n
 	
-	<script type="text/javascript">
-		createAllUsabilityTabNames();
+	<script type=\"text/javascript\">\n
+		// Create tabs in PECI
+		createTabAndContent('" . $clang->gT('PECI: Home') . "', 'homeUsability');
+		addContentToTab('homeUsability', '" . rawurlencode(file_get_contents("tabs/home_$tabTextSuffix.html")) . "');
+		
+		createTabAndContent('" . $clang->gT('PECI: Theory') . "', 'theoryUsability');
+		addContentToTab('theoryUsability', '" . rawurlencode(file_get_contents("tabs/theory_$tabTextSuffix.html")) . "');
+
+		createTabAndContent('" . $clang->gT('PECI: Create your evaluation') . "', 'createEvaluation');
+		$('#createEvaluationTabContent').css('padding', '0px');
+		$('#createEvaluationTabContent').css('margin', '0px');
+		$('#wrapper').appendTo($('#createEvaluationTabContent'));
+	
+		createTabAndContent('" . $clang->gT('PECI: Research project') . "', 'researchUsability');
+		addContentToTab('researchUsability', '" . rawurlencode(file_get_contents("tabs/research_$tabTextSuffix.html")) . "');
+		
+		createTabAndContent('" . $clang->gT('PECI: Contact') . "', 'contactUsability');
+		addContentToTab('contactUsability', '" . rawurlencode(file_get_contents("tabs/contact_$tabTextSuffix.html")) . "');
+		
+		if ($.cookie('peci_tab_selected') == null) {
+			selectTab('homeUsabilityTabName');
+		} else {
+			selectTab($.cookie('peci_tab_selected'));
+		}
+		
 	</script>
 
-	$adminFooter
-EOF;
+	$adminFooter\n";
 
 if (($action=='showphpinfo') && ($_SESSION['USER_RIGHT_CONFIGURATOR'] == 1)) {
 	phpinfo();

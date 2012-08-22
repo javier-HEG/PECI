@@ -29,24 +29,6 @@ function putWrapperIntoTab(targetTabId) {
 	wrapper.appendTo(tab);
 }
 
-function createAllUsabilityTabNames() {
-	createTabAndContent('Home', 'homeUsability');
-	createTabAndContent('Theory', 'theoryUsability');
-	
-	createTabAndContent('Create your evaluation', 'createEvaluation');
-	// put wrapper in this tab
-	$('#wrapper').appendTo($('#createEvaluationTabContent'));
-
-	createTabAndContent('Research project', 'researchUsability');
-	createTabAndContent('Contact', 'contactUsability');
-	
-	if ($.cookie('peci_tab_selected') == null) {
-		selectTab('homeUsabilityTabName');
-	} else {
-		selectTab($.cookie('peci_tab_selected'));
-	}
-}
-
 function createTabAndContent(name, idPrefix) {
 	var usabilityTabNameBar = $('#usabilityTabNameBar');
 	var usabilityTabContainer = $('#usabilityTabContainer');
@@ -55,7 +37,6 @@ function createTabAndContent(name, idPrefix) {
 	usabilityTabNameBar.append(theoryTabName);
 	var theoryTabContent = createSingleTabContent(idPrefix + 'TabContent');
 	usabilityTabContainer.append(theoryTabContent);
-	
 }
 
 function createSingleTabName(name, id) {
@@ -74,6 +55,13 @@ function createSingleTabContent(id) {
 	singleTabContent.hide();
 	
 	return singleTabContent;
+}
+
+function addContentToTab(id, text) {
+	var tabContentDiv = $('#' + id + 'TabContent');
+	var tabContent = $(decodeURIComponent(text + ''));
+	
+	tabContentDiv.append(tabContent);
 }
 
 function selectTab(targetTabId) {

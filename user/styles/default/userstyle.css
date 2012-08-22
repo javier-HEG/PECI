@@ -234,7 +234,18 @@ table.ui-datepicker-calendar th.ui-datepicker-week-end {
 }
 
 .usabilityTabContent {
-	background-color: yellow;
+	background-color: whitesmoke;
+	margin: 12px;
+	padding: 12px;
+}
+
+.usabilityTabContent h1 {
+	margin: 0px;
+	padding: 0px;
+}
+
+.usabilityTabContent p {	
+	text-align: left;
 }
 
 .footer {
@@ -348,7 +359,7 @@ div.disabledPeciStep {
 }
 
 div.surveyPeciStepArrow {
-	background-image: url('../images/user/silk/arrow_right.png');
+	background-image: url('../../../images/user/silk/arrow_right.png');
     background-position: center center;
     background-repeat: no-repeat;
 	display: table-cell;

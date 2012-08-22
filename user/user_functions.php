@@ -33,11 +33,11 @@ function getUserHeader($meta=false) {
  * Creates the menu holding the project selector and other buttons needed
  * for this menu.
  */
-function getProjectSelectorMenu() {
+function getProjectSelectorMenu($openSid = '') {
 	global $imageurl;
 	
 	$output = '<div id="projectMenu">';
-	$output .= '<span id="menuOptionOpen" class="menuOption">' . getUserSurveySelect() . " Open <img src=\"$imageurl/user/silk/page_go.png\" title=\"Open\" /></span>";
+	$output .= '<span id="menuOptionOpen" class="menuOption">' . getUserSurveySelect($openSid) . " Open <img src=\"$imageurl/user/silk/page_go.png\" title=\"Open\" /></span>";
 	$output .= "<span id=\"menuOptionCreate\" class=\"menuOption\">Create new <img src=\"$imageurl/user/silk/page_add.png\" title=\"Create new survey\" /></span>";
 	
 	// Add hover style
@@ -79,7 +79,7 @@ function getProjectSelectorMenu() {
  * Creates an option menu with the surveys belonging to the current user.
  * <strong>NB.</strong> Code based on <code>admin/surveylist.php</code>.
  */
-function getUserSurveySelect() {
+function getUserSurveySelect($openSid = '') {
 	$query = " SELECT a.*, c.*, u.users_name FROM " . db_table_name('surveys')." as a "
 		. " INNER JOIN " . db_table_name('surveys_languagesettings')
 			. " as c ON ( surveyls_survey_id = a.sid AND surveyls_language = a.language )"
@@ -95,12 +95,20 @@ function getUserSurveySelect() {
 	
 	if($result->RecordCount() > 0) {
 		$output = '<select id="userMenuSurveySelect">';
-		$output .= "<option value=\"none\" selected=\"true\">Choose a survey ...</option>";
+		
+		if ($openSid == '') {
+			$output .= "<option value=\"none\" selected=\"true\">Choose a survey ...</option>";
+		}
 		
 		while($rows = $result->FetchRow()) {
-			$output .= "<option value=\"{$rows['sid']}\">{$rows['surveyls_title']}</option>";
+			$selected = '';
+			if ($openSid == $rows['sid']) {
+				$selected = ' selected="true"';
+			}
+			
+			$output .= "<option value=\"{$rows['sid']}\"$selected>{$rows['surveyls_title']}</option>";
 		}
-	
+		
 		$output .= '</select>';
 	}
 	

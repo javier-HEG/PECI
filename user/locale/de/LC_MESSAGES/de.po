@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LimeSurvey German language file\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-10 12:06+0100\n"
-"PO-Revision-Date: 2012-08-10 12:06+0100\n"
+"POT-Creation-Date: 2012-08-21 17:34+0100\n"
+"PO-Revision-Date: 2012-08-21 17:34+0100\n"
 "Last-Translator: Javier Belmonte <javier.belmonte@hesge.ch>\n"
 "Language-Team: LimeSurvey <c_schmitz@users.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -11071,10 +11071,6 @@ msgstr "Französisch"
 msgid "German"
 msgstr "Deutsch (Sie-Form)"
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/classes/core/surveytranslator.php:177
-msgid "Italian"
-msgstr "Italienisch"
-
 #: /Applications/XAMPP/xamppfiles/htdocs/usability/user/login_check.php:101
 #: /Applications/XAMPP/xamppfiles/htdocs/usability/user/login_check.php:114
 #: /Applications/XAMPP/xamppfiles/htdocs/usability/user/login_check.php:143
@@ -11085,12 +11081,24 @@ msgstr ""
 msgid "PECI: Back to login form"
 msgstr ""
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:549
-msgid "PECI: Instructions"
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:640
+msgid "PECI: Home"
 msgstr ""
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:550
-msgid "PECI: The opening/creating survey instructions"
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:643
+msgid "PECI: Theory"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:646
+msgid "PECI: Create your evaluation"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:651
+msgid "PECI: Research project"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:654
+msgid "PECI: Contact"
 msgstr ""
 
 #: /Applications/XAMPP/xamppfiles/htdocs/usability/user/states/export_results.php:91
@@ -11101,6 +11109,13 @@ msgstr ""
 #: /Applications/XAMPP/xamppfiles/htdocs/usability/user/states/export_results.php:97
 msgid "PECI: Stop survey warning"
 msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/states/select_questions.php:181
+msgid "PECI: Text area"
+msgstr ""
+
+#~ msgid "Italian"
+#~ msgstr "Italienisch"
 
 #~ msgid "Albanian"
 #~ msgstr "Albanisch"
