@@ -47,9 +47,15 @@ function openPeciPopup(action, parameters) {
 	});
 }
 
-function submitAsParent(data) {
-//	alert("user.php" + JSON.stringify(data, undefined, 2));
-	$.post("user.php", data, function() {location.reload();});
+function submitAsParent(info) {
+//	alert("user.php" + JSON.stringify(info, undefined, 2));
+	$.post("user.php", info, function(data) {
+		if (info.action == "insertsurvey") {
+			location.href = "user.php?sid=" + data;
+		} else {
+			location.href = "user.php?sid=" + info.sid;
+		}
+	});
 }
 
 /**

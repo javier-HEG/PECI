@@ -113,16 +113,21 @@ else if (isset($surveyid) && $surveyid && $action=='') {
 		
 		// Create the default buttons for the peci steps
 		$surveysummary .= '<div id="surveyPeciStepContainer">
-				<div id="evaluatePeciStep" onClick="setCurrentPeciStep(\'evaluatePeciStep\');" class="surveyPeciStep">About evaluating usefulness</div>
+				<div id="evaluatePeciStep" onClick="setCurrentPeciStep(\'evaluatePeciStep\');" class="surveyPeciStep">'
+				. $clang->gT('PECI: About evaluating usefulness') . '</div>
 				<div class="surveyPeciStepArrow" style="background-image: none;">&nbsp;</div>
 				<div class="surveyPeciStepArrow" style="background-image: none;">&nbsp;</div>
-				<div id="selectQuestionPeciStep" onClick="setCurrentPeciStep(\'selectQuestionPeciStep\');" class="surveyPeciStep">Select questions</div>
+				<div id="selectQuestionPeciStep" onClick="setCurrentPeciStep(\'selectQuestionPeciStep\');" class="surveyPeciStep">'
+				. $clang->gT('PECI: Select questions') . '</div>
 				<div class="surveyPeciStepArrow">&nbsp;</div>
-				<div id="modifySurveyPeciStep" onClick="setCurrentPeciStep(\'modifySurveyPeciStep\');" class="surveyPeciStep">Modify the questionnaire</div>
+				<div id="modifySurveyPeciStep" onClick="setCurrentPeciStep(\'modifySurveyPeciStep\');" class="surveyPeciStep">'
+				. $clang->gT('PECI: Modify the questionnaire') . '</div>
 				<div class="surveyPeciStepArrow">&nbsp;</div>
-				<div id="startSurveyPeciStep" onClick="setCurrentPeciStep(\'startSurveyPeciStep\');" class="surveyPeciStep">Start survey</div>
+				<div id="startSurveyPeciStep" onClick="setCurrentPeciStep(\'startSurveyPeciStep\');" class="surveyPeciStep">'
+				. $clang->gT('PECI: Start survey') . '</div>
 				<div class="surveyPeciStepArrow">&nbsp;</div>
-				<div id="analyzeDataPeciStep" onClick="setCurrentPeciStep(\'analyzeDataPeciStep\');" class="surveyPeciStep">Analyze the data</div>
+				<div id="analyzeDataPeciStep" onClick="setCurrentPeciStep(\'analyzeDataPeciStep\');" class="surveyPeciStep">'
+				. $clang->gT('PECI: Analyze the data') . '</div>
 			</div>';
 		
 		$surveysummary .= "<div id=\"evaluatePeciStepContent\" class=\"peciStepContainer\" >

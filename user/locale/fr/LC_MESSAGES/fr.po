@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LimeSurvey French language file\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-21 17:31+0100\n"
-"PO-Revision-Date: 2012-08-21 17:32+0100\n"
+"POT-Creation-Date: 2012-08-23 22:19+0100\n"
+"PO-Revision-Date: 2012-08-23 22:19+0100\n"
 "Last-Translator: Javier Belmonte <javier.belmonte@hesge.ch>\n"
 "Language-Team: Sébastien GAUGRY <_>\n"
 "MIME-Version: 1.0\n"
@@ -11564,6 +11564,26 @@ msgstr "Français"
 msgid "German"
 msgstr "Allemand"
 
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/html.php:117
+msgid "PECI: About evaluating usefulness"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/html.php:121
+msgid "PECI: Select questions"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/html.php:124
+msgid "PECI: Modify the questionnaire"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/html.php:127
+msgid "PECI: Start survey"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/html.php:130
+msgid "PECI: Analyze the data"
+msgstr ""
+
 #: /Applications/XAMPP/xamppfiles/htdocs/usability/user/login_check.php:101
 #: /Applications/XAMPP/xamppfiles/htdocs/usability/user/login_check.php:114
 #: /Applications/XAMPP/xamppfiles/htdocs/usability/user/login_check.php:143
@@ -11574,23 +11594,23 @@ msgstr "Créer un nouvel utilisateur"
 msgid "PECI: Back to login form"
 msgstr "Retour à la page de login"
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:640
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:646
 msgid "PECI: Home"
 msgstr "Principal"
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:643
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:649
 msgid "PECI: Theory"
 msgstr "Théorie"
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:646
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:652
 msgid "PECI: Create your evaluation"
 msgstr "Créer une évaluation"
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:651
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:657
 msgid "PECI: Research project"
 msgstr "Projet de recherche"
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:654
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:660
 msgid "PECI: Contact"
 msgstr "Contact"
 
@@ -11603,9 +11623,22 @@ msgstr "Votre questionnaire restera active jusqu'au %s. Vous pouvez aussi le dé
 msgid "PECI: Stop survey warning"
 msgstr "Voulez-vous vraiment désactiver le questionnaire? Une fois désactivé il ne pourra plus être re-activé."
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/states/select_questions.php:181
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/states/select_questions.php:31
+msgid "PECI: Sure to import?"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/states/select_questions.php:37
+msgid "PECI: Import nothing?"
+msgstr ""
+
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/states/select_questions.php:239
 msgid "PECI: Text area"
 msgstr "Zone de texte long"
+
+# D:\www\limesurvey/admin/vvimport.php:235
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/states/select_questions.php:248
+msgid "PECI: Import and continue"
+msgstr ""
 
 #~ msgid "PECI: The opening/creating survey instructions"
 #~ msgstr "Instructions pour ouvrir ou créer des questionnaires."

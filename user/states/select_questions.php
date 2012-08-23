@@ -20,14 +20,30 @@
 
 require_once(dirname(__FILE__).'/../../qanda.php');
 
+$templatequeryid = "46664";
+
 $surveysummary .= '<script type="text/javascript">
 		disablePeciSteps(["startSurveyPeciStep", "analyzeDataPeciStep", "modifySurveyPeciStep"]);
 		setCurrentPeciStep("evaluatePeciStep");
 		
+		function confirmAndImport() {
+			if (importingAtLeastOne()) {
+				if (confirm("' . $clang->gT('PECI: Sure to import?') . '")) {
+					$.post("questionimport.php", whatToImportInJson(), function() {
+	  					setSurveyFaxto("");
+					});
+				}
+			} else {
+				if (confirm("' . $clang->gT('PECI: Import nothing?') . '")) {
+					setSurveyFaxto("");
+				}
+			}
+		}
+		
 		function setSurveyFaxto(value) {
 			$.post("user.php", {sid: "' . $surveyid . '", faxto: value, action: "updateFaxTo",
 				checksessionbypost: "'. $_SESSION['checksessionpost'] .'"}, function() {
-				location.reload();
+				location.href = "user.php?sid=' . $surveyid . '";
 			});
 		}
 		
@@ -46,19 +62,56 @@ $surveysummary .= '<script type="text/javascript">
 		var groupIds = [];
 		var groupQuestions = [];
 
-		function checkQuestion(groupId, questionId) {
-			groupIndex = groupIds.indexOf(groupId);
+		function whatToImportInJson() {
+			var jsonObject = {
+				sid : "' . $surveyid . '",
+				checksessionbypost : "' . $_SESSION['checksessionpost'] . '",
+				templatequeryid : "' . $templatequeryid . '",
+				language : "' . $thissurvey['language'] . '",
+				groupIds : [],
+				groupQuestions : []
+			};
+			
+			for (var i = 0; i < groupIds.length; i++) {
+				var questions = [];
+				
+ 				for (var j = 0; j < groupQuestions[i].length; j++) {
+ 					var checkboxId = "questionCheck-" + groupIds[i] + "-" + groupQuestions[i][j];
+ 					
+ 					if ($("#" + checkboxId).is(":checked")) {
+ 						questions.push(groupQuestions[i][j]);
+ 					}
+ 				}
+ 				
+ 				if (questions.length > 0) {
+ 					jsonObject.groupIds.push(groupIds[i]);
+ 					jsonObject.groupQuestions.push(questions);
+				}
+			}
+			
+			return jsonObject;
 		}
 		
-		function uncheckQuestion(groupId, questionId) {
-		
+		function importingAtLeastOne() {
+			var atLeastOne = false;
+			
+			for (var i = 0; i < groupIds.length; i++) {
+				for (var j = 0; j < groupQuestions[i].length; j++) {
+					var checkboxId = "questionCheck-" + groupIds[i] + "-" + groupQuestions[i][j];
+ 					
+ 					if ($("#" + checkboxId).is(":checked")) {
+ 						atLeastOne = true;
+ 					}
+				}
+			}
+			
+			return atLeastOne;
 		}
 	</script>';
 
 // Fill in $surveysummary the list of questions in survey 46664, a template survey
 $templatecontent = '';
 // - Load information about the template survey
-$templatequeryid = "46664";
 $templatequery = "SELECT * FROM ".db_table_name('surveys')
 	. " inner join " . db_table_name('surveys_languagesettings')
 	. " on (surveyls_survey_id=sid and surveyls_language=language) WHERE sid=$templatequeryid";
@@ -112,6 +165,11 @@ if ($gidresult->RecordCount() > 0) {
 
 		if ($qresult->RecordCount() > 0) {
 			while($qrows = $qresult->FetchRow()) {
+				// Add question list in group
+				$templatecontent .= "<script>
+						groupQuestions[groupQuestions.length - 1][groupQuestions[groupQuestions.length - 1].length] = {$qrows['qid']};
+					</script>";
+				
 				$ia = array(0 => $qrows['qid'],
 					1 => $surveyid.'X'.$qrows['gid'].'X'.$qrows['qid'],
 					2 => $qrows['title'],
@@ -137,7 +195,7 @@ if ($gidresult->RecordCount() > 0) {
 					<div class=\"questionHeader\">
 						<div class=\"peciActionButtons\" style=\"float: right; border: 1px solid lightgray; border-radius: 6px; padding: 1px 4px; margin-left: 8px;\">
 							{$clang->gT("Import question?")}
-							<input type=\"checkbox\" id=\"peciQuestionCheckbox{$qrows['qid']}\" value=\"{$qrows['qid']}\"/>
+							<input type=\"checkbox\" id=\"questionCheck-{$gv['gid']}-{$qrows['qid']}\"/>
 						</div>
 						
 						<div class=\"peciActionButtons\" style=\"float: right;\">
@@ -186,5 +244,6 @@ if ($gidresult->RecordCount() > 0) {
 
 $surveysummary .= "<div id=\"selectQuestionPeciStepContent\" class=\"peciStepContainer\">"
 	. $templatecontent
-	. "<input type=\"button\" onclick=\"setSurveyFaxto('');\" value='Next step' />"
+	. "<input type=\"button\" onclick=\"confirmAndImport();\" value='"
+	. $clang->gT('PECI: Import and continue') . "' />"
 	. "</div>";

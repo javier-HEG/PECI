@@ -78,6 +78,12 @@ if (isset($_SESSION['loginID']))
     if (in_array($action, array('updateemailtemplates','delsurvey','delgroup','delquestion','insertsurvey','updatesubquestions','copynewquestion','insertquestiongroup','insertCSV','insertquestion','updatesurveysettings','updatesurveysettingsandeditlocalesettings','updatesurveylocalesettings','updategroup','deactivate','savepersonalsettings','updatequestion','updateansweroptions','renumberquestions','updatedefaultvalues')))
     {
         include('../admin/database.php');
+        
+        // When a new suvey is created all we need from this script is
+        // the new survey's id
+        if ($action == 'insertsurvey') {
+        	die($surveyid);
+        }
     }
     
     sendcacheheaders();
