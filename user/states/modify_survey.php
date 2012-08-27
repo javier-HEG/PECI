@@ -159,8 +159,8 @@ if ($gidresult->RecordCount() > 0) {
 						<div class=\"peciActionButtons\" style=\"float: right;\">"
 					. "<button onClick=\"javascript:openPeciPopup('editquestion', 'surveyid=$surveyid&gid={$gv['gid']}&qid={$qrows['qid']}');\">{$clang->gT('Edit')}</button>&nbsp;"
 					. $subquestions . $answeroptions
-					. "<button disabled=\"true\">{$clang->gT('PECI: Move')}</button>
 						<button disabled=\"true\">{$clang->gT('Add condition')}</button>&nbsp;"
+// 					. "<button disabled=\"true\">{$clang->gT('PECI: Move')}</button>\n"
 					. "<button onclick=\"if (confirm('"
 					. $clang->gT("Deleting this question will also delete any answer options and subquestions it includes. Are you sure you want to continue?","js")
 					. "')) {submitAsParent($deleteQuestionData); }\">{$clang->gT('Delete')}</button>
