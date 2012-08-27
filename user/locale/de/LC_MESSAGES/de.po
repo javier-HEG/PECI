@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LimeSurvey German language file\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-23 22:16+0100\n"
-"PO-Revision-Date: 2012-08-23 22:16+0100\n"
+"POT-Creation-Date: 2012-08-27 11:39+0100\n"
+"PO-Revision-Date: 2012-08-27 11:39+0100\n"
 "Last-Translator: Javier Belmonte <javier.belmonte@hesge.ch>\n"
 "Language-Team: LimeSurvey <c_schmitz@users.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -11098,23 +11098,23 @@ msgstr "Ein neues Konto anlegen"
 msgid "PECI: Back to login form"
 msgstr "Zurück zum Login"
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:646
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:648
 msgid "PECI: Home"
 msgstr "Home"
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:649
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:651
 msgid "PECI: Theory"
 msgstr "Theorie"
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:652
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:654
 msgid "PECI: Create your evaluation"
 msgstr "Eigene Evaluation kreieren"
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:657
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:659
 msgid "PECI: Research project"
 msgstr "Forschungsprojekt"
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:660
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:662
 msgid "PECI: Contact"
 msgstr "Kontakt"
 
@@ -11126,6 +11126,21 @@ msgstr "Aktiv bis zum %s"
 #: /Applications/XAMPP/xamppfiles/htdocs/usability/user/states/export_results.php:97
 msgid "PECI: Stop survey warning"
 msgstr "Warnung"
+
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/states/modify_survey.php:43
+#, fuzzy
+msgid "PECI: equals"
+msgstr "gleich"
+
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/states/modify_survey.php:205
+#, fuzzy
+msgid "PECI: Triggered if"
+msgstr "Textfeld"
+
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/states/modify_survey.php:286
+#, fuzzy
+msgid "PECI: Edit condition"
+msgstr "Bedingung bearbeiten"
 
 #: /Applications/XAMPP/xamppfiles/htdocs/usability/user/states/select_questions.php:31
 msgid "PECI: Sure to import?"
