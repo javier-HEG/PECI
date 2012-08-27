@@ -342,6 +342,9 @@ $surveysummary .= "</div>\n";
  * @param unknown_type $rows
  */
 function getPossibleAnswersForQid($rows) {
+	global $clang;
+	$surveyid = $rows['sid'];
+	
 	$X="X";
 	
 	$shortquestion=$rows['title'].": ".strip_tags($rows['question']);
@@ -493,7 +496,7 @@ function getPossibleAnswersForQid($rows) {
 	elseif ($rows['type'] == "1") //Multi Scale
 	{
 		$aquery="SELECT * "
-		."FROM {$dbprefix}questions "
+		.'FROM ' . db_table_name('questions') . ' '
 		."WHERE parent_qid={$rows['qid']} "
 		."AND language='".GetBaseLanguageFromSurveyID($surveyid)."' "
 		."ORDER BY question_order";
@@ -514,7 +517,7 @@ function getPossibleAnswersForQid($rows) {
 
 			// first label
 			$lquery="SELECT * "
-			."FROM {$dbprefix}answers "
+			.'FROM ' . db_table_name('answers') . ' '
 			."WHERE qid={$rows['qid']} "
 			."AND scale_id=0 "
 			."AND language='".GetBaseLanguageFromSurveyID($surveyid)."' "
@@ -527,7 +530,7 @@ function getPossibleAnswersForQid($rows) {
 
 			// second label
 			$lquery="SELECT * "
-			."FROM {$dbprefix}answers "
+			.'FROM ' . db_table_name('answers') . ' '
 			."WHERE qid={$rows['qid']} "
 			."AND scale_id=1 "
 			."AND language='".GetBaseLanguageFromSurveyID($surveyid)."' "
@@ -549,7 +552,7 @@ function getPossibleAnswersForQid($rows) {
 	elseif ($rows['type'] == "K" ||$rows['type'] == "Q") //Multi shorttext/numerical
 	{
 		$aquery="SELECT * "
-		."FROM {$dbprefix}questions "
+		.'FROM ' . db_table_name('questions') . ' '
 		."WHERE parent_qid={$rows['qid']} "
 		."AND language='".GetBaseLanguageFromSurveyID($surveyid)."' "
 		."ORDER BY question_order";
@@ -572,7 +575,7 @@ function getPossibleAnswersForQid($rows) {
 	elseif ($rows['type'] == "R") //Answer Ranking
 	{
 		$aquery="SELECT * "
-		."FROM {$dbprefix}answers "
+		.'FROM ' . db_table_name('answers') . ' '
 		."WHERE qid={$rows['qid']} "
 		."AND ".db_table_name('answers').".language='".GetBaseLanguageFromSurveyID($surveyid)."' "
 		."AND scale_id=0 "
@@ -605,9 +608,9 @@ function getPossibleAnswersForQid($rows) {
 		$shortquestion=$rows['title'].":$shortanswer ".strip_tags($rows['question']);
 		$cquestions[]=array($shortquestion, $rows['qid'], $rows['type'], $rows['sid'].$X.$rows['gid'].$X.$rows['qid']);
 		$aquery="SELECT * "
-		."FROM {$dbprefix}questions "
+		.'FROM ' . db_table_name('questions') . ' '
 		."WHERE parent_qid={$rows['qid']} "
-		."AND language='".GetBaseLanguageFromSurveyID($surveyid)."' "
+		."AND language='".GetBaseLanguageFromSurveyID($rows['sid'])."' "
 		."ORDER BY question_order";
 		$aresult=db_execute_assoc($aquery) or safe_die ("Couldn't get answers to this question<br />$aquery<br />".$connect->ErrorMsg());
 
