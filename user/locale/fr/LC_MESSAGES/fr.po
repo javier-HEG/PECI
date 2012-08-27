@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: LimeSurvey French language file\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2012-08-23 22:19+0100\n"
-"PO-Revision-Date: 2012-08-23 22:19+0100\n"
+"POT-Creation-Date: 2012-08-27 11:30+0100\n"
+"PO-Revision-Date: 2012-08-27 11:30+0100\n"
 "Last-Translator: Javier Belmonte <javier.belmonte@hesge.ch>\n"
 "Language-Team: Sébastien GAUGRY <_>\n"
 "MIME-Version: 1.0\n"
@@ -11594,23 +11594,23 @@ msgstr "Créer un nouvel utilisateur"
 msgid "PECI: Back to login form"
 msgstr "Retour à la page de login"
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:646
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:648
 msgid "PECI: Home"
 msgstr "Principal"
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:649
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:651
 msgid "PECI: Theory"
 msgstr "Théorie"
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:652
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:654
 msgid "PECI: Create your evaluation"
 msgstr "Créer une évaluation"
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:657
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:659
 msgid "PECI: Research project"
 msgstr "Projet de recherche"
 
-#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:660
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/user.php:662
 msgid "PECI: Contact"
 msgstr "Contact"
 
@@ -11622,6 +11622,18 @@ msgstr "Votre questionnaire restera active jusqu'au %s. Vous pouvez aussi le dé
 #: /Applications/XAMPP/xamppfiles/htdocs/usability/user/states/export_results.php:97
 msgid "PECI: Stop survey warning"
 msgstr "Voulez-vous vraiment désactiver le questionnaire? Une fois désactivé il ne pourra plus être re-activé."
+
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/states/modify_survey.php:43
+msgid "PECI: equals"
+msgstr "est égal à"
+
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/states/modify_survey.php:205
+msgid "PECI: Triggered if"
+msgstr "Question affichée si la réponse à"
+
+#: /Applications/XAMPP/xamppfiles/htdocs/usability/user/states/modify_survey.php:286
+msgid "PECI: Edit condition"
+msgstr "Modifier la condition"
 
 #: /Applications/XAMPP/xamppfiles/htdocs/usability/user/states/select_questions.php:31
 msgid "PECI: Sure to import?"
@@ -11639,6 +11651,13 @@ msgstr "Zone de texte long"
 #: /Applications/XAMPP/xamppfiles/htdocs/usability/user/states/select_questions.php:248
 msgid "PECI: Import and continue"
 msgstr ""
+
+#~ msgid "Delete condition"
+#~ msgstr "Effacer la condition"
+
+#, fuzzy
+#~ msgid "PECI: Add condition"
+#~ msgstr "Ajouter une condition"
 
 #~ msgid "PECI: The opening/creating survey instructions"
 #~ msgstr "Instructions pour ouvrir ou créer des questionnaires."
@@ -12233,9 +12252,6 @@ msgstr ""
 
 #~ msgid "Condition"
 #~ msgstr "Condition"
-
-#~ msgid "Delete condition"
-#~ msgstr "Effacer la condition"
 
 #~ msgid "Edit extended condition"
 #~ msgstr "Éditer la condition étendue"

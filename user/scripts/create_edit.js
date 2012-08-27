@@ -77,3 +77,40 @@ function submitFormAsParent(form) {
 	
 	parent.submitAsParent(jsonObject);
 }
+
+/**
+ * Takes a form name, builds the JSON data object needed to
+ * submit the action and submits it from the parent.
+ * @param form
+ */
+function submitConditionFormAsParent(form) {
+	var elements = form.elements;
+	
+	var editTargetTab = '';
+	for (var i = 0; i < elements.length; i++) {
+		if (elements[i].name == 'editTargetTab')
+			editTargetTab = elements[i].value;
+	}
+	
+	var jsonString = '';
+	
+	if (editTargetTab != '#CANSWERSTAB') {
+		for (var i = 0; i < elements.length; i++) {
+			if (elements[i].type != 'radio' && elements[i].type != 'button') {
+				if (elements[i].name != 'canswers[]') {
+					jsonString += '"' + elements[i].name + '": ' + '"' + elements[i].value + '", ';
+				}
+			}
+		}
+	} else {
+		for (var i = 0; i < elements.length; i++) {
+			if (elements[i].type != 'radio' && elements[i].type != 'button') {
+				jsonString += '"' + elements[i].name + '": ' + '"' + elements[i].value + '", ';
+			}
+		}
+	}
+	
+	var jsonObject = eval('({' + jsonString + '})');
+	
+	parent.submitAsParent(jsonObject);
+}

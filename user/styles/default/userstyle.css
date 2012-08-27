@@ -448,10 +448,23 @@ div.peciStepContainer {
 }
 
 .peciQuestion .questionTitle {
-	font-size: small;
-	margin: 4px;
+	font-size: medium;
+	margin: 12px 0px 6px 0px;
+}
+
+.peciQuestion .questionCondition {
+	border: 1px solid lightgray;
+    border-radius: 6px;
+    font-size: small;
+    font-style: italic;
+    margin: 0 12px 6px;
+    padding: 2px 8px 4px;
 }
 
 .peciQuestion .questionHeader {
 	font-style: italic;
+}
+
+.condition-tbl-left {
+	width: 20%;
 }

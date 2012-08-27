@@ -485,7 +485,9 @@ if (isset($_SESSION['loginID']))
 
 
     // The user menu bar
-    $adminoutput .= showUserMenu();
+    if (function_exists('showUserMenu')) {
+    	$adminoutput .= showUserMenu();
+    }
 
     if (isset($databaseoutput))  {$adminoutput.= $databaseoutput;}
     if (isset($templatesoutput)) {$adminoutput.= $templatesoutput;}

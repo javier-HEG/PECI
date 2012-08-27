@@ -34,6 +34,20 @@ if (!$thissurvey['language']) {
 	$language = getLanguageNameFromCode($thissurvey['language'], false);
 }
 
+// table used for conditions
+// this array will be used soon,
+// to explain wich conditions is used to evaluate the question
+$method = array(
+	"<"  => $clang->gT("Less than"),
+	"<=" => $clang->gT("Less than or equal to"),
+	"==" => $clang->gT("PECI: equals"),
+	"!=" => $clang->gT("Not equal to"),
+	">=" => $clang->gT("Greater than or equal to"),
+	">"  => $clang->gT("Greater than"),
+	"RX" => $clang->gT("Regular expression")
+);
+
+
 $surveysummary .= '<script type="text/javascript">
 		disablePeciSteps(["selectQuestionPeciStep", "analyzeDataPeciStep"]);
 		setCurrentPeciStep("modifySurveyPeciStep");
@@ -137,6 +151,115 @@ if ($gidresult->RecordCount() > 0) {
 				$_SESSION['dateformats'] = getDateFormatData($thissurvey['surveyls_dateformat']);
 				list($plus_qanda, $plus_inputnames)=retrieveAnswers($ia);
 
+				// Check if the question has a condition and generate a short description
+				$conditionExist = false;
+				$shortconditionsoutput = '';
+				
+				$scenarioquery = "SELECT DISTINCT {$dbprefix}conditions.scenario "
+					."FROM {$dbprefix}conditions "
+					."WHERE {$dbprefix}conditions.qid = {$qrows['qid']} "
+				    ."ORDER BY {$dbprefix}conditions.scenario";
+				$scenarioresult = db_execute_assoc($scenarioquery) or safe_die ("Couldn't get other (scenario) conditions for question $qid<br />$query<br />".$connect->Error);
+				$scenariocount = $scenarioresult->RecordCount();
+				
+				if ($scenariocount > 0) {
+				    $scenarionr = $scenarioresult->FetchRow();
+
+				    // Get conditions in scenario
+				    $query = "SELECT {$dbprefix}conditions.cid, "
+					    ."{$dbprefix}conditions.scenario, "
+					    ."{$dbprefix}conditions.cqid, "
+					    ."{$dbprefix}conditions.cfieldname, "
+					    ."{$dbprefix}conditions.method, "
+					    ."{$dbprefix}conditions.value, "
+					    ."{$dbprefix}questions.type "
+					    ."FROM {$dbprefix}conditions, "
+					    ."{$dbprefix}questions, "
+					    ."{$dbprefix}groups "
+					    ."WHERE {$dbprefix}conditions.cqid={$dbprefix}questions.qid "
+					    ."AND {$dbprefix}questions.gid={$dbprefix}groups.gid "
+					    ."AND {$dbprefix}questions.parent_qid=0 "
+					    ."AND {$dbprefix}questions.language='" . $thissurvey['language'] . "' "
+					    ."AND {$dbprefix}groups.language='". $thissurvey['language'] . "' "
+					    ."AND {$dbprefix}conditions.qid={$qrows['qid']} "
+					    ."AND {$dbprefix}conditions.scenario={$scenarionr['scenario']}\n"
+					    ."AND {$dbprefix}conditions.cfieldname NOT LIKE '{%' \n" // avoid catching SRCtokenAttr conditions
+					    ."ORDER BY {$dbprefix}groups.group_order,{$dbprefix}questions.question_order";
+				    $result = db_execute_assoc($query) or safe_die ("Couldn't get other conditions for question $qid<br />$query<br />".$connect->ErrorMsg());
+				    $conditionscount = $result->RecordCount();
+
+				    if ($conditionscount > 0) {
+				    	// In PECI we care only for the first condition
+					    $conditionExist = true;
+			            $rows = $result->FetchRow();
+				    	
+		            	$leftOperandType = 'unknown';
+	            		$leftOperandType = 'prevquestion';
+	            		
+	            		// get condition-questions text
+	            		$cqquery = 'SELECT * FROM ' . db_table_name('questions')
+	            			. " WHERE qid={$rows['cqid']} AND language='{$thissurvey['language']}'";
+	            		$cqresult = db_execute_assoc($cqquery);
+	            		$cqrows = $cqresult->FetchRow();
+	            		
+	            		$shortconditionsoutput .= $clang->gT('PECI: Triggered if') . "\t\"{$cqrows['question']}\"";
+
+	            		$shortconditionsoutput .= "\t" . $method[$rows['method']];
+
+		            	// let's read the condition's right operand
+		            	// determine its type and display it
+		            	$rightOperandType = 'unknown';
+		            	
+		            	if ($rows['method'] == 'RX') {
+		            		$rightOperandType = 'regexp';
+		            		$shortconditionsoutput .= "\t\"" . html_escape($rows['value'])."\"\n";
+		            	} elseif (preg_match('/^@[0-9]+X[0-9]+X([^@]*)@$/', $rows['value'], $matchedSGQA) > 0) {
+		            		// Another questions answer
+		            		$aqquery = 'SELECT * FROM ' . db_table_name('questions')
+		            			. " WHERE qid={$matchedSGQA[1]} AND language='{$thissurvey['language']}'";
+		            		$aqresult = db_execute_assoc($aqquery);
+		            		
+		            		$matchedSGQAText = $clang->gT("Not found");
+		            		if ($aqrows = $aqresult->FetchRow()) {
+		            			$matchedSGQAText = $aqrows['question'];
+		            			$rightOperandType = 'prevQsgqa';
+		            		}
+		            		
+		            		$shortconditionsoutput .= "\t\"" . html_escape($matchedSGQAText)."\"\n";
+		            	} elseif (isset($canswers)) {
+		            		foreach ($canswers as $can) {
+		            			if ($can[0] == $rows['cfieldname'] && $can[1] == $rows['value']) {
+		            				$shortconditionsoutput .= "\t $can[2]";
+		            				$rightOperandType = 'predefinedAnsw';
+		            			}
+		            		}
+		            	}
+		            	
+		            	// if $rightOperandType is still unkown then it is a simple constant
+		            	if ($rightOperandType == 'unknown') {
+		            		$rightOperandType = 'constantVal';
+		            		if ($rows['value'] == ' ' || $rows['value'] == '') {
+		            			$shortconditionsoutput .= "\t\"" . $clang->gT("No answer")."\"\n";
+		            		} else {
+		            			$shortconditionsoutput .= "\t\"" . html_escape($rows['value'])."\"\n";
+		            		}
+		            	}
+		            	
+		            	// This is used when Editting a condition
+		            	if ($rightOperandType == 'predefinedAnsw') {
+		            		$rightOperandType = "EDITcanswers[]=" . html_escape($rows['value']);
+		            	} elseif ($rightOperandType == 'prevQsgqa') {
+		            		$rightOperandType = "EDITprevQuestionSGQA=" . html_escape($rows['value']);
+		            	} elseif ($rightOperandType == 'tokenAttr') {
+		            		$rightOperandType = "EDITtokenAttr=" . html_escape($rows['value']);
+		            	} elseif ($rightOperandType == 'regexp') {
+		            		$rightOperandType = "EDITConditionRegexp=" . html_escape($rows['value']);
+		            	} else {
+		            		$rightOperandType = "EDITConditionConst=" . html_escape($rows['value']);
+		            	}
+				    }
+				}				
+				
 				// Check if the question has subquestions or answer options
 				$subquestions = '';
 				$answeroptions = '';
@@ -154,21 +277,29 @@ if ($gidresult->RecordCount() > 0) {
 				$deleteQuestionData = '{action:\'delquestion\', sid:\'' . $surveyid . '\', gid: \'' . $gv['gid'] . '\', qid: \'' . $qrows['qid'] . '\', checksessionbypost:\'' . $_SESSION['checksessionpost'] . '\'}';
 
 				// Buttons
-				$surveysummary .= "<div class=\"peciQuestion\">
-						<div class=\"questionHeader\">Question $questionIndex
-						<div class=\"peciActionButtons\" style=\"float: right;\">"
-					. "<button onClick=\"javascript:openPeciPopup('editquestion', 'surveyid=$surveyid&gid={$gv['gid']}&qid={$qrows['qid']}');\">{$clang->gT('Edit')}</button>&nbsp;"
+				$getParams = "subaction=editconditionsform&sid=$surveyid&gid={$gv['gid']}&qid={$qrows['qid']}&checksessionbypost={$_SESSION['checksessionpost']}";
+				$conditionButtonCode = "<button onClick=\"javascript:openPeciPopup('conditions', '$getParams');\">" . $clang->gT('Add condition') . "</button>&nbsp;\n";
+				if ($conditionExist) {
+					$getParams = "subaction=editthiscondition&cid={$rows['cid']}&scenario={$scenarionr['scenario']}&method={$rows['method']}&"
+						. "sid=$surveyid&gid={$gv['gid']}&qid={$qrows['qid']}&cquestions={$rows['cfieldname']}&$rightOperandType&checksessionbypost={$_SESSION['checksessionpost']}";
+					
+					$conditionButtonCode = "<button onClick=\"javascript:openPeciPopup('conditions', '$getParams');\">" . $clang->gT('PECI: Edit condition') . "</button>&nbsp;\n";
+				}
+				
+				$surveysummary .= "<div class=\"peciQuestion\">\n"
+					. "<div class=\"questionHeader\">Question $questionIndex\n"
+					. "<div class=\"peciActionButtons\" style=\"float: right;\">\n"
+					. "<button onClick=\"javascript:openPeciPopup('editquestion', 'surveyid=$surveyid&gid={$gv['gid']}&qid={$qrows['qid']}');\">{$clang->gT('Edit')}</button>&nbsp;\n"
 					. $subquestions . $answeroptions
-						<button disabled=\"true\">{$clang->gT('Add condition')}</button>&nbsp;"
 // 					. "<button disabled=\"true\">{$clang->gT('PECI: Move')}</button>\n"
+					. ($conditionExist || $questionIndex > 1 ? $conditionButtonCode : '')
 					. "<button onclick=\"if (confirm('"
 					. $clang->gT("Deleting this question will also delete any answer options and subquestions it includes. Are you sure you want to continue?","js")
-					. "')) {submitAsParent($deleteQuestionData); }\">{$clang->gT('Delete')}</button>
-						</div>
-						</div>
-						<h1 class=\"questionTitle\">{$qrows['question']}</h1>
-						{$plus_qanda[1]}
-						</div>";
+					. "')) {submitAsParent($deleteQuestionData); }\">{$clang->gT('Delete')}</button>\n"
+					. "</div></div>\n"
+					. "<h1 class=\"questionTitle\">{$qrows['question']}</h1>\n"
+					. ($conditionExist ? "<p class=\"questionCondition\"><img src='$imageurl/user/silk/error.png' style='vertical-align: bottom; margin-right: 6px;' />$shortconditionsoutput</p>\n" : '')
+					. $plus_qanda[1] . "</div>\n";
 
 				$questionIndex++;
 			}

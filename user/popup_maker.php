@@ -51,6 +51,9 @@ switch ($action) {
 		$surveyid = $_GET['sid'];
 		include('popups/activate.php');
 		break;
+	case 'conditions':
+		include('popups/editconditions.php');
+		break;
 }
 
 $scriptsToLoad = '';
@@ -93,12 +96,30 @@ foreach ($js_admin_includes as $jsinclude) {
 <body>
 
 <?php 
-	if (isset($newgroupoutput)) print $newgroupoutput;
-	if (isset($editgroup)) print $editgroup;
-	if (isset($editquestion)) print $editquestion;
-	if (isset($editsurvey)) print $editsurvey;
-	if (isset($vasummary)) print $vasummary;
-	if (isset($activateoutput)) print $activateoutput;
+	if (isset($newgroupoutput)) {
+		print $newgroupoutput;
+	}
+	if (isset($editgroup)) {
+		print $editgroup;
+	}
+	if (isset($editquestion)) {
+		print $editquestion;
+	}
+	if (isset($editsurvey)) {
+		print $editsurvey;
+	}
+	if (isset($vasummary)) {
+		print $vasummary;
+	}
+	if (isset($activateoutput)) {
+		print $activateoutput;
+	}
+	if (isset($conditionsoutput_main_content)) {
+// 		print $conditionsoutput_header;
+// 		print $conditionsoutput_menubar;
+		print $conditionsoutput_action_error;
+		print $conditionsoutput_main_content;
+	}
 ?>
 
 </body>
