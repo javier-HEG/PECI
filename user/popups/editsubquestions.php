@@ -154,7 +154,7 @@ for ($scale_id = 0; $scale_id < $scalecount; $scale_id++) {
 			." />";
 
 		$vasummary .= "</td><td>\n"
-			. "<input type='text' size='100' id='answer_{$row['language']}_{$row['qid']}_{$row['scale_id']}' "
+			. "<input type='text' size='75' id='answer_{$row['language']}_{$row['qid']}_{$row['scale_id']}' "
 			. "name='answer_{$row['language']}_{$row['qid']}_{$row['scale_id']}' value=\"{$row['question']}\" "
 // 			. "onkeypress=\" if(event.keyCode==13) {if (event && event.preventDefault) event.preventDefault(); document.getElementById('saveallbtn_$baselang').click(); return false;}\" "
 			. "/>\n</td>\n"

@@ -198,7 +198,7 @@ for ($scale_id = 0; $scale_id < $scalecount; $scale_id++) {
 		}
 
 		$vasummary .= "</td><td>\n"
-			."<input type='text' class='answer' id='answer_{$row['language']}_{$row['sortorder']}_{$scale_id}' name='answer_{$row['language']}_{$row['sortorder']}_{$scale_id}' size='100' value=\"{$row['answer']}\" />\n";
+			."<input type='text' class='answer' id='answer_{$row['language']}_{$row['sortorder']}_{$scale_id}' name='answer_{$row['language']}_{$row['sortorder']}_{$scale_id}' size='75' value=\"{$row['answer']}\" />\n";
 // 		. getEditor("editanswer","answer_".$row['language']."_{$row['sortorder']}_{$scale_id}", "[".$clang->gT("Answer:", "js")."](".$row['language'].")",$surveyid,$gid,$qid,'editanswer');
 
 		// Deactivate delete button for active surveys

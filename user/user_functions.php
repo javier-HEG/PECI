@@ -34,11 +34,11 @@ function getUserHeader($meta=false) {
  * for this menu.
  */
 function getProjectSelectorMenu($openSid = '') {
-	global $imageurl;
+	global $imageurl, $clang;
 	
 	$output = '<div id="projectMenu">';
-	$output .= '<span id="menuOptionOpen" class="menuOption">' . getUserSurveySelect($openSid) . " Open <img src=\"$imageurl/user/silk/page_go.png\" title=\"Open\" /></span>";
-	$output .= "<span id=\"menuOptionCreate\" class=\"menuOption\">Create new <img src=\"$imageurl/user/silk/page_add.png\" title=\"Create new survey\" /></span>";
+	$output .= '<span id="menuOptionOpen" class="menuOption">' . getUserSurveySelect($openSid)  . $clang->gT("PECI: Open") . "<img src=\"$imageurl/user/silk/page_go.png\" title=\"Open\" /></span>";
+	$output .= "<span id=\"menuOptionCreate\" class=\"menuOption\">" . $clang->gT("PECI: Create new survey") . "<img src=\"$imageurl/user/silk/page_add.png\" title=\"Create new survey\" /></span>";
 	
 	// Add hover style
 	$output .= "<script>
@@ -80,6 +80,7 @@ function getProjectSelectorMenu($openSid = '') {
  * <strong>NB.</strong> Code based on <code>admin/surveylist.php</code>.
  */
 function getUserSurveySelect($openSid = '') {
+	global $clang;
 	$query = " SELECT a.*, c.*, u.users_name FROM " . db_table_name('surveys')." as a "
 		. " INNER JOIN " . db_table_name('surveys_languagesettings')
 			. " as c ON ( surveyls_survey_id = a.sid AND surveyls_language = a.language )"
@@ -91,13 +92,13 @@ function getUserSurveySelect($openSid = '') {
 	
 	$result = db_execute_assoc($query) or safe_die($connect->ErrorMsg());
 	
-	$output = '<select name="menu1" disabled="true"><option selected="true">(No surveys yet)</option></select>';
+	$output = '<select name="menu1" disabled="true"><option selected="true">' . $clang->gT("No surveys yet") . '</option></select>';
 	
 	if($result->RecordCount() > 0) {
 		$output = '<select id="userMenuSurveySelect">';
 		
 		if ($openSid == '') {
-			$output .= "<option value=\"none\" selected=\"true\">Choose a survey ...</option>";
+			$output .= "<option value=\"none\" selected=\"true\">" . $clang->gT("PECI: Choose a survey ...") . "</option>";
 		}
 		
 		while($rows = $result->FetchRow()) {

@@ -58,21 +58,24 @@ include("start_survey.php");
 
 // The "Modify survey window"
 $surveysummary .= "<div id=\"modifySurveyPeciStepContent\" class=\"peciStepContainer\">
-	<button id=\"showDetailsBtn\" style=\"float: right; margin: 4px 8px;\"
-		onclick=\"$('#surveyDetails').show(); $('#showDetailsBtn').hide();\">(show survey details)</button>
-	<h1 class=\"peciStep\">" . $clang->gT('PECI: Modify the questionnaire') . "</h1>
+<div class=\"selectQuestion\">
+
+	<h3>" . $clang->gT('PECI: Modify the questionnaire') . "</h3><p>" . $clang->gT('PECI: Dans cette étape, vous pouvez modifier les questions que vous avez choisies dans l\'étape précedente. Vous pouvez également changer les types des réponses ainsi qu\'ajouter vos propres questions.') . "</p></div>
+		<button id=\"showDetailsBtn\" style=\"float: right; margin: 4px 8px;\"
+		onclick=\"$('#surveyDetails').show(); $('#showDetailsBtn').hide();\">" . $clang->gT("PECI: show survey details") . "</button>
 	<div id=\"surveyDetails\">
-		<h2>Survey details
+	
+		<h2>" . $clang->gT("PECI: Survey details") . "
 			<div class=\"peciActionButtons\" style=\"float: right; margin-right: -6px;\">
-				<button onClick=\"javascript:openPeciPopup('editsurveylocalesettings', 'surveyid=$surveyid');\">Edit</button>
-				<button onClick=\"javascript:$('#surveyDetails').hide();  $('#showDetailsBtn').show();\">Hide</button>
+				<button onClick=\"javascript:openPeciPopup('editsurveylocalesettings', 'surveyid=$surveyid');\">" . $clang->gT("Edit") . "</button>
+				<button onClick=\"javascript:$('#surveyDetails').hide();  $('#showDetailsBtn').show();\">" . $clang->gT("PECI: Hide") . "</button>
 			</div>
 		</h2>
 		<p><u>{$clang->gT("Title")}:</u> {$thissurvey['surveyls_title']} <br />
 		<u>{$clang->gT("Base language:")}</u> $language <br />
 		<u>{$clang->gT("Description:")}</u> {$thissurvey['surveyls_description']} <br />
-		<u>{$clang->gT("Welcome text:")}</u> {$thissurvey['surveyls_welcometext']} <br />
-		<u>{$clang->gT("End text:")}</u> {$thissurvey['surveyls_endtext']}</p>
+		<u>{$clang->gT("Welcome message:")}</u> {$thissurvey['surveyls_welcometext']} <br />
+		<u>{$clang->gT("End message:")}</u> {$thissurvey['surveyls_endtext']}</p>
 	</div>";
 
 // Hide the survey details
@@ -82,7 +85,8 @@ $surveysummary .= '<script type="text/javascript">$("#surveyDetails").hide();</s
 $surveysummary .= "<div class=\"peciActionButtons\" style=\"margin-left: 8px;\">
 		<button onClick=\"javascript:openPeciPopup('addgroup', 'surveyid=$surveyid');\">{$clang->gT('Add Group')}</button>
 		<!--button disabled=\"true\">Add a new question</button-->
-	</div>";
+	</div>
+	";
 
 // Find all question groups in this survey
 $gidquery = "SELECT gid, group_name FROM " . db_table_name('groups')
@@ -112,8 +116,8 @@ if ($gidresult->RecordCount() > 0) {
 
 		// Control buttons
 		$surveysummary .= "<div class=\"peciActionButtons\" style=\"float: right; display: inline; margin: 0px -3px;\">
-						<button style=\"width: 2em;\" id=\"groupCollapser{$gv['gid']}\">-</button>
-						<button style=\"width: 2em; display: none;\" id=\"groupExpander{$gv['gid']}\">+</button>
+						<button style=\"width: 2em;\" title=\"". $clang->gT("Hide")."\" id=\"groupCollapser{$gv['gid']}\">-</button>
+						<button style=\"width: 2em; display: none;\" title=\"". $clang->gT("Show")."\"  id=\"groupExpander{$gv['gid']}\">+</button>
 					</div>";
 
 		$deleteGroupData = '{action:\'delgroup\', sid:\'' . $surveyid . '\', gid: \'' . $gv['gid'] . '\', checksessionbypost:\'' . $_SESSION['checksessionpost'] . '\'}';
@@ -292,7 +296,7 @@ if ($gidresult->RecordCount() > 0) {
 				}
 				
 				$surveysummary .= "<div class=\"peciQuestion\">\n"
-					. "<div class=\"questionHeader\">Question $questionIndex\n"
+					. "<div class=\"questionHeader\">" . $clang->gT("Question") . " $questionIndex\n"
 					. "<div class=\"peciActionButtons\" style=\"float: right;\">\n"
 					. "<button onClick=\"javascript:openPeciPopup('editquestion', 'surveyid=$surveyid&gid={$gv['gid']}&qid={$qrows['qid']}');\">{$clang->gT('Edit')}</button>&nbsp;\n"
 					. $subquestions . $answeroptions
@@ -333,7 +337,16 @@ if ($gidresult->RecordCount() > 0) {
 		$surveysummary .= "</div>\n";
 	}
 }
-
+// Create buttons for adding new groups and questions
+$surveysummary .= "<div class=\"peciActionButtons\" style=\"margin-left: 8px;\">
+		<button onClick=\"javascript:openPeciPopup('addgroup', 'surveyid=$surveyid');\">{$clang->gT('Add Group')}</button>
+		<!--button disabled=\"true\">Add a new question</button-->
+	</div>
+		<br/>
+	<input type=\"button\" onClick=\"setCurrentPeciStep('startSurveyPeciStep');\" class=\"buttonPeci\" value='"
+	. $clang->gT('PECI: Start survey') . "' />
+	";
+	
 $surveysummary .= "</div>\n";
 
 /**

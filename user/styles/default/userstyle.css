@@ -16,6 +16,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+ 
+ 
+ /* Color scheme: Red: #cc0000, lightgray: #eaecef, #7f7f7f, darkgrey: #333333 */
 
 /***************************/
 /* Overriding admin styles */
@@ -24,13 +27,21 @@ body {
     background-color: white;
 }
 
+#container {
+	width: 960px;
+	margin-left: auto;
+	margin-right: auto;
+	clear: both;
+	overflow: hidden;
+	}
+
 a:hover {
-    color: #819D26;
+    color: black;
     text-decoration: underline;
 }
 
 a, a:link, a:visited {
-    color: royalblue;
+    color: #cc0000;
     text-decoration: none;
 }
 
@@ -39,7 +50,7 @@ a, a:link, a:visited {
 }
 
 .maintitle {
-	color: royalblue;
+	color: #cc0000;
 	text-align: center;
 	background: white;
 	border: none;
@@ -47,19 +58,20 @@ a, a:link, a:visited {
 	margin: 6px 12px 32px;
 	text-align: left;
 	width: auto;
+	float:left;
 }
 
 #mainTitleMenu {
 	float: right;
-	position: absolute;
-	right: 14px;
-	top: 6px;
+	position: relative;
+	margin-top: 6px;
+	display: inline;
 }
 
 div.menubar {
     background-color: transparent;
     clear: none;
-    margin: 0px;
+    margin-right: 12px;
     min-height: inherit;
     padding: 0px;
     width: auto;
@@ -67,7 +79,7 @@ div.menubar {
 
 .limebutton  {
 	background-image: none;
-	background-color: lightgray;
+	background-color: #eaecef;
 	border: 0px;
 	padding: 2px;
 	margin: 4px;
@@ -91,7 +103,7 @@ div.menubar {
 
 div.messagebox {
     background-color: white;
-    border: 1px solid lightgray;
+    border: 1px solid #eaecef;
     margin: 10px auto;
     padding: 0px;
     text-align: center;
@@ -100,7 +112,7 @@ div.messagebox {
 
 div.messagebox .header {
 	background-image: none;
-	background-color: lightgray;
+	background-color: #eaecef;
 	color: black;
 	border: none;
 	padding: 10px;
@@ -166,11 +178,11 @@ table.question th {
 
 #ui-datepicker-div .ui-widget-header {
 	border: none;
-	background: none #efefef;
+	background: none #eaecef;
 }
 
 #ui-datepicker-div .ui-widget-content {
-	background: none whitesmoke;
+	background: none #dcdcdc;
 }
 
 #ui-datepicker-div input,
@@ -182,13 +194,13 @@ table.question th {
 
 table.ui-datepicker-calendar .ui-state-default {
 	color: black;
-	background: none lightgray;
+	background: none #eaecef;
 	border-color: gray;
 }
 
 table.ui-datepicker-calendar .ui-state-hover {
 	color: black;
-	background: none whitesmoke;
+	background: none #dcdcdc;
 }
 
 table.ui-datepicker-calendar th {
@@ -207,18 +219,25 @@ table.ui-datepicker-calendar th.ui-datepicker-week-end {
 #usabilityTabNameBar {
 	height: 27px;
 	margin: 12px 12px 0px 24px;
+	font-weight:bold;
+	clear: both;
 }
 
 .usabilityTabName {
 	border: 2px solid darkgray;
 	border-bottom: none;
-	background: lightgray;
+	background: #dcdcdc;
 	padding: 4px;
 	margin-right: 4px;
 	border-radius: 5px 5px 0px 0px;
 	float: left;
 }
 
+.usabilityTabName:hover {
+	font-weight: bold;
+	cursor: pointer;
+	}
+	
 .usabilityTabSelected {
 	border: 2px solid gray;
 	border-bottom: none;
@@ -234,7 +253,7 @@ table.ui-datepicker-calendar th.ui-datepicker-week-end {
 }
 
 .usabilityTabContent {
-	background-color: whitesmoke;
+	background-color: #dcdcdc;
 	margin: 12px;
 	padding: 12px;
 }
@@ -251,7 +270,7 @@ table.ui-datepicker-calendar th.ui-datepicker-week-end {
 .footer {
     text-align: center;
     color: gray;
-    background-color: #efefef;
+    background-color: white;
     margin: 12px;
 }
 
@@ -266,7 +285,7 @@ table.ui-datepicker-calendar th.ui-datepicker-week-end {
 /*********************/
 #loginform, #newuserform {
 	background-color: white;
-	border: 1px solid lightgray;
+	border: 1px solid #eaecef;
 	margin-left: auto;
 	margin-right: auto;
 	margin-bottom: 12px;
@@ -313,7 +332,7 @@ table.ui-datepicker-calendar th.ui-datepicker-week-end {
 }
 
 #projectMenu span.menuOption {
-	background-color: lightgray;
+	background-color: #eaecef;
     border-radius: 3px;
     cursor: pointer;
     margin-right: 4px;
@@ -347,14 +366,14 @@ div.surveyPeciStep {
 }
 
 div.currentPeciStep {
-	background-color: whitesmoke;
+	background-color: #dcdcdc;
 	color: black;
 }
 
 div.disabledPeciStep {
     font-style: italic;
-    border: 1px dashed whitesmoke;
-    background-color: lightgray;
+    border: 1px dashed #dcdcdc;
+    background-color: #eaecef;
     color: gray;
 }
 
@@ -397,7 +416,7 @@ div.peciStepContainer {
 	padding-bottom: 8px;
 	border-radius: 6px;
 	background-color: white;
-	border: 1px solid lightgray;
+	border: 1px solid #eaecef;
 }
 
 #surveyDetails p {
@@ -420,7 +439,7 @@ div.peciStepContainer {
 }
 
 .peciActionButtons .ui-state-hover {
-	background-color: lightgray;
+	background-color: #eaecef;
 }
 
 /********************/
@@ -437,7 +456,7 @@ div.peciStepContainer {
     font-weight: bold;
     padding: 1px 4px;
     margin: 0px;
-	background-color: black;
+	background-color: #cc0000;
 }
 
 .peciQuestion {
@@ -448,12 +467,12 @@ div.peciStepContainer {
 }
 
 .peciQuestion .questionTitle {
-	font-size: medium;
-	margin: 12px 0px 6px 0px;
+	font-size: small;
+	margin: 3px 0px 6px 0px;
 }
 
 .peciQuestion .questionCondition {
-	border: 1px solid lightgray;
+	border: 1px solid #eaecef;
     border-radius: 6px;
     font-size: small;
     font-style: italic;
@@ -468,3 +487,196 @@ div.peciStepContainer {
 .condition-tbl-left {
 	width: 20%;
 }
+
+/*Tooltip for States in PECI when inactive */
+
+.tooltip {
+  
+  color: #000000; 
+  outline: none;
+  text-decoration: none;
+  position: relative;
+}
+a.tooltip {
+	text-decoration:none;
+	color: black;
+	}
+
+a.tooltip:hover {
+	text-decoration:none;
+	cursor: pointer;
+	}
+
+.tooltip span {
+  margin-left: -999em;
+  position: absolute;
+}
+
+.tooltip:hover span {
+  position: absolute;
+  left: 1em;
+  top: 2em;
+  z-index: 99;
+  margin-left: 0;
+  width: 250px;
+}
+
+/*
+.tooltip:hover img {
+  border: 0;
+  margin: -10px 0 0 -55px;
+  float: left;
+  position: absolute;
+}*/
+
+.classic { 
+	padding: 0.8em 1em;
+	background: none repeat scroll 0 0 #FFFFAA;
+	border: 1px solid #FFAD33;
+	}
+		}
+
+* html a:hover { background: transparent; }
+
+.selectQuestion {
+	padding-left:10px;
+	}
+
+.selectQuestion h3 {
+	color: #cc0000;
+	}
+	
+.questionAnswers ul, li {
+	list-style-type: none;
+	}
+	
+.settingentrypeci {
+ /*   float: left;
+    padding-left: 5px;
+    font-size: 13px;
+    text-align: left;
+    clear: right;
+    margin-bottom: 10px;
+    background-color: #F8F8FF;
+	outline: 0 none;*/
+}
+
+.settingentrypeci span {
+	outline: 0 none;
+}
+
+.settingrowpeci {
+    clear: left;
+    margin: 0 auto 20px auto;
+    background-color: #F8F8FF;
+}
+
+font.settingcaptionpeci {
+    vertical-align: top;
+    text-align: right;
+    font-size: 13px;
+    font-weight: 700;
+    color: #1D2D45;
+}
+
+span.settingcaptionpeci {
+    float: left;
+    width: 35%;
+    text-align: right;
+    font-weight: 700;
+    clear: left;
+    margin-bottom: 10px;
+    background-color: #F8F8FF;
+    color: #1D2D45;
+}
+
+#process {
+	font-weight: bold;
+	padding-left: 15px;
+	padding-top: 15px;
+	text-align:center;
+
+	}
+
+#process p {
+	display:inline;
+		font-size: 14px;
+		color: gray;
+	}
+	
+.nonactive {
+	color: gray;
+	}
+	
+#process p.active {
+	color: #cc0000;
+	}
+	
+.arrow {
+	padding: 0 10px;
+	color: grey;
+	}
+
+	/* Buttons */
+.buttonPeci {
+    -moz-box-shadow:inset 1px 1px 3px 1px #f5978e;
+	-webkit-box-shadow:inset 1px 1px 3px 1px #f5978e;
+	box-shadow:inset 1px 1px 3px 1px #f5978e;
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #f24537), color-stop(1, #cc0000) );
+	background:-moz-linear-gradient( center top, #f24537 5%, #cc0000 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f24537', endColorstr='#cc0000');
+	background-color:#f24537;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	border:1px solid #d02718;
+	display:inline-block;
+	color:#ffffff;
+	font-family:arial;
+	font-size:15px;
+	font-weight:bold;
+	padding:6px 10px;
+	text-decoration:none;
+	text-shadow:2px 2px 2px #810e05;
+	float: right;
+	}
+
+/* a.buttonPeci  {
+	color: white;
+	} */
+	
+.buttonPeci:hover {
+	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #cc0000), color-stop(1, #f24537) );
+	background:-moz-linear-gradient( center top, #cc0000 5%, #f24537 100% );
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#cc0000', endColorstr='#f24537');
+	background-color:#cc0000;
+}
+
+.buttonPeci:active {
+	position:relative;
+	top:1px;
+}
+
+#selectQuestionPeciStepContent, #modifySurveyPeciStepContent, #startSurveyPeciStepContent {
+	overflow: hidden; /*For button*/
+	}
+	
+form#personalsettings {
+	width: 560px;
+	margin: 0 auto;
+	}
+	
+#personalsettings label {
+	width: 44%;
+	}
+
+.ui-widget-header {
+    background-image: none;
+	background-color: #cc0000;
+	color: white;
+    border: 1px solid grey;
+	}
+	
+.ui-tabs-nav {
+	background: url("../../../images/ui-bg_inset-hard_100_F8F8FF_1x100.png") repeat-x scroll 50% bottom #F8F8FF;
+	}
