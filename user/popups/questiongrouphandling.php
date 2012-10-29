@@ -72,11 +72,11 @@ if ($action == "editgroup") {
 	$basesettings = array('group_name' => $esrow['group_name'],'description' => $esrow['description'],'group_order' => $esrow['group_order']);
 	
 	$esrow = array_map('htmlspecialchars', $esrow);
-	$tab_content = "<div class='settingrow'><span class='settingcaption'><label for='group_name_$baselang'>".$clang->gT("Title").":</label></span>\n"
-	. "<span class='settingentry'><input type='text' maxlength='100' size='80' name='group_name_$baselang' id='group_name_$baselang' value=\"{$esrow['group_name']}\" />\n"
+	$tab_content = "<div class='settingrowpeci'><span class='settingcaptionpeci'><label for='group_name_$baselang'>".$clang->gT("Title").":</label></span>\n"
+	. "<span class='settingentrypeci'><input type='text' maxlength='100' size='80' name='group_name_$baselang' id='group_name_$baselang' value=\"{$esrow['group_name']}\" />\n"
 	. "\t</span></div>\n"
-	. "<div class='settingrow'><span class='settingcaption'><label for='description_$baselang'>".$clang->gT("Description:")."</label>\n"
-	. "</span><span class='settingentry'><textarea cols='70' rows='8' id='description_$baselang' name='description_$baselang'>{$esrow['description']}</textarea>\n"
+	. "<div class='settingrowpeci'><span class='settingcaptionpeci'><label for='description_$baselang'>".$clang->gT("Description:")."</label>\n"
+	. "</span><span class='settingentrypeci'><textarea cols='70' rows='8' id='description_$baselang' name='description_$baselang'>{$esrow['description']}</textarea>\n"
 	. "\t</span></div><div style='clear:both'></div>";
 	
 	

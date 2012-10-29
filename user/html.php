@@ -91,8 +91,8 @@ else if (isset($surveyid) && $surveyid && $action=='') {
 		// Output starts here...
 		$surveysummary = '<script type="text/javascript">
 				function setCurrentPeciStep(stepId) {
-					$("#surveyPeciStepContainer .surveyPeciStep").removeClass("currentPeciStep");
-					$("#" + stepId).addClass("currentPeciStep");
+					$("#surveyPeciStepContainer .surveyPeciStep").removeClass("active");
+					$("#" + stepId).addClass("active");
 					
 					if ($("#" + stepId + "Content").length > 0) {
 						// hide other peci step container
@@ -109,26 +109,19 @@ else if (isset($surveyid) && $surveyid && $action=='') {
 				}
 			</script>';
 		
-		$surveysummary .= '<div style="background-color: lightgray; width: 100%; margin: -1px 0px; padding-bottom: 6px;">';
+		$surveysummary .= '<div style="background-color: #dcdcdc; width: 100%; margin: -1px 0px; padding-bottom: 6px;">';
 		
 		// Create the default buttons for the peci steps
 		$surveysummary .= '<div id="surveyPeciStepContainer">
-				<div id="evaluatePeciStep" onClick="setCurrentPeciStep(\'evaluatePeciStep\');" class="surveyPeciStep">'
-				. $clang->gT('PECI: About evaluating usefulness') . '</div>
-				<div class="surveyPeciStepArrow" style="background-image: none;">&nbsp;</div>
-				<div class="surveyPeciStepArrow" style="background-image: none;">&nbsp;</div>
-				<div id="selectQuestionPeciStep" onClick="setCurrentPeciStep(\'selectQuestionPeciStep\');" class="surveyPeciStep">'
-				. $clang->gT('PECI: Select questions') . '</div>
-				<div class="surveyPeciStepArrow">&nbsp;</div>
-				<div id="modifySurveyPeciStep" onClick="setCurrentPeciStep(\'modifySurveyPeciStep\');" class="surveyPeciStep">'
-				. $clang->gT('PECI: Modify the questionnaire') . '</div>
-				<div class="surveyPeciStepArrow">&nbsp;</div>
-				<div id="startSurveyPeciStep" onClick="setCurrentPeciStep(\'startSurveyPeciStep\');" class="surveyPeciStep">'
-				. $clang->gT('PECI: Start survey') . '</div>
-				<div class="surveyPeciStepArrow">&nbsp;</div>
-				<div id="analyzeDataPeciStep" onClick="setCurrentPeciStep(\'analyzeDataPeciStep\');" class="surveyPeciStep">'
-				. $clang->gT('PECI: Analyze the data') . '</div>
-			</div>';
+		<div id="process">
+		<p id="selectQuestionPeciStep" onClick="#" class="surveyPeciStep">' . $clang->gT('Peci: 1. Select questions') . '</p>
+		<p class="arrow">&gt;&gt;</p>
+		<p id="modifySurveyPeciStep" onClick="#" class="surveyPeciStep">' . $clang->gT('Peci: 2. Modify selected questions') . '</p>
+		<p class="arrow">&gt;&gt;</p>
+		<p id="startSurveyPeciStep" onClick="#" class="surveyPeciStep">' . $clang->gT('Peci: 3. Conduct survey') . '</p>
+</div></div>
+
+		<br/>';
 		
 		$surveysummary .= "<div id=\"evaluatePeciStepContent\" class=\"peciStepContainer\" >
 				<p>About using surveys to evaluate usability</p>

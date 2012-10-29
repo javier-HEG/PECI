@@ -68,14 +68,14 @@ if ($action == "addquestion") {
 
 	$editquestion .= "<input type='hidden' id='title' name='title' value=\"{$eqrow['title']}\" />\n";
 
-	$editquestion .=  "\t<div class='settingrow'><span class='settingcaption'>".$clang->gT("Question:")."</span>\n"
-		. "<span class='settingentry'><textarea cols='50' rows='4' name='question_{$eqrow['language']}'>{$eqrow['question']}</textarea>\n"
+	$editquestion .=  "\t<div class='settingrowpeci'><span class='settingcaptionpeci'>".$clang->gT("Question:")."</span>\n"
+		. "<span class='settingentrypeci'><textarea cols='50' rows='4' name='question_{$eqrow['language']}'>{$eqrow['question']}</textarea>\n"
 		. "\t</span></div>\n"
-		. "\t<div class='settingrow'><span class='settingcaption'>".$clang->gT("Help:")."</span>\n"
-		. "<span class='settingentry'><textarea cols='50' rows='4' name='help_{$eqrow['language']}'>{$eqrow['help']}</textarea>\n"
+		. "\t<div class='settingrowpeci'><span class='settingcaptionpeci'>".$clang->gT("Help:")."</span>\n"
+		. "<span class='settingentrypeci'><textarea cols='50' rows='4' name='help_{$eqrow['language']}'>{$eqrow['help']}</textarea>\n"
 		. "\t</span></div>\n"
-		. "\t<div class='settingrow'><span class='settingcaption'>&nbsp;</span>\n"
-		. "<span class='settingentry'>&nbsp;\n"
+		. "\t<div class='settingrowpeci'><span class='settingcaptionpeci'>&nbsp;</span>\n"
+		. "<span class='settingentrypeci'>&nbsp;\n"
 		. "\t</span></div>\n";
 	$editquestion .= '&nbsp;</div>';
 
@@ -222,14 +222,14 @@ if ($action == "editquestion") {
 	$editquestion .= "<input type='hidden' id='title' name='title' value=\"{$eqrow['title']}\" />\n";
 
 	// Question and help
-	$editquestion .=  "\t<div class='settingrow'><span class='settingcaption'>".$clang->gT("Question:")."</span>\n"
-	. "<span class='settingentry'><textarea cols='50' rows='4' name='question_{$eqrow['language']}'>{$eqrow['question']}</textarea>\n"
+	$editquestion .=  "\t<div class='settingrowpeci'><span class='settingcaptionpeci'>".$clang->gT("Question:")."</span>\n"
+	. "<span class='settingentrypeci'><textarea cols='50' rows='4' name='question_{$eqrow['language']}'>{$eqrow['question']}</textarea>\n"
 	. "\t</span></div>\n"
-	. "\t<div class='settingrow'><span class='settingcaption'>".$clang->gT("Help:")."</span>\n"
-	. "<span class='settingentry'><textarea cols='50' rows='4' name='help_{$eqrow['language']}'>{$eqrow['help']}</textarea>\n"
+	. "\t<div class='settingrowpeci'><span class='settingcaptionpeci'>".$clang->gT("Help:")."</span>\n"
+	. "<span class='settingentrypeci'><textarea cols='50' rows='4' name='help_{$eqrow['language']}'>{$eqrow['help']}</textarea>\n"
 	. "\t</span></div>\n"
-	. "\t<div class='settingrow'><span class='settingcaption'>&nbsp;</span>\n"
-	. "<span class='settingentry'>&nbsp;\n"
+	. "\t<div class='settingrowpeci'><span class='settingcaptionpeci'>&nbsp;</span>\n"
+	. "<span class='settingentrypeci'>&nbsp;\n"
 	. "\t</span></div>\n";
 	$editquestion .= '&nbsp;</div>';
 
