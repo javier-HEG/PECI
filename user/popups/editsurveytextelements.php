@@ -39,13 +39,13 @@ if(bHasSurveyPermission($surveyid,'surveylocale','read')) {
 	. "<li><label for=''>".$clang->gT("Survey title").":</label>\n"
 	. "<input type='text' size='80' name='short_title_".$esrow['surveyls_language']."' value=\"{$esrow['surveyls_title']}\" /></li>\n"
 	. "<li><label for=''>".$clang->gT("Description:")."</label>\n"
-	. "<textarea cols='80' rows='8' name='description_".$esrow['surveyls_language']."'>{$esrow['surveyls_description']}</textarea>\n"
+	. "<textarea cols='80' rows='15' name='description_".$esrow['surveyls_language']."'>{$esrow['surveyls_description']}</textarea>\n"
 	. "</li>\n"
 	. "<li><label for=''>".$clang->gT("Welcome message:")."</label>\n"
-	. "<textarea cols='80' rows='8' name='welcome_".$esrow['surveyls_language']."'>{$esrow['surveyls_welcometext']}</textarea>\n"
+	. "<textarea cols='80' rows='15' name='welcome_".$esrow['surveyls_language']."'>{$esrow['surveyls_welcometext']}</textarea>\n"
 	. "</li>\n"
 	. "<li><label for=''>".$clang->gT("End message:")."</label>\n"
-	. "<textarea cols='80' rows='8' name='endtext_".$esrow['surveyls_language']."'>{$esrow['surveyls_endtext']}</textarea>\n"
+	. "<textarea cols='80' rows='15' name='endtext_".$esrow['surveyls_language']."'>{$esrow['surveyls_endtext']}</textarea>\n"
 	. "</li></ul>\n";
 	
 	// Hidden fields

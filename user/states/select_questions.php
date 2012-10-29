@@ -20,15 +20,15 @@
 
 require_once(dirname(__FILE__).'/../../qanda.php');
 
-$templatequeryid = "51417";
+$templatequeryid = "46664";
 
 $surveysummary .= '<script type="text/javascript">
 		disablePeciSteps(["startSurveyPeciStep", "analyzeDataPeciStep", "modifySurveyPeciStep"]);
-		setCurrentPeciStep("selectQuestionPeciStep");
+		setCurrentPeciStep("evaluatePeciStep");
 		
 		function confirmAndImport() {
 			if (importingAtLeastOne()) {
-				if (confirm("' . $clang->gT('PECI: Save selected questions? You won\'t be able to return to this section anymore.') . '")) {
+				if (confirm("' . $clang->gT('PECI: Sure to import?') . '")) {
 					$.post("questionimport.php", whatToImportInJson(), function() {
 	  					setSurveyFaxto("");
 					});
@@ -193,9 +193,9 @@ if ($gidresult->RecordCount() > 0) {
 
 				$templatecontent .= "<div class=\"peciQuestion\">
 					<div class=\"questionHeader\">
-						<div class=\"peciActionButtons\" style=\"float: right; border: 1px solid lightgray; border-radius: 6px; padding: 1px 4px; margin-left: 8px;\">" . 
-							$clang->gT("PECI: Import question") .
-							"<input type=\"checkbox\" id=\"questionCheck-{$gv['gid']}-{$qrows['qid']}\"/>
+						<div class=\"peciActionButtons\" style=\"float: right; border: 1px solid lightgray; border-radius: 6px; padding: 1px 4px; margin-left: 8px;\">
+							{$clang->gT("Import question?")}
+							<input type=\"checkbox\" id=\"questionCheck-{$gv['gid']}-{$qrows['qid']}\"/>
 						</div>
 						
 						<div class=\"peciActionButtons\" style=\"float: right;\">
@@ -235,16 +235,15 @@ if ($gidresult->RecordCount() > 0) {
 	// Disable input fields 
 	$templatecontent .= "<script>
 		$('.questionAnswers input').attr('disabled', 'disabled');
+		
 		$('.questionAnswers textarea').attr('value', '" . $clang->gT('PECI: Text area', 'js') . "');
 		$('.questionAnswers textarea').attr('disabled', 'disabled');
 	</script>";
 }
 
 
-$surveysummary .= "<div id=\"selectQuestionPeciStepContent\" class=\"peciStepContainer\">
-	<div class=\"selectQuestion\"><h3>" . $clang->gT('PECI: Select questions') . "</h3>
-	<p>" . $clang->gT('Peci: Dans cette étape de création de questionnaire, vous pouvez choisir les questions que vous souhaitez intégrer dans votre propre questionnaire. Cochez la case à droite de la question à copier. Une fois que vous avez fini votre sélection, vous cliquez sur le bouton xy tout en bas pour aller à l\'étape suivante.') . "</p> </div>"
+$surveysummary .= "<div id=\"selectQuestionPeciStepContent\" class=\"peciStepContainer\">"
 	. $templatecontent
-	. "<input type=\"button\" onclick=\"confirmAndImport();\" class=\"buttonPeci\" value='"
-	. $clang->gT('PECI: Make a copy of selection and continue') . "' />"
+	. "<input type=\"button\" onclick=\"confirmAndImport();\" value='"
+	. $clang->gT('PECI: Import and continue') . "' />"
 	. "</div>";
