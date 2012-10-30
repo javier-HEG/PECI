@@ -21,7 +21,6 @@
 $surveysummary .= "<div id=\"analyzeDataPeciStepContent\" class=\"peciStepContainer\">";
 
 $surveysummary .= '<script type="text/javascript">
-		disablePeciSteps(["selectQuestionPeciStep", "modifySurveyPeciStep", "startSurveyPeciStep"]);
 		setCurrentPeciStep("analyzeDataPeciStep");
 		
 		function stopSurvey() {

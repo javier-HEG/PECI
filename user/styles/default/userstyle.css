@@ -365,18 +365,6 @@ div.surveyPeciStep {
 	vertical-align: middle;
 }
 
-div.currentPeciStep {
-	background-color: #dcdcdc;
-	color: black;
-}
-
-div.disabledPeciStep {
-    font-style: italic;
-    border: 1px dashed #dcdcdc;
-    background-color: #eaecef;
-    color: gray;
-}
-
 div.surveyPeciStepArrow {
 	background-image: url('../../../images/user/silk/arrow_right.png');
     background-position: center center;
@@ -488,76 +476,69 @@ div.peciStepContainer {
 	width: 20%;
 }
 
-/*Tooltip for States in PECI when inactive */
-
+/******************************/
+/* Tooltip for States in PECI */
+/* when inactive              */
+/******************************/
 .tooltip {
-  
-  color: #000000; 
-  outline: none;
-  text-decoration: none;
-  position: relative;
+	color: #000000; 
+	outline: none;
+	text-decoration: none;
+	position: relative;
 }
+
 a.tooltip {
 	text-decoration:none;
 	color: black;
-	}
+}
 
 a.tooltip:hover {
 	text-decoration:none;
 	cursor: pointer;
-	}
+}
 
 .tooltip span {
-  margin-left: -999em;
-  position: absolute;
+	margin-left: -999em;
+	position: absolute;
 }
 
 .tooltip:hover span {
-  position: absolute;
-  left: 1em;
-  top: 2em;
-  z-index: 99;
-  margin-left: 0;
-  width: 250px;
+	position: absolute;
+	left: 1em;
+	top: 2em;
+	z-index: 99;
+	margin-left: 0;
+	width: 250px;
 }
-
-/*
-.tooltip:hover img {
-  border: 0;
-  margin: -10px 0 0 -55px;
-  float: left;
-  position: absolute;
-}*/
 
 .classic { 
 	padding: 0.8em 1em;
 	background: none repeat scroll 0 0 #FFFFAA;
 	border: 1px solid #FFAD33;
-	}
-		}
+}
 
 * html a:hover { background: transparent; }
 
 .selectQuestion {
 	padding-left:10px;
-	}
+}
 
 .selectQuestion h3 {
 	color: #cc0000;
-	}
+}
 	
 .questionAnswers ul, li {
 	list-style-type: none;
-	}
+}
 	
 .settingentrypeci {
- /*   float: left;
-    padding-left: 5px;
-    font-size: 13px;
-    text-align: left;
-    clear: right;
-    margin-bottom: 10px;
-    background-color: #F8F8FF;
+	/*float: left;
+	padding-left: 5px;
+	font-size: 13px;
+	text-align: left;
+	clear: right;
+	margin-bottom: 10px;
+	background-color: #F8F8FF;
 	outline: 0 none;*/
 }
 
@@ -566,28 +547,28 @@ a.tooltip:hover {
 }
 
 .settingrowpeci {
-    clear: left;
-    margin: 0 auto 20px auto;
-    background-color: #F8F8FF;
+	clear: left;
+	margin: 0 auto 20px auto;
+	background-color: #F8F8FF;
 }
 
 font.settingcaptionpeci {
-    vertical-align: top;
-    text-align: right;
-    font-size: 13px;
-    font-weight: 700;
-    color: #1D2D45;
+	vertical-align: top;
+	text-align: right;
+	font-size: 13px;
+	font-weight: 700;
+	color: #1D2D45;
 }
 
 span.settingcaptionpeci {
-    float: left;
-    width: 35%;
-    text-align: right;
-    font-weight: 700;
-    clear: left;
-    margin-bottom: 10px;
-    background-color: #F8F8FF;
-    color: #1D2D45;
+	float: left;
+	width: 35%;
+	text-align: right;
+	font-weight: 700;
+	clear: left;
+	margin-bottom: 10px;
+	background-color: #F8F8FF;
+	color: #1D2D45;
 }
 
 #process {
@@ -595,29 +576,30 @@ span.settingcaptionpeci {
 	padding-left: 15px;
 	padding-top: 15px;
 	text-align:center;
-
-	}
+}
 
 #process p {
 	display:inline;
-		font-size: 14px;
-		color: gray;
-	}
+	font-size: 14px;
+	color: gray;
+}
 	
 .nonactive {
 	color: gray;
-	}
+}
 	
 #process p.active {
 	color: #cc0000;
-	}
+}
 	
 .arrow {
 	padding: 0 10px;
 	color: grey;
-	}
+}
 
-	/* Buttons */
+/***********/
+/* Buttons */
+/***********/
 .buttonPeci {
     -moz-box-shadow:inset 1px 1px 3px 1px #f5978e;
 	-webkit-box-shadow:inset 1px 1px 3px 1px #f5978e;
@@ -641,10 +623,6 @@ span.settingcaptionpeci {
 	float: right;
 	}
 
-/* a.buttonPeci  {
-	color: white;
-	} */
-	
 .buttonPeci:hover {
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #cc0000), color-stop(1, #f24537) );
 	background:-moz-linear-gradient( center top, #cc0000 5%, #f24537 100% );
@@ -659,24 +637,24 @@ span.settingcaptionpeci {
 
 #selectQuestionPeciStepContent, #modifySurveyPeciStepContent, #startSurveyPeciStepContent {
 	overflow: hidden; /*For button*/
-	}
+}
 	
 form#personalsettings {
 	width: 560px;
 	margin: 0 auto;
-	}
+}
 	
 #personalsettings label {
 	width: 44%;
-	}
+}
 
 .ui-widget-header {
     background-image: none;
 	background-color: #cc0000;
 	color: white;
     border: 1px solid grey;
-	}
+}
 	
 .ui-tabs-nav {
 	background: url("../../../images/ui-bg_inset-hard_100_F8F8FF_1x100.png") repeat-x scroll 50% bottom #F8F8FF;
-	}
+}

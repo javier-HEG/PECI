@@ -23,7 +23,6 @@ require_once(dirname(__FILE__).'/../../qanda.php');
 $templatequeryid = "51417";
 
 $surveysummary .= '<script type="text/javascript">
-		disablePeciSteps(["startSurveyPeciStep", "analyzeDataPeciStep", "modifySurveyPeciStep"]);
 		setCurrentPeciStep("selectQuestionPeciStep");
 		
 		function confirmAndImport() {

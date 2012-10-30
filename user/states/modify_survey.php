@@ -49,7 +49,6 @@ $method = array(
 
 
 $surveysummary .= '<script type="text/javascript">
-		disablePeciSteps(["selectQuestionPeciStep", "analyzeDataPeciStep"]);
 		setCurrentPeciStep("modifySurveyPeciStep");
 	</script>';
 

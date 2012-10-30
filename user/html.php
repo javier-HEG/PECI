@@ -100,33 +100,22 @@ else if (isset($surveyid) && $surveyid && $action=='') {
 						$("#" + stepId + "Content").show();
 					}
 				}
-				
-				function disablePeciSteps(stepIdsArray) {
-					for (var i = 0; i < stepIdsArray.length; i++) {
-					    $("#" + stepIdsArray[i]).addClass("disabledPeciStep");
-					    $("#" + stepIdsArray[i]).attr("onclick", "");
-					}
-				}
 			</script>';
 		
 		$surveysummary .= '<div style="background-color: #dcdcdc; width: 100%; margin: -1px 0px; padding-bottom: 6px;">';
 		
 		// Create the default buttons for the peci steps
 		$surveysummary .= '<div id="surveyPeciStepContainer">
-		<div id="process">
-		<p id="selectQuestionPeciStep" onClick="#" class="surveyPeciStep">' . $clang->gT('Peci: 1. Select questions') . '</p>
-		<p class="arrow">&gt;&gt;</p>
-		<p id="modifySurveyPeciStep" onClick="#" class="surveyPeciStep">' . $clang->gT('Peci: 2. Modify selected questions') . '</p>
-		<p class="arrow">&gt;&gt;</p>
-		<p id="startSurveyPeciStep" onClick="#" class="surveyPeciStep">' . $clang->gT('Peci: 3. Conduct survey') . '</p>
-</div></div>
-
-		<br/>';
+			<div id="process">
+				<p id="selectQuestionPeciStep" class="surveyPeciStep">' . $clang->gT('Peci: 1. Select questions') . '</p>
+				<p class="arrow">&gt;&gt;</p>
+				<p id="modifySurveyPeciStep" class="surveyPeciStep">' . $clang->gT('Peci: 2. Modify selected questions') . '</p>
+				<p class="arrow">&gt;&gt;</p>
+				<p id="startSurveyPeciStep" class="surveyPeciStep">' . $clang->gT('Peci: 3. Conduct survey') . '</p>
+			</div>
+		</div>
+		<br />';
 		
-		$surveysummary .= "<div id=\"evaluatePeciStepContent\" class=\"peciStepContainer\" >
-				<p>About using surveys to evaluate usability</p>
-			</div>";
-
 		// Load information about the survey
 		$sumquery = "SELECT * FROM ".db_table_name('surveys')." inner join ".db_table_name('surveys_languagesettings')." on (surveyls_survey_id=sid and surveyls_language=language) WHERE sid=$surveyid";
 		$sumresult = db_select_limit_assoc($sumquery, 1);
@@ -140,7 +129,7 @@ else if (isset($surveyid) && $surveyid && $action=='') {
 		$thissurvey = array_map('FlattenText', $thissurvey);
 				
 		// It is already possible to detect if the PECI state is the last one
-		// - If the survey is active and the end-date is in the past, the "ANALYZE THE SURVEY"
+		// - If the survey is active and the end-date is in the past, then "ANALYZE THE SURVEY"
 		if ($thissurvey['active'] == 'Y') { // && time() > strtotime($thissurvey['expires']) ) {
 			include('states/analyze_survey.php');
 		} else {
