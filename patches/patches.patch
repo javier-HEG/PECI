@@ -65,6 +65,19 @@ Index: admin/sessioncontrol.php
  returnglobal('action') != 'forgotpass' &&
  returnglobal('action') != 'ajaxquestionattributes' &&
  returnglobal('action') != '')
+Index: admin/admin_functions.php
+===================================================================
+--- admin/admin_functions.php	(revision 12170)
++++ admin/admin_functions.php	(working copy)
+@@ -369,7 +369,7 @@
+         $strAdminHeader .= "<link rel=\"stylesheet\" type=\"text/css\" media=\"all\" href=\"$cssinclude\" />\n";
+     }
+     $strAdminHeader.= use_firebug()
+-    . "</head>\n<body>\n";
++    . "</head>\n<body>\n<div id=container>";
+     if (isset($_SESSION['dateformat']))
+     {
+         $formatdata=getDateFormatData($_SESSION['dateformat']);
 Index: classes/core/surveytranslator.php
 ===================================================================
 --- classes/core/surveytranslator.php	(revision 12170)
