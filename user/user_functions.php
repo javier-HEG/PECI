@@ -8,24 +8,34 @@ function getUserHeader($meta=false) {
 	$adminHeader = getAdminHeader($meta);
 	
 	global $admintheme, $rooturl, $homeurl;
+
+	$userHomeUrl = $rooturl . '/user';
 	
 	// Override the admin stylesheet with our stylesheet
 	$adminStyle = "<link rel=\"stylesheet\" type=\"text/css\" href=\"{$homeurl}/styles/$admintheme/adminstyle.css\" />";
-	$userStyle = "<link rel=\"stylesheet\" type=\"text/css\" href=\"{$rooturl}/user/styles/default/userstyle.css\" />";
+	$userStyle = "<link rel=\"stylesheet\" type=\"text/css\" href=\"{$userHomeUrl}/styles/default/userstyle.css\" />";
 	$adminHeader = str_replace($adminStyle, $adminStyle . "\n" . $userStyle, $adminHeader);
 	
 	// Add our custom made JavaScript scripts
 	$adminCoreScript = "<script type=\"text/javascript\" src=\"{$homeurl}/scripts/admin_core.js\"></script>";
-	$userTabsScript = "<script type=\"text/javascript\" src=\"{$rooturl}/user/scripts/tabs.js\"></script>";
-	$userCreateEditScript = "<script type=\"text/javascript\" src=\"{$rooturl}/user/scripts/create_edit.js\"></script>";
+	$userTabsScript = "<script type=\"text/javascript\" src=\"{$userHomeUrl}/scripts/tabs.js\"></script>";
+	$userCreateEditScript = "<script type=\"text/javascript\" src=\"{$userHomeUrl}/scripts/create_edit.js\"></script>";
 	$adminHeader = str_replace($adminCoreScript, $adminCoreScript . "\n" . $userTabsScript . "\n" . $userCreateEditScript, $adminHeader);
 	
 	// Add our custom made JavaScript scripts
 	$jQueryScript = "<script type=\"text/javascript\" src=\"{$rooturl}/scripts/jquery/jquery.js\"></script>";
-	$jQueryCookieScript = "<script type=\"text/javascript\" src=\"{$rooturl}/user/scripts/jquery.cookie.js\"></script>";
-	$jQuerySimpleModalScript = "<script type=\"text/javascript\" src=\"{$rooturl}/user/scripts/jquery.simplemodal.js\"></script>";
+	$jQueryCookieScript = "<script type=\"text/javascript\" src=\"{$userHomeUrl}/scripts/jquery.cookie.js\"></script>";
+	$jQuerySimpleModalScript = "<script type=\"text/javascript\" src=\"{$userHomeUrl}/scripts/jquery.simplemodal.js\"></script>";
 	$adminHeader = str_replace($jQueryScript, $jQueryScript . "\n" . $jQueryCookieScript . "\n" . $jQuerySimpleModalScript, $adminHeader);
 	
+	// Change path to user/favicon.ico
+	$adminShortCutFavicon = "<link rel=\"shortcut icon\" href=\"{$homeurl}/favicon.ico\" type=\"image/x-icon\" />";
+	$adminFavicon = "<link rel=\"icon\" href=\"{$homeurl}/favicon.ico\" type=\"image/x-icon\" />";
+	$userShortCutFavicon = "<link rel=\"shortcut icon\" href=\"{$userHomeUrl}/favicon.ico\" type=\"image/x-icon\" />";
+	$userFavicon = "<link rel=\"icon\" href=\"{$userHomeUrl}/favicon.ico\" type=\"image/x-icon\" />";
+	$adminHeader = str_replace($adminShortCutFavicon, $userShortCutFavicon, $adminHeader);
+	$adminHeader = str_replace($adminFavicon, $userFavicon, $adminHeader);
+
 	return $adminHeader;
 }
 
