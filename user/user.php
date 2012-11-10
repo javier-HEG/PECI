@@ -485,10 +485,8 @@ if (isset($_SESSION['loginID']))
 
 
     // The user menu bar
-    if (function_exists('showUserMenu')) {
-    	$adminoutput .= showUserMenu();
-    }
-
+    $adminoutput .= getUserMenu();
+    
     if (isset($databaseoutput))  {$adminoutput.= $databaseoutput;}
     if (isset($templatesoutput)) {$adminoutput.= $templatesoutput;}
     if (isset($accesssummary  )) {$adminoutput.= $accesssummary;}
@@ -615,18 +613,30 @@ if (isset($_SESSION['loginID']))
         . "//-->\n"
         . "</script>\n";
     }
-} else { //not logged in
-	if ($action == 'addonlineuser') {
-        include ('userrighthandling.php');
-        $adminoutput .= $addsummary;
-	}
+} else {
+	// Not logged in
 	
+	// Show the translation links
+    $adminoutput .= getUserMenu();
+    
+	switch ($action) {
+		case 'addonlineuser':
+			include ('userrighthandling.php');
+        	$adminoutput .= $addsummary;
+			break;
+		case 'changelanguage':
+			$_SESSION['adminlang'] = $_GET['lang'];
+			break;
+	}
+
 	sendcacheheaders();
 	if (!isset($_SESSION['metaHeader'])) {
 		$_SESSION['metaHeader']='';
 	}
 	
-	$adminoutput = getUserHeader($_SESSION['metaHeader']).$adminoutput.$loginsummary;  // All future output is written into this and then outputted at the end of file
+	// All future output is written into this and then outputted at the end of file
+	$adminoutput = getUserHeader($_SESSION['metaHeader']) .
+		$adminoutput . $loginsummary;
 
 	unset($_SESSION['metaHeader']);
 	

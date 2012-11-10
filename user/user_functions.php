@@ -127,6 +127,66 @@ function getUserSurveySelect($openSid = '') {
 }
 
 /**
+ * Returns html text for the registered user menu bar.
+ * A simplication of "admin/html.php:showadminmenu()".
+ */
+function getUserMenu() {
+	global $clang;
+
+	// Originally this variable is that set to "admin.php" in config.php,
+	// we however need to send calls to our script.
+	$scriptname = "user.php";
+
+	$adminmenu = "<div class='menubar'>\n";
+
+	if (isset($_SESSION['loginID'])) {
+		$adminmenu .= $clang->gT("Logged in as:") . " <a onclick=\"window.open('{$scriptname}?action=personalsettings', '_top')\""
+		. " title=\"Edit your personal preferences\">" . $_SESSION['full_name'] . "</a>";
+		$adminmenu .= " | <a onclick=\"window.open('$scriptname?action=logout', '_top')\""
+		. " title=\"".$clang->gTview("Logout")."\" >" . $clang->gT("Logout") . "</a>";
+	} else {
+		// TODO Make it so clicking calls user.php action=changelanguage "lang" is the
+		// variable holding the value
+		// Also, make the menu automatically from the language list, before removing
+		// english as an option, check: html.php::51
+		
+		$allLanguages = array();
+
+		if (isset($_SESSION['adminlang']))
+			$currentLanguage = $_SESSION['adminlang'];
+		else
+			$currentLanguage = $clang->getlangcode();
+
+		foreach (getlanguagedata(true) as $langkey=>$languagekind) {
+			$changeLanguageScript = "$.ajax({
+				url: '$scriptname?action=changelanguage&lang=$langkey',
+				success: function(data) { location.reload(); }
+			});";
+
+			if ($langkey == $currentLanguage)
+				$allLanguages[] = strtoupper($langkey);
+			else {
+				$languageLink = '<a title="Change language to ' . $languagekind['description'] . '" ' .
+					'onclick="' . $changeLanguageScript . '">';
+				$languageLink .= strtoupper($langkey);
+				$languageLink .= '</a>';
+
+				$allLanguages[] = $languageLink;
+			}
+		}
+
+		$adminmenu .= implode('&nbsp;|&nbsp;', $allLanguages);
+	}
+
+	$adminmenu .= "</div>";
+
+	// Move the menu bar to its definitive position
+	$adminmenu .= "<script type=\"text/javascript\">$('#mainTitleMenu').append($('.menubar'));</script>";
+
+	return $adminmenu;
+}
+
+/**
  * Function returning html text for the interface's footer.
  * <strong>NB.</strong> Code based on <code>common_functions.php</code>'s
  * <code>getAdminFooter()</code> function but returning a much simpler footer.

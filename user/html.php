@@ -150,30 +150,3 @@ else if (isset($surveyid) && $surveyid && $action=='') {
 	}
 }
 
-/**
- * Returns html text for the registered user menu bar.
- * A simplication of "admin/html.php:showadminmenu()".
- */
-function showUserMenu() {
-	global $clang;
-
-	// Originally this variable is that set to "admin.php" in config.php,
-	// we however need to send calls to our script.
-	$scriptname = "user.php";
-
-	$adminmenu = "<div class='menubar'>\n";
-
-	if (isset($_SESSION['loginID'])) {
-		$adminmenu .= $clang->gT("Logged in as:") . " <a onclick=\"window.open('{$scriptname}?action=personalsettings', '_top')\""
-		. " title=\"Edit your personal preferences\">" . $_SESSION['full_name'] . "</a>";
-		$adminmenu .= " | <a onclick=\"window.open('$scriptname?action=logout', '_top')\""
-		. " title=\"".$clang->gTview("Logout")."\" >" . $clang->gT("Logout") . "</a>";
-	}
-
-	$adminmenu .= "</div>";
-
-	// Move the menu bar to its definitive position
-	$adminmenu .= "<script type=\"text/javascript\">$('#mainTitleMenu').append($('.menubar'));</script>";
-
-	return $adminmenu;
-}
