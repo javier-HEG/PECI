@@ -60,7 +60,7 @@ if (trim($esrow['expires']) != '') {
 $surveysummary .= "<input type='hidden' name='sid' value='$surveyid' />\n";
 $surveysummary .="<ul><li><label for='expires'>".$clang->gT("Expiry date/time:")."</label>\n"
 . "<input type='text' class='popupdatetime' id='expires' size='20' name='expires' value=\"{$expires}\" /><a class=\"tooltip\" href=\"#\">
-<img src=\"http://localhost/limesurvey/images/user/silk/help.png\"/><span class=\"classic\">" . $clang->gT('Peci: Tooltip Date') . "</span></a></li>\n";
+<img src=\"$imageurl/user/silk/help.png\"/><span class=\"classic\">" . $clang->gT('Peci: Tooltip Date') . "</span></a></li>\n";
 
 
 
@@ -84,7 +84,7 @@ if ($esrow['usecookie'] != "Y") {
 $surveysummary .= ">".$clang->gT("No")."</option>\n"
 . "</select>\n"
 . "<a class=\"tooltip\" href=\"#\">
-<img src=\"http://localhost/limesurvey/images/user/silk/help.png\"/><span class=\"classic\">" . $clang->gT('Peci: Tooltip Cookie') . "</span></a></li></ul>\n";
+<img src=\"$imageurl/user/silk/help.png\"/><span class=\"classic\">" . $clang->gT('Peci: Tooltip Cookie') . "</span></a></li></ul>\n";
 
 ///////////////////////////////////////////
 // URL
@@ -94,7 +94,7 @@ $surveysummary .= "<table><tr>"
 $tmp_url = $GLOBALS['publicurl'] . '/index.php?sid=' . $surveyinfo['sid'];
 $surveysummary .= "<td align='left'> <a href='$tmp_url' target='_blank'>$tmp_url</a>";
 $surveysummary .= "<a class=\"tooltip\" href=\"#\">
-<img src=\"http://localhost/limesurvey/images/user/silk/help.png\"/><span class=\"classic\">" . $clang->gT('Peci: Tooltip URL') . "</span></a></td></tr></table>\n";
+<img src=\"$imageurl/user/silk/help.png\"/><span class=\"classic\">" . $clang->gT('Peci: Tooltip URL') . "</span></a></td></tr></table>\n";
 
 
 ///////////////////////////////////////////
@@ -135,8 +135,10 @@ $surveysummary .= "<div class='header ui-widget-header'>"
 $surveysummary .= "<div class='header ui-widget-header'>"
 	. $clang->gT("Export results") . "\n</div><br/>";
 
-$surveysummary .= 	"<input type=\"button\" onClick=\"setCurrentPeciStep('modifySurveyPeciStep');\" class=\"buttonPeci\" value='"
-	. $clang->gT('PECI: Return to the questionnaire') . "' />";
+$surveysummary .= 	"<div style=\"text-align: right; \">"
+	. "<input type=\"button\" onClick=\"setCurrentPeciStep('modifySurveyPeciStep');\" class=\"buttonPeci\" value='"
+	. $clang->gT('PECI: Return to the questionnaire') . "' />"
+	. "</div>";
 
 
 $surveysummary .= "</div>";

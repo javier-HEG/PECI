@@ -32,7 +32,6 @@ body {
 	margin-left: auto;
 	margin-right: auto;
 	clear: both;
-	overflow: hidden;
 	}
 
 a:hover {
@@ -378,6 +377,7 @@ div.peciStepContainer {
     border: 1px solid gray;
     margin: 4px 150px 8px;
     padding: 6px;
+    overflow: visible;
 }
 
 /******************/
@@ -498,17 +498,17 @@ a.tooltip:hover {
 }
 
 .tooltip span {
-	margin-left: -999em;
+	width: 250px;
 	position: absolute;
+	display: none;
 }
 
 .tooltip:hover span {
 	position: absolute;
+	display: block;
 	left: 1em;
 	top: 2em;
 	z-index: 99;
-	margin-left: 0;
-	width: 250px;
 }
 
 .classic { 
@@ -620,8 +620,7 @@ span.settingcaptionpeci {
 	padding:6px 10px;
 	text-decoration:none;
 	text-shadow:2px 2px 2px #810e05;
-	float: right;
-	}
+}
 
 .buttonPeci:hover {
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #cc0000), color-stop(1, #f24537) );
@@ -633,10 +632,6 @@ span.settingcaptionpeci {
 .buttonPeci:active {
 	position:relative;
 	top:1px;
-}
-
-#selectQuestionPeciStepContent, #modifySurveyPeciStepContent, #startSurveyPeciStepContent {
-	overflow: hidden; /*For button*/
 }
 	
 form#personalsettings {

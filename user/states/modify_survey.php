@@ -342,8 +342,10 @@ $surveysummary .= "<div class=\"peciActionButtons\" style=\"margin-left: 8px;\">
 		<!--button disabled=\"true\">Add a new question</button-->
 	</div>
 		<br/>
-	<input type=\"button\" onClick=\"setCurrentPeciStep('startSurveyPeciStep');\" class=\"buttonPeci\" value='"
+		<div style=\"text-align: right; \">
+		<input type=\"button\" onClick=\"setCurrentPeciStep('startSurveyPeciStep');\" class=\"buttonPeci\" value='"
 	. $clang->gT('PECI: Start survey') . "' />
+		</div>
 	";
 	
 $surveysummary .= "</div>\n";
