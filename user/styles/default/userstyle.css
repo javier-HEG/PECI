@@ -48,6 +48,17 @@ a, a:link, a:visited {
     background-color: white;
 }
 
+.wrap2columns {
+	width: 616px;
+}
+
+.panelCache {
+	background-color: gray;
+	opacity: 0.5;
+	position: absolute;
+	z-index: 99;
+}
+
 .maintitle {
 	color: #cc0000;
 	text-align: center;

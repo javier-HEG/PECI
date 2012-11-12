@@ -47,15 +47,7 @@ $method = array(
 	"RX" => $clang->gT("Regular expression")
 );
 
-
-$surveysummary .= '<script type="text/javascript">
-		setCurrentPeciStep("modifySurveyPeciStep");
-	</script>';
-
-// The "Start survey window"
-include("start_survey.php");
-
-// The "Modify survey window"
+// The "Modify survey" panel
 $surveysummary .= "<div id=\"modifySurveyPeciStepContent\" class=\"peciStepContainer\">
 <div class=\"selectQuestion\">
 
@@ -349,6 +341,70 @@ $surveysummary .= "<div class=\"peciActionButtons\" style=\"margin-left: 8px;\">
 	";
 	
 $surveysummary .= "</div>\n";
+
+/////////////////////////////////////
+// The "Start survey" panel
+include("start_survey.php");
+
+
+///////////////////////////////////////////////
+// Disabling survey modification and setting
+// the cache over the right panels
+
+// - Set the correct state
+if ($thissurvey['active'] == 'Y') {
+	$surveysummary .= '<script type="text/javascript">
+		setCurrentPeciStep("startSurveyPeciStep");
+		$("#toModifySurveyPeciStepButton").hide();
+	</script>';
+} else {
+	$surveysummary .= '<script type="text/javascript">
+		setCurrentPeciStep("modifySurveyPeciStep");
+	</script>';
+}
+
+// - Display caches
+if ($thissurvey['active'] == 'Y') {
+	// If the survey is active show the cache over
+	// the activation panel
+	$surveysummary .= '<script type="text/javascript">
+		function setCacheOnPanels() {
+			var eltHeight = $("#surveyActivateWrapper").height();
+			var eltWidth = $("#surveyActivateWrapper").width();
+			var eltOffset = $("#surveyActivateWrapper").offset();
+
+			$("#activateSurveyCache").height(eltHeight + "px");
+			$("#activateSurveyCache").width(eltWidth + "px");
+			$("#activateSurveyCache").offset({ top: eltOffset.top, left: eltOffset.left });
+		}
+	</script>';
+} else {
+	// Otherwise cache both panels about responses
+	// made to the surveys
+	$surveysummary .= '<script type="text/javascript">
+		function setCacheOnPanels() {
+			var respSumHeight = $("#resultsSummaryWrapper").height();
+			var respSumWidth = $("#resultsSummaryWrapper").width();
+			var respSumOffset = $("#resultsSummaryWrapper").offset();
+			
+			$("#responseSummaryCache").height(respSumHeight + "px");
+			$("#responseSummaryCache").width(respSumWidth + "px");
+			$("#responseSummaryCache").offset({ top: respSumOffset.top, left: respSumOffset.left });
+
+			var expResHeight = $("#exportresultswrapper").height();
+			var expResWidth = $("#exportresultswrapper").width();
+			var expResOffset = $("#exportresultswrapper").offset();
+			
+			$("#exportDataCache").height(expResHeight + "px");
+			$("#exportDataCache").width(expResWidth + "px");
+			$("#exportDataCache").offset({ top: expResOffset.top, left: expResOffset.left });
+		}
+	</script>';
+}
+
+////////////////////////
+// Utiliy functions
+////////////////////////
 
 /**
  * Parameter fields = "qid"=>$myrows['qid'], "sid"=>$myrows['sid'], "gid"=>$myrows['gid'], "question"=>$myrows['question'],

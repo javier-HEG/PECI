@@ -54,52 +54,6 @@ if (!$exportstyle) {
 
     $afieldcount = count($excesscols);
     
-    // Survey URL
-    $tmp_url = $GLOBALS['publicurl'] . '/index.php?sid=' . $thissurvey['sid'];
-    $surveyurl = "<a href='$tmp_url' target='_blank'>$tmp_url</a>";
-    
-    // Get responses count
-    $surveytable = db_table_name("survey_".$thissurvey['sid']);
-    $num_total_answers=0;
-    $num_completed_answers=0;
-    $gnquery = "SELECT count(id) FROM $surveytable";
-    $gnquery2 = "SELECT count(id) FROM $surveytable WHERE submitdate IS NOT NULL";
-    $gnresult = db_execute_num($gnquery);
-    $gnresult2 = db_execute_num($gnquery2);
-    while ($gnrow=$gnresult->FetchRow()) {
-    	$num_total_answers = $gnrow[0];
-    }
-    while ($gnrow2=$gnresult2->FetchRow()) {
-    	$num_completed_answers = $gnrow2[0];
-    }
-    
-    $answercount = "<div class='header ui-widget-header' style='text-align: center;'>".$clang->gT("Response summary")."</div>"
-    . "<p>" . $clang->gT("This survey is currently active.") . "<br /> $surveyurl</p>"
-    . "<p><table class='statisticssummary'>\n"
-    . "<tfoot><tr><th>".$clang->gT("Total responses:")."</th><td>".$num_total_answers."</td></tr></tfoot>"
-    . "\t<tbody>"
-    . "<tr><th>".$clang->gT("Full responses:")."</th><td>".$num_completed_answers."</td></tr></tbody>"
-    . "</table></p>";
-    
-    // Print the Stop survey segment
-    $expiresOutput = '';
-    if ($thissurvey['expires'] != '') {
-    	$datetimeobj = new Date_Time_Converter($thissurvey['expires'] , "Y-m-d H:i:s");
-    	$dateformatdetails = getDateFormatData($_SESSION['dateformat']);
-    	$expires = $datetimeobj->convert($dateformatdetails['phpdate'] . ' H:i');
-    	
-    	$expiresOutput .= '<p>' . sprintf($clang->gT("PECI: Active until %s"), $expires) . '</p>';
-    }
-    
-    $exportoutput .= '<div id="surveystop" style="display: none">'
-    	. $answercount . $expiresOutput
-    	. '<p><input type="button" onclick="if (confirm(\''
-    	. $clang->gT('PECI: Stop survey warning', 'js')
-    	. '\')) { stopSurvey(); }" value="'
-    	. $clang->gT('Deactivate Survey')
-    	. '" /></p>'
-    	. '</div>';
-    
     $exportoutput .= "<div class='header ui-widget-header'>".$clang->gT("Export results").'</div>'
     ."<div id='exportresultswrapper' class='wrap2columns'>\n"
     ."<form id='resultexport' action='$scriptname?action=exportresults' method='post'><div class='left'>\n";
@@ -288,7 +242,7 @@ if (!$exportstyle) {
     }
     $exportoutput .= "</div>\n"
     ."\t<div style='clear:both;'><p><input type='submit' value='".$clang->gT("Export data")."' /></div></form></div>\n"
-    . "<div id='wrap2columnscache' style='background-color: gray; opacity: 0.5; position: absolute; z-index: 99;'></div>";
+    . "<div id='exportDataCache' class='panelCache'></div>";
     return;
 }
 

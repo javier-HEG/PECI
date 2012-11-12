@@ -99,6 +99,11 @@ else if (isset($surveyid) && $surveyid && $action=='') {
 						$(".peciStepContainer").hide();
 						$("#" + stepId + "Content").show();
 					}
+
+					// 2nd and 3rd states have caches that need activation
+					if (stepId == "startSurveyPeciStep" || stepId == "modifySurveyPeciStep") {
+						$("#" + stepId).ready(function () {	setCacheOnPanels();	});
+					}
 				}
 			</script>';
 		
@@ -127,23 +132,15 @@ else if (isset($surveyid) && $surveyid && $action=='') {
 
 		$thissurvey = $sumresult->FetchRow();
 		$thissurvey = array_map('FlattenText', $thissurvey);
-				
-		// It is already possible to detect if the PECI state is the last one
-		// - If the survey is active and the end-date is in the past, then "ANALYZE THE SURVEY"
-		if ($thissurvey['active'] == 'Y') { // && time() > strtotime($thissurvey['expires']) ) {
-			include('states/analyze_survey.php');
+		
+		// 2nd (modify_survey) and 3rd(start_survey) states are both
+		// rendered when in 2nd state. Toggling from one to the other
+		// is possible by clicking a button.
+		if ($thissurvey['faxto'] != '') {
+			include('states/select_questions.php');
 		} else {
-			// At first it seemed enought to check if the survey had at least one
-			// question group to chose between the "select questions" and the "modify
-			// survey" steps. However, I finally decided to use the "faxto" property
-			// to tell if the survey has already gone through import.
-			
-			if ($thissurvey['faxto'] != '') {
-				include('states/select_questions.php');
-			} else {
-				// faxto is to be set to empty to continue
-				include('states/modify_survey.php');
-			}
+			// faxto is to be set to empty to continue
+			include('states/modify_survey.php');
 		}
 
 		$surveysummary .= '</div>';

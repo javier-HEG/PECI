@@ -22,8 +22,9 @@ $surveysummary .= "<div id=\"startSurveyPeciStepContent\" class=\"peciStepContai
 
 // Start Survey
 $surveysummary .= "<div class='header ui-widget-header'>"
-	. $clang->gT("Peci: Activate Survey") . "\n</div><br/>";
-$surveysummary .= "<div><p>" . $clang->gT('Peci: Text activate survey') . "</p></div>";
+	. $clang->gT("Peci: Activate Survey") . "\n</div>";
+$surveysummary .= "<div id='surveyActivateWrapper' class='wrap2columns'>\n";
+$surveysummary .= $clang->gT('Peci: Text activate survey') . "<br />";
 	
 ///////////////////////////////////////////
 // Load query info
@@ -63,7 +64,6 @@ $surveysummary .="<ul><li><label for='expires'>".$clang->gT("Expiry date/time:")
 <img src=\"$imageurl/user/silk/help.png\"/><span class=\"classic\">" . $clang->gT('Peci: Tooltip Date') . "</span></a></li>\n";
 
 
-
 ///////////////////////////////////////////
 // Cookie
 $surveysummary .= "<li><label for=''>".$clang->gT("Set cookie to prevent repeated participation?")."</label>\n"
@@ -82,31 +82,21 @@ if ($esrow['usecookie'] != "Y") {
 }
 
 $surveysummary .= ">".$clang->gT("No")."</option>\n"
-. "</select>\n"
-. "<a class=\"tooltip\" href=\"#\">
-<img src=\"$imageurl/user/silk/help.png\"/><span class=\"classic\">" . $clang->gT('Peci: Tooltip Cookie') . "</span></a></li></ul>\n";
-
-///////////////////////////////////////////
-// URL
-$surveysummary .= "<table><tr>"
-	. "<td align='right' valign='top'><strong>"
-	. $clang->gT("Survey URL") . ":</strong></td>\n";
-$tmp_url = $GLOBALS['publicurl'] . '/index.php?sid=' . $surveyinfo['sid'];
-$surveysummary .= "<td align='left'> <a href='$tmp_url' target='_blank'>$tmp_url</a>";
-$surveysummary .= "<a class=\"tooltip\" href=\"#\">
-<img src=\"$imageurl/user/silk/help.png\"/><span class=\"classic\">" . $clang->gT('Peci: Tooltip URL') . "</span></a></td></tr></table>\n";
-
+	. "</select>\n"
+	. "<a class=\"tooltip\" href=\"#\">"
+	. "<img src=\"$imageurl/user/silk/help.png\"/><span class=\"classic\">"
+	. $clang->gT('Peci: Tooltip Cookie') . "</span></a></li></ul>\n";
 
 ///////////////////////////////////////////
 // Activate button
 $surveysummary .= "<p>\n"
-	. "<input type='button' value='". $clang->gT('Peci: Activate') . "' onClick='openPeciPopup(\"activatesurvey\", \"sid=$surveyid\");' />\n";
-
+	. "<input type='button' value='". $clang->gT('Peci: Activate') . "' onClick='openPeciPopup(\"activatesurvey\", \"sid=$surveyid\");' />\n"
+	. "</div>";
 
 // Export Survey questions
 $surveysummary .= "<form id='exportstructure' name='exportstructure' action='$scriptname' method='post'>\n"
 	. "<div class='header ui-widget-header'>"
-	. $clang->gT("Peci: Export Survey Structure") . "\n</div><br />\n"
+	. $clang->gT("Peci: Export Survey Structure") . "\n</div>\n"
 	. "<ul>\n"
 	. "<li><input type='radio' class='radiobtn' name='action' value='exportstructurexml' checked='checked' id='surveyxml'"
 	. "<label for='surveycsv'>"
@@ -126,19 +116,89 @@ $surveysummary .= "<p>\n"
 
 $surveysummary .= "</form>\n";
 
-
-// Stop Survey
+///////////////////////////////////////////
+// Results summary
 $surveysummary .= "<div class='header ui-widget-header'>"
-	. $clang->gT("Response summary") . "\n</div><br/>";
+	. $clang->gT("Response summary") . "\n</div>"
+	. "<div id='resultsSummaryWrapper' class='wrap2columns'>\n";
 
+// Get responses count
+$num_total_answers = 0;
+$num_completed_answers = 0;
+
+if ($thissurvey['active'] == 'Y') {
+    $surveytable = db_table_name("survey_" . $thissurvey['sid']);
+    $gnquery = "SELECT count(id) FROM $surveytable";
+    $gnquery2 = "SELECT count(id) FROM $surveytable WHERE submitdate IS NOT NULL";
+    $gnresult = db_execute_num($gnquery);
+    $gnresult2 = db_execute_num($gnquery2);
+    while ($gnrow = $gnresult->FetchRow()) {
+    	$num_total_answers = $gnrow[0];
+    }
+    while ($gnrow2 = $gnresult2->FetchRow()) {
+    	$num_completed_answers = $gnrow2[0];
+	}
+
+	// Survey URL
+    $tmp_url = $GLOBALS['publicurl'] . '/index.php?sid=' . $thissurvey['sid'];
+    $surveyurl = "<a href='$tmp_url' target='_blank'>$tmp_url</a>";
+	$surveyUrlText = "<b>" . $clang->gT("This survey is currently active.") . "</b><br />"
+		. $clang->gT("Survey URL") . ": $surveyurl"
+		. "<a class=\"tooltip\" href=\"#\">"
+		. "<img src=\"$imageurl/user/silk/help.png\"/><span class=\"classic\">"
+		. $clang->gT('Peci: Tooltip URL') . "</span></a><br />\n";
+
+	// Stop survey
+    $stopSurvey = '<script type="text/javascript">
+		function stopSurvey() {
+			$.post("user.php", {sid: "' . $thissurvey['sid'] . '", action: "stopSurvey",
+				checksessionbypost: "'. $_SESSION['checksessionpost'] .'"}, function() {
+				location.reload();
+			});
+		}
+	</script>';
+
+    if ($thissurvey['expires'] != '') {
+    	$datetimeobj = new Date_Time_Converter($thissurvey['expires'] , "Y-m-d H:i:s");
+    	$dateformatdetails = getDateFormatData($_SESSION['dateformat']);
+    	$expires = $datetimeobj->convert($dateformatdetails['phpdate'] . ' H:i');
+    	
+    	$stopSurvey .= '<p>' . sprintf($clang->gT("PECI: Active until %s"), $expires) . '</p>';
+    } else {
+    	$stopSurvey .= '<p>' . $clang->gT("PECI: Active without expiracy date") . '</p>';
+    }
+    
+    $stopSurvey .= '<p><input type="button" onclick="if (confirm(\''
+    	. $clang->gT('PECI: Stop survey warning', 'js')
+    	. '\')) { stopSurvey(); }" value="'
+    	. $clang->gT('Deactivate Survey')
+    	. '" /></p>';
+}
+
+$surveysummary .= (isset($surveyUrlText) ? $surveyUrlText : '<b>' . $clang->gT("PECI: This survey is currently inactive") . '</b>')
+    . "<p><table class='statisticssummary'>\n"
+    . "<tfoot><tr><th>".$clang->gT("Total responses:")."</th><td>".$num_total_answers."</td></tr></tfoot>"
+    . "\t<tbody>"
+    . "<tr><th>".$clang->gT("Full responses:")."</th><td>".$num_completed_answers."</td></tr></tbody>"
+    . "</table></p>"
+    . (isset($stopSurvey) ? $stopSurvey : '');
+
+// Close wrapper and add cache div
+$surveysummary .= "</div>"
+	. "<div id='responseSummaryCache' class='panelCache'></div>";
+
+/////////////////////////////////////////
 // Export results/data
-$surveysummary .= "<div class='header ui-widget-header'>"
-	. $clang->gT("Export results") . "\n</div><br/>";
+include("export_results.php");
 
+$surveysummary .= $exportoutput;
+$exportoutput = '';
+
+/////////////////////////////////////////
+// Return to survey editing button
 $surveysummary .= 	"<div style=\"text-align: right; \">"
-	. "<input type=\"button\" onClick=\"setCurrentPeciStep('modifySurveyPeciStep');\" class=\"buttonPeci\" value='"
+	. "<input id=\"toModifySurveyPeciStepButton\" type=\"button\" onClick=\"setCurrentPeciStep('modifySurveyPeciStep');\" class=\"buttonPeci\" value='"
 	. $clang->gT('PECI: Return to the questionnaire') . "' />"
+	. "</div>"
+    . "<div id='activateSurveyCache' class='panelCache'></div>"
 	. "</div>";
-
-
-$surveysummary .= "</div>";
