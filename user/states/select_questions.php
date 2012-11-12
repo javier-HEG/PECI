@@ -247,5 +247,5 @@ $surveysummary .= "<div id=\"selectQuestionPeciStepContent\" class=\"peciStepCon
 	. "<div style=\"text-align: right; \">"
 	. "<input type=\"button\" onclick=\"confirmAndImport();\" class=\"buttonPeci\" value='"
 	. $clang->gT('PECI: Make a copy of selection and continue') . "' />"
-	. "</div>";
+	. "</div>"
 	. "</div>";
