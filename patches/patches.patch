@@ -82,7 +82,7 @@ Index: classes/core/surveytranslator.php
 ===================================================================
 --- classes/core/surveytranslator.php	(revision 12170)
 +++ classes/core/surveytranslator.php	(working copy)
-@@ -152,118 +152,6 @@
+@@ -152,139 +152,6 @@
      if (isset($result[$orderbynative])) return $result[$orderbynative];
 
      if (!isset($supportedLanguages)) {
@@ -198,13 +198,13 @@ Index: classes/core/surveytranslator.php
 -    $supportedLanguages['nl-informal']['dateformat'] = 2;
 -    $supportedLanguages['nl-informal']['radixpoint'] = 1;
 -
-     // English
-     $supportedLanguages['en']['description'] = $clang->gT('English');
-     $supportedLanguages['en']['nativedescription'] = 'English';
-@@ -271,20 +159,6 @@
-     $supportedLanguages['en']['dateformat'] = 9;
-     $supportedLanguages['en']['radixpoint'] = 0;
-
+-    // English
+-    $supportedLanguages['en']['description'] = $clang->gT('English');
+-    $supportedLanguages['en']['nativedescription'] = 'English';
+-    $supportedLanguages['en']['rtl'] = false;
+-    $supportedLanguages['en']['dateformat'] = 9;
+-    $supportedLanguages['en']['radixpoint'] = 0;
+-
 -    // Estonian
 -    $supportedLanguages['et']['description'] = $clang->gT('Estonian');
 -    $supportedLanguages['et']['nativedescription'] = 'Eesti';
@@ -222,7 +222,7 @@ Index: classes/core/surveytranslator.php
      // French
      $supportedLanguages['fr']['description'] = $clang->gT('French');
      $supportedLanguages['fr']['nativedescription'] = 'Fran&#231;ais';
-@@ -292,279 +166,12 @@
+@@ -292,279 +159,12 @@
      $supportedLanguages['fr']['dateformat'] = 2;
      $supportedLanguages['fr']['radixpoint'] = 1;
 
