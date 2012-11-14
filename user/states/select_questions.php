@@ -18,8 +18,6 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-require_once(dirname(__FILE__).'/../../qanda.php');
-
 $templatequeryid = "51417";
 
 $surveysummary .= '<script type="text/javascript">
@@ -29,7 +27,7 @@ $surveysummary .= '<script type="text/javascript">
 			if (importingAtLeastOne()) {
 				if (confirm("' . $clang->gT('PECI: Save selected questions? You won\'t be able to return to this section anymore.') . '")) {
 					$.post("questionimport.php", whatToImportInJson(), function() {
-	  					setSurveyFaxto("");
+	  		 			setSurveyFaxto("");
 					});
 				}
 			} else {
@@ -42,20 +40,8 @@ $surveysummary .= '<script type="text/javascript">
 		function setSurveyFaxto(value) {
 			$.post("user.php", {sid: "' . $surveyid . '", faxto: value, action: "updateFaxTo",
 				checksessionbypost: "'. $_SESSION['checksessionpost'] .'"}, function() {
-				location.href = "user.php?sid=' . $surveyid . '";
+					location.href = "user.php?sid=' . $surveyid . '";
 			});
-		}
-		
-		function expandQuestion(qid) {
-			$("#questionAnswers" + qid).show();
-			$("#questionCollapser" + qid).show();
-			$("#questionExpander" + qid).hide();
-		}
-		
-		function collapseQuestion(qid) {
-			$("#questionAnswers" + qid).hide();
-			$("#questionCollapser" + qid).hide();
-			$("#questionExpander" + qid).show();
 		}
 		
 		var groupIds = [];
@@ -108,7 +94,7 @@ $surveysummary .= '<script type="text/javascript">
 		}
 	</script>';
 
-// Fill in $surveysummary the list of questions in survey 46664, a template survey
+// Fill in $surveysummary the list of questions in template survey
 $templatecontent = '';
 // - Load information about the template survey
 $templatequery = "SELECT * FROM ".db_table_name('surveys')
@@ -180,11 +166,6 @@ if ($gidresult->RecordCount() > 0) {
 					7 => 'N',
 					8 => 'N' ); // ia[8] is usedinconditions
 
-				// Session values are needed to use qanda.php::retrieveAnswers()
-				$_SESSION['s_lang'] = $thissurvey['language'];
-				$_SESSION['dateformats'] = getDateFormatData($thissurvey['surveyls_dateformat']);
-				list($plus_qanda, $plus_inputnames) = retrieveAnswers($ia);
-
 				// Check if the question has subquestions or answer options
 				$subquestions = '';
 				$answeroptions = '';
@@ -196,18 +177,8 @@ if ($gidresult->RecordCount() > 0) {
 							$clang->gT("PECI: Import question") .
 							"<input type=\"checkbox\" id=\"questionCheck-{$gv['gid']}-{$qrows['qid']}\"/>
 						</div>
-						
-						<div class=\"peciActionButtons\" style=\"float: right;\">
-							<button style=\"width: 2em;\" id=\"questionCollapser{$qrows['qid']}\"
-								onclick=\"collapseQuestion('{$qrows['qid']}')\">-</button>
-							<button style=\"width: 2em; display: none;\" id=\"questionExpander{$qrows['qid']}\"
-								onclick=\"expandQuestion('{$qrows['qid']}')\">+</button>
-						</div>
 					</div>
 					<h1 class=\"questionTitle\">{$qrows['question']}</h1>
-					<div class=\"questionAnswers\" id=\"questionAnswers{$qrows['qid']}\">
-						{$plus_qanda[1]}
-					</div>
 				</div>";
 			}
 		}

@@ -333,11 +333,13 @@ table.ui-datepicker-calendar th.ui-datepicker-week-end {
 }
 
 #projectMenu select {
+	margin-right: 6px;
 	width: 150px;
 	color: black;
 }
 
 #projectMenu img {
+	margin-left: 6px;
 	vertical-align: middle;
 }
 
@@ -481,6 +483,7 @@ div.peciStepContainer {
 
 .peciQuestion .questionHeader {
 	font-style: italic;
+	margin-bottom: 12px;
 }
 
 .condition-tbl-left {

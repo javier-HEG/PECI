@@ -60,6 +60,7 @@ for ($i = 0; $i < count($groupIds); $i++) {
 		$tmpQuestionResult = db_execute_assoc($tmpQuestionQuery);
 		
 		$tmpQuestion = $tmpQuestionResult->FetchRow();
+		$tmpQuestion  = array_map('db_quote', $tmpQuestion);
 
 		// Find the current maximum question_order
 		$maxQuestionOrderQuery = "SELECT max(question_order) AS max FROM " . db_table_name('questions') . " WHERE gid=$newGroupId";
