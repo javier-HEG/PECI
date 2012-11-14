@@ -70,7 +70,7 @@ $surveysummary .= "<div id=\"modifySurveyPeciStepContent\" class=\"peciStepConta
 	</div>";
 
 // Hide the survey details
-$surveysummary .= '<script type="text/javascript">$("#surveyDetails").hide();</script>';
+$surveysummary .= '<script type="text/javascript">$("#surveyDetails").show(); $("#showDetailsBtn").hide();</script>';
 
 // Create buttons for adding new groups and questions
 $surveysummary .= "<div class=\"peciActionButtons\" style=\"margin-left: 8px;\">

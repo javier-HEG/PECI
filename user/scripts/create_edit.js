@@ -50,7 +50,7 @@ function openPeciPopup(action, parameters) {
 function submitAsParent(info) {
 //	alert("user.php" + JSON.stringify(info, undefined, 2));
 	$.post("user.php", info, function(data) {
-		if (info.action == "insertsurvey") {
+		if (info.action == "insertsurvey" || info.action== "importsurvey") {
 			location.href = "user.php?sid=" + data;
 		} else {
 			location.href = "user.php?sid=" + info.sid;
@@ -64,6 +64,11 @@ function submitAsParent(info) {
  * @param form
  */
 function submitFormAsParent(form) {
+	var jsonObject = getFormParametersAsJson(form);
+	parent.submitAsParent(jsonObject);
+}
+
+function getFormParametersAsJson(form) {
 	var elements = form.elements;
 	var jsonString = '';
 	
@@ -73,9 +78,7 @@ function submitFormAsParent(form) {
 		}
 	}
 
-	var jsonObject = eval('({' + jsonString + '})');
-	
-	parent.submitAsParent(jsonObject);
+	return eval('({' + jsonString + '})');
 }
 
 /**

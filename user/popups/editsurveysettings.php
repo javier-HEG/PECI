@@ -163,64 +163,8 @@ if(!bHasSurveyPermission($surveyid,'surveysettings','read') && !bHasGlobalPermis
 		}
 		$onSubmit .= '}); } else { alert("'.$clang->gT("Error: You have to enter a title for this survey.","js").'"); }';
 
-		$editsurvey .= "<p><input type='button' onClick='$onSubmit' value='". $clang->gT("Save") . "' />\n</p></div>";
+		$editsurvey .= "<p><input type='button' onClick='$onSubmit' value='". $clang->gT("Save") . "' />\n</p></div></form>";
 	}	
-		
-				// header
-		$editsurvey .= "<div class='header ui-widget-header'>" . $clang->gT("PECI: Import survey") . " ($surveyid)</div>\n";
-
-		$editsurvey .= "<form class='form30' name='addnewsurvey' id='addnewsurvey' onSubmit='return false;'>\n";
-
-		
-	/*	if ($action == "newsurvey" ) {
-            // Import TAB
-            $editsurvey .= "<div id='import'>\n";
-
-            // Import survey
-            $editsurvey .= "<form enctype='multipart/form-data' class='form30' id='importsurvey' name='importsurvey' action='$scriptname' method='post' onsubmit='return validatefilename(this,\"" . $clang->gT('Please select a file to import!', 'js') . "\");'>\n"
-            . "<ul>\n"
-            . "<li><label for='the_file'>" . $clang->gT("Select survey structure file (*.lss, *.csv):") . "</label>\n"
-            . "<input id='the_file' name=\"the_file\" type=\"file\" size=\"50\" /></li>\n"
-            . "<li><label for='translinksfields'>" . $clang->gT("Convert resource links and INSERTANS fields?") . "</label>\n"
-            . "<input id='translinksfields' name=\"translinksfields\" type=\"checkbox\" checked='checked'/></li></ul>\n"
-            . "<p><input type='submit' value='" . $clang->gT("Import survey") . "' />\n"
-            . "<input type='hidden' name='action' value='importsurvey' /></p></form>\n";
-
-            // End Import TAB
-            $editsurvey .= "</div>\n";
-
-            
-            
-        } elseif ($action = "editsurveysettings") {
-            // TAB Uploaded Resources Management
-            $ZIPimportAction = " onclick='if (validatefilename(this.form,\"".$clang->gT('Please select a file to import!','js')."\")) {this.form.submit();}'";
-            if (!function_exists("zip_open")) {
-                $ZIPimportAction = " onclick='alert(\"".$clang->gT("zip library not supported by PHP, Import ZIP Disabled","js")."\");'";
-            }
-
-            $disabledIfNoResources = '';
-            if (hasResources($surveyid, 'survey') === false) {
-                $disabledIfNoResources = " disabled='disabled'";
-            }
-
-            $editsurvey .= "<div id='resources'>\n"
-            . "<form enctype='multipart/form-data'  class='form30' id='importsurveyresources' name='importsurveyresources' action='$scriptname' method='post' onsubmit='return validatefilename(this,\"".$clang->gT('Please select a file to import!','js')."\");'>\n"
-            . "<input type='hidden' name='sid' value='$surveyid' />\n"
-            . "<input type='hidden' name='action' value='importsurveyresources' />\n"
-            . "<ul>\n"
-            . "<li><label>&nbsp;</label>\n"
-            . "<input type='button' onclick='window.open(\"{$homeurl}/scripts/kcfinder/browse.php\", \"_blank\")' value=\"".$clang->gT("Browse Uploaded Resources")."\" $disabledIfNoResources /></li>\n"
-            . "<li><label>&nbsp;</label>\n"
-            . "<input type='button' onclick='window.open(\"$scriptname?action=exportsurvresources&amp;sid={$surveyid}\", \"_blank\")' value=\"".$clang->gT("Export Resources As ZIP Archive")."\" $disabledIfNoResources /></li>\n"
-            . "<li><label for='the_file'>".$clang->gT("Select ZIP File:")."</label>\n"
-            . "<input id='the_file' name='the_file' type='file' size='50' /></li>\n"
-            . "<li><label>&nbsp;</label>\n"
-            . "<input type='button' value='".$clang->gT("Import Resources ZIP Archive")."' $ZIPimportAction /></li>\n"
-            . "</ul></form>\n";
-
-            // End TAB Uploaded Resources Management
-            $editsurvey .= "</div>\n";
-        }	*/
 }
 
 ?>

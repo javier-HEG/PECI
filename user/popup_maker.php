@@ -33,6 +33,7 @@ switch ($action) {
 		break;
 	case 'newsurvey':
 		include('popups/editsurveysettings.php');
+		include('popups/importsurvey.php');
 		break;
 	case 'editsurveylocalesettings':
 		include('popups/editsurveytextelements.php');
@@ -67,7 +68,7 @@ foreach ($js_admin_includes as $jsinclude) {
 <html>
 <head>
 <script type="text/javascript" src="<?php echo $rooturl; ?>/admin/scripts/tabpane/js/tabpane.js"></script>
-<script type="text/javascript" src="<?php echo $rooturl; ?>/scripts/jquery/jquery.js"></script>
+<script type="text/javascript" src="<?php echo $rooturl; ?>/user/scripts/jquery.js"></script>
 <script type="text/javascript" src="<?php echo $rooturl; ?>/scripts/jquery/jquery.dd.js"></script>
 <!-- <script type="text/javascript" src="<?php echo $rooturl; ?>/user/scripts/jquery.cookie.js"></script> -->
 <!-- <script type="text/javascript" src="<?php echo $rooturl; ?>/user/scripts/jquery.simplemodal.js"></script> -->

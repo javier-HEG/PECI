@@ -91,6 +91,15 @@ if (isset($_SESSION['loginID']))
     if ($action == 'importsurvey' || $action == 'copysurvey') {
         if ($_SESSION['USER_RIGHT_CREATE_SURVEY']==1)	{
         	include('../admin/http_importsurvey.php');
+
+        	// When a new suvey is imported
+	        if ($action == 'importsurvey') {
+	        	if (!$importerror) {
+	        		die ($aImportResults['newsid']);
+	        	} else {
+	        		die ('Error');
+	        	}
+	        }
         } else {
         	include('../admin/access_denied.php');
         }
