@@ -137,6 +137,13 @@ div.messagebox .header {
   display: none;
 }
 
+/**************************************/
+/* For the reCaptcha at user creation */
+/**************************************/
+#recaptcha_widget_div {
+    margin-left: 170px;
+}
+
 /*************************************************/
 /* Rendering questions, as returned by qanda.php */
 /*************************************************/
@@ -293,7 +300,22 @@ table.ui-datepicker-calendar th.ui-datepicker-week-end {
 /*********************/
 /* Login Form Styles */
 /*********************/
-#loginform, #newuserform {
+#userNotification {
+	width: 914px;
+	border: 1px solid #cc0000;
+    border-top: none;
+	text-align: center;
+	padding: 15px 10px;
+	margin: 0px 12px;
+}
+
+#userNotification p {
+	margin: 6px;
+}
+/*********************/
+/* Login Form Styles */
+/*********************/
+#loginform, #newuserform, #forgotpassword {
 	background-color: white;
 	border: 1px solid #eaecef;
 	margin-left: auto;
@@ -303,6 +325,10 @@ table.ui-datepicker-calendar th.ui-datepicker-week-end {
 	padding-top: 12px;
 	padding-bottom: 12px;
 	width: 600px;
+}
+
+#loginform p, #newuserform p, #forgotpassword p {
+	text-align: center;
 }
 
 #newuserform li label:first-child {

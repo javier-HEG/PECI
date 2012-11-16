@@ -36,6 +36,21 @@ function getUserHeader($meta=false) {
 	$adminHeader = str_replace($adminShortCutFavicon, $userShortCutFavicon, $adminHeader);
 	$adminHeader = str_replace($adminFavicon, $userFavicon, $adminHeader);
 
+	// Prepare any notification message
+	if (isset($_SESSION['userNotification']) && $_SESSION['userNotification']!='') {
+		$adminHeader .= "<script type='text/javascript'>
+				$('#container').prepend($('<div id=\"userNotification\" style=\"display: none;\"></div>'));
+				$('#userNotification').html(\"{$_SESSION['userNotification']}\");
+				
+				$(document).ready(function() {
+					$('#userNotification').show('fast');
+					setTimeout(\"$('#userNotification').hide('fast');\", 5000);
+				});
+			</script>";
+
+		unset($_SESSION['userNotification']);
+    }
+
 	return $adminHeader;
 }
 
@@ -145,18 +160,8 @@ function getUserMenu() {
 		$adminmenu .= " | <a onclick=\"window.open('$scriptname?action=logout', '_top')\""
 		. " title=\"".$clang->gTview("Logout")."\" >" . $clang->gT("Logout") . "</a>";
 	} else {
-		// TODO Make it so clicking calls user.php action=changelanguage "lang" is the
-		// variable holding the value
-		// Also, make the menu automatically from the language list, before removing
-		// english as an option, check: html.php::51
-		
 		$allLanguages = array();
-
-		if (isset($_SESSION['adminlang']))
-			$currentLanguage = $_SESSION['adminlang'];
-		else
-			$currentLanguage = $clang->getlangcode();
-
+		$currentLanguage = (isset($_SESSION['adminlang']) ? $_SESSION['adminlang'] : $clang->getlangcode());
 		foreach (getlanguagedata(true) as $langkey=>$languagekind) {
 			$changeLanguageScript = "$.ajax({
 				url: '$scriptname?action=changelanguage&lang=$langkey',

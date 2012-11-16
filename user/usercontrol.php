@@ -165,11 +165,8 @@ if (!isset($_SESSION['loginID'])) {
 						}
 						$login = true;
 
- 						$loginsummary .= "<div class='messagebox ui-corner-all' id='loggedInMessageBox'>\n";
- 						$loginsummary .= sprintf($clang->gT("Welcome %s!"),$_SESSION['full_name']) . "</div>\n";
- 						// Set the summary to hide itself after 5 seconds
- 						$loginsummary .= "<script type='text/javascript'>setTimeout(\"$('#loggedInMessageBox').hide('fast');\", 5000);</script>";
-
+						$loginTryNotification = sprintf($clang->gT("Welcome %s!"),$_SESSION['full_name']);
+						
 						if (isset($_POST['refererargs']) && $_POST['refererargs'] &&
 						strpos($_POST['refererargs'], "action=logout") === FALSE)
 						{
@@ -210,8 +207,8 @@ if (!isset($_SESSION['loginID'])) {
 
 	// If a user filled the create user online
 	else if ($action == "addonlineuser") {
-		$addsummary = "";
-		$failedToAddUser = "<p><strong>".$clang->gT("Failed to add user")."</strong></p>\n";
+		$userCreationMessage = "";
+		$failedToAddUser = "<p><strong>".$clang->gT("Failed to add user")."</strong></p>";
 
 		$new_user = FlattenText($postnew_user, true);
 		$new_email = FlattenText($postnew_email, true);
@@ -221,20 +218,32 @@ if (!isset($_SESSION['loginID'])) {
 		$valid_email = true;
 		if (!validate_email($new_email)) {
 			$valid_email = false;
-			$addsummary .= $failedToAddUser;
-			$addsummary .= $clang->gT("The email address is not valid.") . '<br />';
+			$userCreationMessage .= $failedToAddUser;
+			$userCreationMessage .= $clang->gT("The email address is not valid.")."<br />";
 		}
 
 		$valid_user = true;
 		if (empty($new_user)) {
 			if ($valid_email)
-				$addsummary .= $failedToAddUser;
-			$addsummary .= $clang->gT("A username was not supplied or the username is invalid.")."<br />\n";
+				$userCreationMessage .= $failedToAddUser;
+			$userCreationMessage .= $clang->gT("A username was not supplied or the username is invalid.")."<br />";
 			
 			$valid_user = false;
 		}
+
+		$valid_captcha = true;
+		require_once('recaptchalib.php');
+		$privatekey = "6Ld6H9kSAAAAAK5xH3F7Nx4NO_86cni0ajBj3zux";
+		$resp = recaptcha_check_answer($privatekey, $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"],
+			$_POST["recaptcha_response_field"]);
+		if (!$resp->is_valid) {
+			if ($valid_email && $valid_user)
+				$userCreationMessage .= $failedToAddUser;
+			$userCreationMessage .= $clang->gT("PECI: The reCaptcha failed");
+			$valid_captcha = false;
+		}
 		
-		if ($valid_email && $valid_user) {
+		if ($valid_email && $valid_user && $valid_captcha) {
 			$uquery = "INSERT INTO {$dbprefix}users (users_name, password,full_name,parent_id,lang,email,"
 			. "create_survey,create_user,delete_user,superadmin,configurator,manage_template,manage_label,htmleditormode) "
 			. "VALUES ('".db_quote($new_user)."', '".SHA256::hashing($postnew_password)."', '".db_quote($postnew_full_name)
@@ -247,16 +256,25 @@ if (!isset($_SESSION['loginID'])) {
 
 				// add default template to template rights for user
 				$template_query = "INSERT INTO {$dbprefix}templates_rights VALUES('$newqid','default','1')";
-				$connect->Execute($template_query); //Checked				
+				$connect->Execute($template_query); //Checked
+				$userCreationMessage .= $clang->gT("PECI: New user has been added") . "<br />";		
 			} else {
-				$addsummary .= $failedToAddUser;
-				$addsummary .= $clang->gT("The user name already exists.")."<br />\n";
+				$userCreationMessage .= $failedToAddUser;
+				$userCreationMessage .= $clang->gT("The user name already exists.") . "<br />";
 			}
 		}		
 	}
 } elseif ($action == "logout") {
     killSession();
-    $logoutsummary = '<p>' . $clang->gT("Logout successful.") . '</p>';
+    $userCreationMessage = '<p>' . $clang->gT("Logout successful.") . '</p>';
+}
+
+if (isset($loginTryNotification) && $loginTryNotification != '') {
+	$_SESSION['userNotification'] = $loginTryNotification;
+}
+
+if (isset($userCreationMessage) && $userCreationMessage != '') {
+	$_SESSION['userNotification'] = $userCreationMessage;
 }
 
 function fGetLoginAttemptUpdateQry($la,$sIp)

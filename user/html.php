@@ -43,11 +43,6 @@ if ($action == "personalsettings") {
     	. "<label for='lang'>".$clang->gT("Interface language").":</label>\n"
     	. "<select id='lang' name='lang'>\n";
     
-	$cssummary .= "<option value='auto'";
-    if ($sSavedLanguage == 'auto') {
-		$cssummary .= " selected='selected'";
-	}
-    $cssummary .= ">".$clang->gT("(Autodetect)")."</option>\n";
     foreach (getlanguagedata(true) as $langkey=>$languagekind) {
 		$cssummary .= "<option value='$langkey'";
         

@@ -49,7 +49,7 @@ if(!isset($_SESSION['loginID']) && $action != "forgotpass" && ($action != "logou
 				</ul>
 			</form>
             <br />';
-    } elseif (!isset($loginsummary)) {
+    } else { //if (!isset($loginsummary)) {
     	// Could be at login or after logout
         $refererargs=''; // If this is a direct access to user.php, no args are given
         
@@ -76,7 +76,10 @@ if(!isset($_SESSION['loginID']) && $action != "forgotpass" && ($action != "logou
             }
         }
         
-        $loginsummary ="";
+        if (!isset($loginsummary)) {
+        	$loginsummary = "";
+        }
+        
         if (!$bCannotLogin) {
             if (!isset($logoutsummary)) {
                 $loginsummary = "<form name='loginform' id='loginform' method='post' action='$scriptname' >"
@@ -93,13 +96,14 @@ if(!isset($_SESSION['loginID']) && $action != "forgotpass" && ($action != "logou
                                 <input name='password' id='password' type='password' size='40' maxlength='40' /></li>\n";
             
             $loginsummary .= "</ul>
-                        <p><input type='hidden' name='action' value='login' />
+                		<p><input type='hidden' name='action' value='login' />
                         <input type='hidden' name='refererargs' value='".$refererargs."' />
                         <input type='hidden' name='loginlang' value='default' />
                         <input class='action' type='submit' value='".$clang->gT("Login")."' /><br />&nbsp;\n<br/>";
             
             $loginsummary .= '<p><a href="#" onclick="$(\'#loginform\').hide(); $(\'#newuserform\').show();">' . $clang->gT("PECI: Create new user") . '</a></p>';
         } else {
+        	$loginsummary = "<form name='loginform' id='loginform' method='post' action='$scriptname' >";
             $loginsummary .= "<p>".sprintf($clang->gT("You have exceeded you maximum login attempts. Please wait %d minutes before trying again"),($timeOutTime/60))."<br /></p>";
         }
         
@@ -125,22 +129,24 @@ if(!isset($_SESSION['loginID']) && $action != "forgotpass" && ($action != "logou
 	        <input name='new_password_check' id='new_password_check' type='password' size='40' maxlength='40' /></li>
 	        <li><label for='loginlang'>".$clang->gT("Interface language")."</label>
 	        <select id='loginlang' name='loginlang' style='width:216px;'>";
-        
-        $loginsummary .= '<option value="default" selected="selected">' . $clang->gT('Default') . '</option>';
 
-        $lan = array();
+        $currentLanguage = (isset($_SESSION['adminlang']) ? $_SESSION['adminlang'] : $clang->getlangcode());
         foreach (getlanguagedata(true) as $langkey=>$languagekind) {
-        	array_push($lan, $langkey);
+    		$loginsummary .= "<option value='$langkey'"
+    			. ($langkey == $currentLanguage ? " selected='selected'>" : ">")
+    			. $languagekind['nativedescription'] . " - " . $languagekind['description'] . "</option>\n";
         }
 
-        foreach (getlanguagedata(true) as $langkey=>$languagekind) {
-        	//The following conditional statements select the browser language in the language drop down box and echoes the other options.
-        	$loginsummary .= "<option value='$langkey'>".$languagekind['nativedescription']." - ".$languagekind['description']."</option>\n";
-        }
+        $loginsummary .= "</select></li></ul>";
 
-        $loginsummary .= "</select></li></ul>                            
-				<p><input type='hidden' value='addonlineuser' name='action'>
-                <input class='action' type='submit' value='".$clang->gT("PECI: Create new user")."' /><br /><br /></p>";
+        require_once('recaptchalib.php');
+		$publickey = "6Ld6H9kSAAAAABPEFxHMtWb2K4cmtIyS4KKNKofP";
+        $loginsummary .= '<p>' . recaptcha_get_html($publickey) . '</p>';
+
+		$loginsummary .= "<p>
+				<input type='hidden' value='addonlineuser' name='action'>
+                <input class='action' type='submit' value='".$clang->gT("PECI: Create new user")."' /><br /><br />
+			</p>";
         
         $loginsummary .= '<p><a href="#" onclick="$(\'#newuserform\').hide(); $(\'#loginform\').show();">' . $clang->gT("PECI: Back to login form") . '</a></p>';
 

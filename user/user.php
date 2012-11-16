@@ -492,6 +492,12 @@ if (isset($_SESSION['loginID']))
         include ('userrighthandling.php');
     }
 
+    // Pass any flash message coming from the admin scripts to
+    // the user version variable
+    if (isset($_SESSION['flashmessage'])) {
+    	$_SESSION['userNotification'] = $_SESSION['flashmessage'];
+    	unset($_SESSION['flashmessage']);
+    }
 
     // The user menu bar
     $adminoutput .= getUserMenu();
@@ -631,7 +637,6 @@ if (isset($_SESSION['loginID']))
 	switch ($action) {
 		case 'addonlineuser':
 			include ('userrighthandling.php');
-        	$adminoutput .= $addsummary;
 			break;
 		case 'changelanguage':
 			$_SESSION['adminlang'] = $_GET['lang'];
