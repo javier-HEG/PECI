@@ -140,7 +140,7 @@ if(!isset($_SESSION['loginID']) && $action != "forgotpass" && ($action != "logou
         $loginsummary .= "</select></li></ul>";
 
         require_once('recaptchalib.php');
-		$publickey = "6Ld6H9kSAAAAABPEFxHMtWb2K4cmtIyS4KKNKofP";
+		$publickey = "6Ld7H9kSAAAAALVmioyqn6HCGWUay2DSNCXquCB_";
         $loginsummary .= '<p>' . recaptcha_get_html($publickey) . '</p>';
 
 		$loginsummary .= "<p>

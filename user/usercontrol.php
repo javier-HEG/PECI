@@ -233,7 +233,7 @@ if (!isset($_SESSION['loginID'])) {
 
 		$valid_captcha = true;
 		require_once('recaptchalib.php');
-		$privatekey = "6Ld6H9kSAAAAAK5xH3F7Nx4NO_86cni0ajBj3zux";
+		$privatekey = "";
 		$resp = recaptcha_check_answer($privatekey, $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"],
 			$_POST["recaptcha_response_field"]);
 		if (!$resp->is_valid) {
